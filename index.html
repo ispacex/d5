@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(d){d.classList.add('js');try{var t=localStorage.getItem('d5-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<title>The D₅ problem: where we are — The D₅ problem</title>
+<link rel="alternate" hreflang="en" href="https://ispacex.github.io/d5/">
+<link rel="alternate" hreflang="ru" href="https://ispacex.github.io/d5/ru/">
+<link rel="alternate" hreflang="x-default" href="https://ispacex.github.io/d5/">
+<style>
+:root { --ink:#1f2933; --muted:#52606d; --line:#d9dee5; --bg:#ffffff; --soft:#f4f6f9;
+        --bad:#fde8e4; --badink:#a33a1f; --ok:#e7f4ea; --amb:#fff3d6; --acc:#2e6db4; --sel:rgba(46,109,180,.12);
+        --cmp:#9fd3ad; --ppr:#a9c6ec; --both:#98d4d6; --open:#f3d38a; --cellink:#1f2933;
+        --veil:rgba(15,20,30,.35); --imgpad:0; color-scheme:light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#e6e9ee; --muted:#a3adb9; --line:#38414c; --bg:#14181d; --soft:#1c2128; --bad:#4a2620;
+        --badink:#ffb4a2; --ok:#1f3a27; --amb:#4a3d1c; --acc:#7fb0ec; --sel:rgba(127,176,236,.2);
+        --cmp:#2f6b45; --ppr:#2f5687; --both:#2c6a72; --open:#7a5d1e; --cellink:#f2f4f7;
+        --veil:rgba(0,0,0,.6); --imgpad:6px; color-scheme:dark; } }
+:root[data-theme="dark"] { --ink:#e6e9ee; --muted:#a3adb9; --line:#38414c; --bg:#14181d; --soft:#1c2128; --bad:#4a2620;
+        --badink:#ffb4a2; --ok:#1f3a27; --amb:#4a3d1c; --acc:#7fb0ec; --sel:rgba(127,176,236,.2);
+        --cmp:#2f6b45; --ppr:#2f5687; --both:#2c6a72; --open:#7a5d1e; --cellink:#f2f4f7;
+        --veil:rgba(0,0,0,.6); --imgpad:6px; color-scheme:dark; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system, "Segoe UI", Roboto, "DejaVu Sans", sans-serif; }
+header { border-bottom:1px solid var(--line); background:var(--soft); }
+header .wrap { padding-top:.7rem; padding-bottom:.8rem; }
+header .top { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin-bottom:.6rem; }
+header .title { font-weight:600; color:var(--ink); text-decoration:none; }
+header .tools { display:flex; align-items:center; gap:.6rem; margin-left:auto; }
+.lang { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; font-size:.85rem; line-height:1.6; }
+.lang a, .lang strong { padding:0 .6em; text-decoration:none; }
+.lang a { color:var(--acc); background:var(--bg); }
+.lang strong { background:var(--acc); color:var(--bg); }
+.lang > * + * { border-left:1px solid var(--line); }
+.theme { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; font-size:.85rem; line-height:1.6; }
+.theme button { display:inline-flex; align-items:center; height:1.6em; margin:0; padding:0 .5em; border:0; border-radius:0;
+        background:var(--bg); color:var(--muted); font:inherit; cursor:pointer; }
+.theme button + button { border-left:1px solid var(--line); }
+.theme button:hover { color:var(--acc); }
+.theme button:focus-visible { outline:2px solid var(--acc); outline-offset:-2px; }
+.theme button[aria-pressed="true"] { background:var(--acc); color:var(--bg); }
+.theme svg { width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+html:not(.js) .theme { display:none; }
+#nav-palette, #nav-open { --p-bg:var(--bg); --p-fg:var(--ink); --p-line:var(--line); --p-sel:var(--sel);
+        --p-mark:var(--acc); --p-veil:var(--veil); }
+nav { display:flex; flex-wrap:wrap; gap:.4rem; }
+nav a { color:var(--acc); text-decoration:none; white-space:nowrap; font-size:.92rem; line-height:1.5;
+        padding:.15em .65em; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+nav a:hover, nav a:focus-visible { border-color:var(--acc); }
+nav a.cur { background:var(--acc); border-color:var(--acc); color:var(--bg); font-weight:600; }
+@media (max-width:520px) { nav { gap:.3rem; } nav a { font-size:.85rem; padding:.1em .5em; } }
+.wrap { max-width:1100px; margin:0 auto; padding:.9rem 16px; }
+h1 { font-size:1.6rem; margin:.6rem 0 .8rem; } h2 { font-size:1.25rem; margin-top:2rem; }
+a { color:var(--acc); } .muted { color:var(--muted); } small { color:var(--muted); }
+.tw { overflow-x:auto; margin:1rem 0; border:1px solid var(--line); border-radius:6px; position:relative; }
+table { border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums; }
+th, td { border-bottom:1px solid var(--line); padding:.3rem .55rem; text-align:center; vertical-align:top; }
+th { background:var(--soft); position:sticky; top:0; }
+td.l, th.l { text-align:left; } td.r, th.r { text-align:right; }
+.box { border-left:4px solid var(--acc); background:var(--soft); padding:.7rem 1rem; margin:1rem 0; border-radius:0 6px 6px 0; }
+code { background:var(--soft); padding:0 .25em; border-radius:3px; }
+footer { border-top:1px solid var(--line); margin-top:3rem; }
+.tag { display:inline-block; font-size:.78rem; line-height:1.5; padding:0 .45em; border-radius:4px; white-space:nowrap;
+       color:var(--cellink); border:1px solid var(--line); }
+.tag.c { background:var(--cmp); } .tag.p { background:var(--ppr); } .tag.cp { background:var(--both); }
+.tag.o { background:var(--open); } .tag.l { background:var(--soft); color:var(--ink); }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:.8rem; margin:1rem 0; }
+.card { border:1px solid var(--line); border-radius:8px; padding:.7rem .9rem; background:var(--soft); }
+.card h3 { margin:.1rem 0 .4rem; font-size:1rem; } .card .big { font-size:1.35rem; font-weight:600; }
+.card p { margin:.3rem 0; font-size:.92rem; }
+.fig { overflow-x:auto; margin:1rem 0; } .fig svg { display:block; max-width:100%; height:auto; }
+svg text { fill:var(--ink); font:12px -apple-system, "Segoe UI", Roboto, "DejaVu Sans", sans-serif; }
+svg .muted { fill:var(--muted); } svg .cell { stroke:var(--bg); stroke-width:2; }
+svg .k-c { fill:var(--cmp); } svg .k-p { fill:var(--ppr); } svg .k-cp { fill:var(--both); } svg .k-o { fill:var(--open); }
+svg .k-n { fill:var(--soft); } svg .k-x { fill:url(#hatch); } svg .hl { fill:none; stroke:var(--ink); stroke-width:1.5; }
+svg .bar { fill:var(--acc); opacity:.75; } svg .bar0 { fill:var(--ok); } svg .axis { stroke:var(--line); }
+svg .ct { fill:var(--cellink); font-size:11px; }
+ol.tl { list-style:none; padding:0; border-left:2px solid var(--line); margin-left:.4rem; }
+ol.tl li { position:relative; padding:0 0 .9rem 1.1rem; }
+ol.tl li::before { content:""; position:absolute; left:-.42rem; top:.45rem; width:.7rem; height:.7rem; border-radius:50%;
+       background:var(--acc); border:2px solid var(--bg); }
+ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; }
+</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+ onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+ macros:{'\\D':'\\Delta','\\Z':'\\mathbb{Z}'},ignoredTags:['script','noscript','style','textarea','pre','code','svg']})"></script></head>
+<body><header><div class="wrap"><div class="top"><a class="title" href="index.html">The $D_5$ problem</a>
+<div class="tools"><span class="pal"></span><span class="theme" role="group" aria-label="Theme"><button type="button" data-t="system" aria-pressed="true" aria-label="Theme: system" title="Theme: system"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button><button type="button" data-t="light" aria-pressed="false" aria-label="Theme: light" title="Theme: light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-t="dark" aria-pressed="false" aria-label="Theme: dark" title="Theme: dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button></span><span class="lang" role="group" aria-label="Language"><strong lang="en" aria-current="true">EN</strong><a href="ru/index.html" hreflang="ru" lang="ru">RU</a></span></div></div>
+<nav aria-label="Sections"><a href="index.html" class=cur aria-current=page>Summary</a><a href="coverage.html">Coverage map</a><a href="results.html">Results</a><a href="computations.html">Computations</a><a href="timeline.html">Timeline</a><a href="open.html">Open questions</a><a href="paper.html">Paper</a><a href="search.html">Search</a></nav></div></header>
+<main class="wrap"><h1>The $D_5$ problem: where we are</h1>
+
+<div class="box"><p><b>The question</b> (Kourovka notebook, Problem 20.84). Let $\Delta$ be the augmentation ideal of $\mathbb Z[G]$,
+$D_n(G)=G\cap(1+\Delta^n)$ the dimension subgroups and $\gamma_n(G)$ the lower central series. Always $\gamma_n\subseteq D_n$,
+and $D_n=\gamma_n$ for $n\le3$; for $n=4$ this fails (Rips). <b>Is $D_5(G)\subseteq\gamma_4(G)$ for every group?</b></p>
+<p>For Lie rings the answer is yes (Ionin, Mikhailov, Petrov, 2026, formalized in Lean). For groups it is open,
+and we have not solved it. This site shows what is proved, what is computed, and what is left.</p></div>
+<div class="cards">
+<div class="card"><h3>$2$-torsion: $D_5\subseteq\gamma_4$</h3><div class="big">up to $2^{10}$</div>
+<p>True for every finite group whose Sylow $2$-subgroup has order $\le2^{10}$, in particular for all groups of order $<2048$.</p>
+<p>Order $2^{11}$: ranks $2$–$4$ and $\ge8$ closed, $5$–$7$ open.</p></div>
+<div class="card"><h3>$3$-torsion: $D_5=\gamma_5$</h3><div class="big">up to $3^9$</div>
+<p>No $3$-torsion in $D_5/\gamma_5$ when the Sylow $3$-subgroup has order $\le3^9$.</p>
+<p>On paper for all groups with $G/\gamma_2$ of exponent $3$, of any order.</p></div>
+<div class="card"><h3>Lie rings and Lean</h3><div class="big">proved</div>
+<p>$D_5(L)\subseteq\gamma_4(L)$ for Lie rings; the formalization audited. The group question and the reduction to $2$-groups of class $3$ are stated in Lean.</p></div>
+<div class="card"><h3>Counterexamples</h3><div class="big">0</div>
+<p>No computed group has $D_5\ne\gamma_5$; in all of them $D_n=\gamma_n$ for every $n$. Over a hundred thousand candidates, all computations exact.</p></div>
+</div>
+<h2>Coverage map: $2$-groups of class $3$</h2>
+<p>A cell stands for all $2$-groups of class $3$ of the given order and rank; it is closed when all of them have $D_5=1$.
+33 cells are closed and 3 open. More on the <a href="coverage.html">coverage map</a> page.</p>
+<div class="fig"><svg viewBox="0 0 440 282" width="440" height="282" role="img" aria-label="Coverage map"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--open)"/><line x1="0" y1="0" x2="0" y2="6" style="stroke:var(--ppr);stroke-width:3"/></pattern></defs><text x="248.0" y="12" text-anchor="middle" class="muted">rank d</text><text x="6" y="26" class="muted">order</text><text x="87.0" y="26" text-anchor="middle">2</text><text x="133.0" y="26" text-anchor="middle">3</text><text x="179.0" y="26" text-anchor="middle">4</text><text x="225.0" y="26" text-anchor="middle">5</text><text x="271.0" y="26" text-anchor="middle">6</text><text x="317.0" y="26" text-anchor="middle">7</text><text x="363.0" y="26" text-anchor="middle">8</text><text x="409.0" y="26" text-anchor="middle">9</text><text x="56" y="53.0" text-anchor="end">2<tspan dy="-6" font-size="9">4</tspan></text><rect class="cell k-c" x="64" y="34" width="46" height="30" rx="3"><title>2⁴, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="53.0" text-anchor="middle">C</text><rect class="cell k-n" x="110" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="156" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="202" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="248" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="294" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="340" y="34" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="34" width="46" height="30" rx="3"/><text x="56" y="83.0" text-anchor="end">2<tspan dy="-6" font-size="9">5</tspan></text><rect class="cell k-c" x="64" y="64" width="46" height="30" rx="3"><title>2⁵, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="83.0" text-anchor="middle">C</text><rect class="cell k-c" x="110" y="64" width="46" height="30" rx="3"><title>2⁵, d = 3: computer (Prop. 5.1)</title></rect><text class="ct" x="133.0" y="83.0" text-anchor="middle">C</text><rect class="cell k-n" x="156" y="64" width="46" height="30" rx="3"/><rect class="cell k-n" x="202" y="64" width="46" height="30" rx="3"/><rect class="cell k-n" x="248" y="64" width="46" height="30" rx="3"/><rect class="cell k-n" x="294" y="64" width="46" height="30" rx="3"/><rect class="cell k-n" x="340" y="64" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="64" width="46" height="30" rx="3"/><text x="56" y="113.0" text-anchor="end">2<tspan dy="-6" font-size="9">6</tspan></text><rect class="cell k-c" x="64" y="94" width="46" height="30" rx="3"><title>2⁶, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="113.0" text-anchor="middle">C</text><rect class="cell k-c" x="110" y="94" width="46" height="30" rx="3"><title>2⁶, d = 3: computer (Prop. 5.1)</title></rect><text class="ct" x="133.0" y="113.0" text-anchor="middle">C</text><rect class="cell k-c" x="156" y="94" width="46" height="30" rx="3"><title>2⁶, d = 4: computer (Prop. 5.1)</title></rect><text class="ct" x="179.0" y="113.0" text-anchor="middle">C</text><rect class="cell k-n" x="202" y="94" width="46" height="30" rx="3"/><rect class="cell k-n" x="248" y="94" width="46" height="30" rx="3"/><rect class="cell k-n" x="294" y="94" width="46" height="30" rx="3"/><rect class="cell k-n" x="340" y="94" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="94" width="46" height="30" rx="3"/><text x="56" y="143.0" text-anchor="end">2<tspan dy="-6" font-size="9">7</tspan></text><rect class="cell k-c" x="64" y="124" width="46" height="30" rx="3"><title>2⁷, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="143.0" text-anchor="middle">C</text><rect class="cell k-c" x="110" y="124" width="46" height="30" rx="3"><title>2⁷, d = 3: computer (Prop. 5.1)</title></rect><text class="ct" x="133.0" y="143.0" text-anchor="middle">C</text><rect class="cell k-c" x="156" y="124" width="46" height="30" rx="3"><title>2⁷, d = 4: computer (Prop. 5.1)</title></rect><text class="ct" x="179.0" y="143.0" text-anchor="middle">C</text><rect class="cell k-c" x="202" y="124" width="46" height="30" rx="3"><title>2⁷, d = 5: computer (Prop. 5.1)</title></rect><text class="ct" x="225.0" y="143.0" text-anchor="middle">C</text><rect class="cell k-n" x="248" y="124" width="46" height="30" rx="3"/><rect class="cell k-n" x="294" y="124" width="46" height="30" rx="3"/><rect class="cell k-n" x="340" y="124" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="124" width="46" height="30" rx="3"/><text x="56" y="173.0" text-anchor="end">2<tspan dy="-6" font-size="9">8</tspan></text><rect class="cell k-c" x="64" y="154" width="46" height="30" rx="3"><title>2⁸, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="173.0" text-anchor="middle">C</text><rect class="cell k-c" x="110" y="154" width="46" height="30" rx="3"><title>2⁸, d = 3: computer (Prop. 5.1)</title></rect><text class="ct" x="133.0" y="173.0" text-anchor="middle">C</text><rect class="cell k-c" x="156" y="154" width="46" height="30" rx="3"><title>2⁸, d = 4: computer (Prop. 5.1)</title></rect><text class="ct" x="179.0" y="173.0" text-anchor="middle">C</text><rect class="cell k-c" x="202" y="154" width="46" height="30" rx="3"><title>2⁸, d = 5: computer (Prop. 5.1)</title></rect><text class="ct" x="225.0" y="173.0" text-anchor="middle">C</text><rect class="cell k-c" x="248" y="154" width="46" height="30" rx="3"><title>2⁸, d = 6: computer (Prop. 5.1)</title></rect><text class="ct" x="271.0" y="173.0" text-anchor="middle">C</text><rect class="cell k-n" x="294" y="154" width="46" height="30" rx="3"/><rect class="cell k-n" x="340" y="154" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="154" width="46" height="30" rx="3"/><text x="56" y="203.0" text-anchor="end">2<tspan dy="-6" font-size="9">9</tspan></text><rect class="cell k-c" x="64" y="184" width="46" height="30" rx="3"><title>2⁹, d = 2: computer (Prop. 5.1)</title></rect><text class="ct" x="87.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-c" x="110" y="184" width="46" height="30" rx="3"><title>2⁹, d = 3: computer (Prop. 5.1)</title></rect><text class="ct" x="133.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-c" x="156" y="184" width="46" height="30" rx="3"><title>2⁹, d = 4: computer (Prop. 5.1)</title></rect><text class="ct" x="179.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-c" x="202" y="184" width="46" height="30" rx="3"><title>2⁹, d = 5: computer (Prop. 5.1)</title></rect><text class="ct" x="225.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-c" x="248" y="184" width="46" height="30" rx="3"><title>2⁹, d = 6: computer (Prop. 5.1)</title></rect><text class="ct" x="271.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-c" x="294" y="184" width="46" height="30" rx="3"><title>2⁹, d = 7: computer (Prop. 5.1)</title></rect><text class="ct" x="317.0" y="203.0" text-anchor="middle">C</text><rect class="cell k-n" x="340" y="184" width="46" height="30" rx="3"/><rect class="cell k-n" x="386" y="184" width="46" height="30" rx="3"/><text x="56" y="233.0" text-anchor="end">2<tspan dy="-6" font-size="9">10</tspan></text><rect class="cell k-cp" x="64" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 2: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="87.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="110" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 3: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="133.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="156" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 4: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="179.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="202" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 5: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="225.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="248" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 6: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="271.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="294" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 7: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="317.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="340" y="214" width="46" height="30" rx="3"><title>2¹⁰, d = 8: computer + paper (Prop. 5.3)</title></rect><text class="ct" x="363.0" y="233.0" text-anchor="middle">C+P</text><rect class="cell k-n" x="386" y="214" width="46" height="30" rx="3"/><text x="56" y="263.0" text-anchor="end">2<tspan dy="-6" font-size="9">11</tspan></text><rect class="cell k-cp" x="64" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 2: computer + paper (§5)</title></rect><text class="ct" x="87.0" y="263.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="110" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 3: computer + paper (§5)</title></rect><text class="ct" x="133.0" y="263.0" text-anchor="middle">C+P</text><rect class="cell k-cp" x="156" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 4: computer + paper (§5)</title></rect><text class="ct" x="179.0" y="263.0" text-anchor="middle">C+P</text><rect class="cell k-o" x="202" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 5: open</title></rect><text class="ct" x="225.0" y="263.0" text-anchor="middle">?</text><rect class="hl" x="203" y="245" width="44" height="28" rx="3"/><rect class="cell k-o" x="248" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 6: open</title></rect><text class="ct" x="271.0" y="263.0" text-anchor="middle">?</text><rect class="hl" x="249" y="245" width="44" height="28" rx="3"/><rect class="cell k-o" x="294" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 7: open</title></rect><text class="ct" x="317.0" y="263.0" text-anchor="middle">?</text><rect class="hl" x="295" y="245" width="44" height="28" rx="3"/><rect class="cell k-cp" x="340" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 8: computer + paper (Prop. 5.7)</title></rect><text class="ct" x="363.0" y="263.0" text-anchor="middle">C+P</text><rect class="cell k-p" x="386" y="244" width="46" height="30" rx="3"><title>2¹¹, d = 9: paper (Prop. 5.7)</title></rect><text class="ct" x="409.0" y="263.0" text-anchor="middle">P</text></svg></div><p><small><span class="tag c">C</span> computer <span class="tag cp">C+P</span> computer + paper <span class="tag p">P</span> paper <span class="tag o">?</span> open. Empty cells: no such groups.</small></p>
+<h2>Latest</h2><ul><li>The group analogue of Theorem C: $D_7=1$ for the plateau group; the first search at $c=4$; at $c=5$, $D_7\ne1$ but $D_8\cap\gamma_5=1$.</li><li>Order $3^8$: the full scan, $904$ non-metabelian groups, $D_5=1$ in all.</li><li>Order $3^9$: the $p$-cover filter, $62\,245$ candidates, $D_5=1$ in all; rank $5$ excluded on paper.</li><li>On paper: $D_5=\gamma_5$ for $Q/\gamma_2$ of exponent $3$; the Lie-ring lemma; $P^{*\prime\prime}=1$. Two independent line-by-line reviews.</li></ul>
+<p>The paper draft (of 17 October 2026): <a href="paper/d5.pdf">English</a>, <a href="paper/d5-ru.pdf">Russian</a>;
+the whole story is in the <a href="timeline.html">timeline</a>.</p>
+</main><footer><div class="wrap"><small>Progress on Problem 20.84 of the Kourovka notebook: is $D_5(G)\subseteq\gamma_4(G)$ for every group?
+As of 17 October 2026. Code and data: <a href="https://github.com/ispacex/dimension-subrings">ispacex/dimension-subrings</a>.</small><p><small>Contact: <a href="https://vissi.su">vissi.su</a></small></p></div></footer>
+<script>(function(){var d=document.documentElement,K='d5-theme',
+b=document.querySelectorAll('.theme button');
+function show(){var t=d.getAttribute('data-theme')||'system';
+for(var i=0;i<b.length;i++)b[i].setAttribute('aria-pressed',b[i].getAttribute('data-t')===t?'true':'false')}
+function set(t){if(t==='light'||t==='dark')d.setAttribute('data-theme',t);else{t='system';d.removeAttribute('data-theme')}show();return t}
+for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(){var t=set(this.getAttribute('data-t'));
+try{if(t==='system')localStorage.removeItem(K);else localStorage.setItem(K,t)}catch(e){}});
+addEventListener('storage',function(e){if(e.key===K)set(e.newValue)});show()})()</script>
+<script src="/sitesearch/palette.js" data-index="/d5/nav-index.json" data-mount="header .pal" data-search="/d5/search.html" data-search-index="/d5/search-index.json" data-placeholder="Where to? for example: 3^9, Tahara, rank 5" defer></script>
+</body></html>
