@@ -135,5 +135,5 @@ function set(t){if(t==='light'||t==='dark')d.setAttribute('data-theme',t);else{t
 for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(){var t=set(this.getAttribute('data-t'));
 try{if(t==='system')localStorage.removeItem(K);else localStorage.setItem(K,t)}catch(e){}});
 addEventListener('storage',function(e){if(e.key===K)set(e.newValue)});show()})()</script>
-<script src="/sitesearch/palette.js" data-index="/d5/nav-index.json" data-mount="header .pal" data-search="/d5/search.html" data-search-index="/d5/search-index.json" data-placeholder="Where to? for example: 3^9, Tahara, rank 5" defer></script>
+<script src="/sitesearch/palette.js" data-index="/d5/nav-index.json" data-mount="header .pal" data-search="/d5/search.html" data-search-index="/d5/search-index.json" data-placeholder="Where to? for example: 3^9, Tahara, rank 5" data-symbols="true" defer></script>
 </body></html>
