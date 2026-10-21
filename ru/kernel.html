@@ -1,0 +1,1777 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(d){d.classList.add('js');try{var t=localStorage.getItem('d5-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
+<title>Быстрое ядро для Dₙ: профиль, вариант A, вариант B — Задача о D₅</title>
+<link rel="alternate" hreflang="en" href="https://ispacex.github.io/d5/kernel.html">
+<link rel="alternate" hreflang="ru" href="https://ispacex.github.io/d5/ru/kernel.html">
+<link rel="alternate" hreflang="x-default" href="https://ispacex.github.io/d5/kernel.html">
+<meta name="description" content="Документ docs/analysis.ru.md из ispacex/cflint-fast-core (коммит 306d269) как есть. GitLab рисует на странице только первые 50 формул, а здесь их около трёх тысяч; тут их рисует KaTeX, все.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Задача о D₅">
+<meta property="og:title" content="Быстрое ядро для Dₙ: профиль, вариант A, вариант B — Задача о D₅">
+<meta property="og:description" content="Документ docs/analysis.ru.md из ispacex/cflint-fast-core (коммит 306d269) как есть. GitLab рисует на странице только первые 50 формул, а здесь их около трёх тысяч; тут их рисует KaTeX, все.">
+<meta property="og:url" content="https://ispacex.github.io/d5/ru/kernel.html">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://ispacex.github.io/d5/og-ru.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root { --ink:#1f2933; --muted:#52606d; --line:#d9dee5; --bg:#ffffff; --soft:#f4f6f9;
+        --bad:#fde8e4; --badink:#a33a1f; --ok:#e7f4ea; --amb:#fff3d6; --acc:#2e6db4; --sel:rgba(46,109,180,.12);
+        --cmp:#9fd3ad; --ppr:#a9c6ec; --both:#98d4d6; --open:#f3d38a; --cellink:#1f2933;
+        --veil:rgba(15,20,30,.35); --imgpad:0; color-scheme:light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#e6e9ee; --muted:#a3adb9; --line:#38414c; --bg:#14181d; --soft:#1c2128; --bad:#4a2620;
+        --badink:#ffb4a2; --ok:#1f3a27; --amb:#4a3d1c; --acc:#7fb0ec; --sel:rgba(127,176,236,.2);
+        --cmp:#2f6b45; --ppr:#2f5687; --both:#2c6a72; --open:#7a5d1e; --cellink:#f2f4f7;
+        --veil:rgba(0,0,0,.6); --imgpad:6px; color-scheme:dark; } }
+:root[data-theme="dark"] { --ink:#e6e9ee; --muted:#a3adb9; --line:#38414c; --bg:#14181d; --soft:#1c2128; --bad:#4a2620;
+        --badink:#ffb4a2; --ok:#1f3a27; --amb:#4a3d1c; --acc:#7fb0ec; --sel:rgba(127,176,236,.2);
+        --cmp:#2f6b45; --ppr:#2f5687; --both:#2c6a72; --open:#7a5d1e; --cellink:#f2f4f7;
+        --veil:rgba(0,0,0,.6); --imgpad:6px; color-scheme:dark; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system, "Segoe UI", Roboto, "DejaVu Sans", sans-serif; }
+header { border-bottom:1px solid var(--line); background:var(--soft); }
+header .wrap { padding-top:.7rem; padding-bottom:.8rem; }
+header .top { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin-bottom:.6rem; }
+header .title { font-weight:600; color:var(--ink); text-decoration:none; }
+header .tools { display:flex; align-items:center; gap:.6rem; margin-left:auto; }
+.lang { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; font-size:.85rem; line-height:1.6; }
+.lang a, .lang strong { padding:0 .6em; text-decoration:none; }
+.lang a { color:var(--acc); background:var(--bg); }
+.lang strong { background:var(--acc); color:var(--bg); }
+.lang > * + * { border-left:1px solid var(--line); }
+.theme { display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; font-size:.85rem; line-height:1.6; }
+.theme button { display:inline-flex; align-items:center; height:1.6em; margin:0; padding:0 .5em; border:0; border-radius:0;
+        background:var(--bg); color:var(--muted); font:inherit; cursor:pointer; }
+.theme button + button { border-left:1px solid var(--line); }
+.theme button:hover { color:var(--acc); }
+.theme button:focus-visible { outline:2px solid var(--acc); outline-offset:-2px; }
+.theme button[aria-pressed="true"] { background:var(--acc); color:var(--bg); }
+.theme svg { width:1em; height:1em; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+html:not(.js) .theme { display:none; }
+#nav-palette, #nav-open { --p-bg:var(--bg); --p-fg:var(--ink); --p-line:var(--line); --p-sel:var(--sel);
+        --p-mark:var(--acc); --p-veil:var(--veil); }
+nav { display:flex; flex-wrap:wrap; gap:.4rem; }
+nav a { color:var(--acc); text-decoration:none; white-space:nowrap; font-size:.92rem; line-height:1.5;
+        padding:.15em .65em; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+nav a:hover, nav a:focus-visible { border-color:var(--acc); }
+nav a.cur { background:var(--acc); border-color:var(--acc); color:var(--bg); font-weight:600; }
+@media (max-width:520px) { nav { gap:.3rem; } nav a { font-size:.85rem; padding:.1em .5em; } }
+.wrap { max-width:1100px; margin:0 auto; padding:.9rem 16px; }
+h1 { font-size:1.6rem; margin:.6rem 0 .8rem; } h2 { font-size:1.25rem; margin-top:2rem; }
+a { color:var(--acc); } .muted { color:var(--muted); } small { color:var(--muted); }
+.tw { overflow-x:auto; margin:1rem 0; border:1px solid var(--line); border-radius:6px; position:relative; }
+table { border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums; }
+th, td { border-bottom:1px solid var(--line); padding:.3rem .55rem; text-align:center; vertical-align:top; }
+th { background:var(--soft); position:sticky; top:0; }
+td.l, th.l { text-align:left; } td.r, th.r { text-align:right; }
+.box { border-left:4px solid var(--acc); background:var(--soft); padding:.7rem 1rem; margin:1rem 0; border-radius:0 6px 6px 0; }
+code { background:var(--soft); padding:0 .25em; border-radius:3px; }
+footer { border-top:1px solid var(--line); margin-top:3rem; }
+.tag { display:inline-block; font-size:.78rem; line-height:1.5; padding:0 .45em; border-radius:4px; white-space:nowrap;
+       color:var(--cellink); border:1px solid var(--line); }
+.tag.c { background:var(--cmp); } .tag.p { background:var(--ppr); } .tag.cp { background:var(--both); }
+.tag.o { background:var(--open); } .tag.l { background:var(--soft); color:var(--ink); }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:.8rem; margin:1rem 0; }
+.card { border:1px solid var(--line); border-radius:8px; padding:.7rem .9rem; background:var(--soft); }
+.card h3 { margin:.1rem 0 .4rem; font-size:1rem; } .card .big { font-size:1.35rem; font-weight:600; }
+.card p { margin:.3rem 0; font-size:.92rem; }
+.fig { overflow-x:auto; margin:1rem 0; } .fig svg { display:block; max-width:100%; height:auto; }
+svg text { fill:var(--ink); font:12px -apple-system, "Segoe UI", Roboto, "DejaVu Sans", sans-serif; }
+svg .muted { fill:var(--muted); } svg .cell { stroke:var(--bg); stroke-width:2; }
+svg .k-c { fill:var(--cmp); } svg .k-p { fill:var(--ppr); } svg .k-cp { fill:var(--both); } svg .k-o { fill:var(--open); }
+svg .k-n { fill:var(--soft); } svg .k-x { fill:url(#hatch); } svg .hl { fill:none; stroke:var(--ink); stroke-width:1.5; }
+svg .bar { fill:var(--acc); opacity:.75; } svg .bar0 { fill:var(--ok); } svg .axis { stroke:var(--line); }
+svg .ct { fill:var(--cellink); font-size:11px; }
+ol.tl { list-style:none; padding:0; border-left:2px solid var(--line); margin-left:.4rem; }
+ol.tl li { position:relative; padding:0 0 .9rem 1.1rem; }
+ol.tl li::before { content:""; position:absolute; left:-.42rem; top:.45rem; width:.7rem; height:.7rem; border-radius:50%;
+       background:var(--acc); border:2px solid var(--bg); }
+.kernel h2, .kernel h3, .kernel h4 { scroll-margin-top:1rem; } .kernel h4 { font-size:1rem; }
+.kernel th, .kernel td { text-align:left; } .kernel .katex-display { overflow-x:auto; overflow-y:hidden; padding:.2rem 0; }
+.kernel pre { background:var(--soft); padding:.6rem .8rem; border-radius:6px; overflow-x:auto; font-size:.88rem; }
+.kernel pre code { padding:0; } .kernel blockquote { border-left:4px solid var(--line); margin:1rem 0; padding:0 1rem; color:var(--muted); }
+ol.toc { list-style:none; padding-left:0; } ol.toc > li { margin:.55rem 0; } ol.toc ul { margin:.2rem 0 0; padding-left:1.4rem; }
+ol.toc .stm { font-size:.88rem; margin:.15rem 0 0 1.4rem; } ol.toc .stm > span { white-space:nowrap; }
+ol.toc .stm > span .muted { white-space:normal; }
+ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; }
+</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+ onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
+ macros:{'\\D':'\\Delta','\\Z':'\\mathbb{Z}'},ignoredTags:['script','noscript','style','textarea','pre','code','svg']})"></script></head>
+<body><header><div class="wrap"><div class="top"><a class="title" href="index.html">Задача о $D_5$</a>
+<div class="tools"><span class="pal"></span><span class="theme" role="group" aria-label="Тема"><button type="button" data-t="system" aria-pressed="true" aria-label="Тема: как в системе" title="Тема: как в системе"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button><button type="button" data-t="light" aria-pressed="false" aria-label="Тема: светлая" title="Тема: светлая"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-t="dark" aria-pressed="false" aria-label="Тема: тёмная" title="Тема: тёмная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button></span><span class="lang" role="group" aria-label="Язык"><a href="../kernel.html" hreflang="en" lang="en">EN</a><strong lang="ru" aria-current="true">RU</strong></span></div></div>
+<nav aria-label="Разделы"><a href="index.html">Сводка</a><a href="coverage.html">Карта покрытия</a><a href="results.html">Результаты</a><a href="computations.html">Вычисления</a><a href="kernel.html" class=cur aria-current=page>Быстрое ядро</a><a href="timeline.html">Хронология</a><a href="open.html">Открытые вопросы</a><a href="paper.html">Статья</a><a href="search.html">Поиск</a></nav></div></header>
+<main class="wrap"><h1>Быстрое ядро для $D_n$: профиль, вариант A, вариант B</h1>
+<div class="box"><p>Документ <a href="https://gitlab.com/ispacex/cflint-fast-core/-/blob/306d2690619fcfe9ac3515fee04d745dcb2dbc81/docs/analysis.ru.md"><code>docs/analysis.ru.md</code></a> из <a href="https://gitlab.com/ispacex/cflint-fast-core">ispacex/cflint-fast-core</a> (коммит <code>306d269</code>) как есть.
+GitLab рисует на странице только первые 50 формул, а здесь их около трёх тысяч; тут их рисует KaTeX, все.</p></div><h2>Содержание</h2><ol class="toc"><li><a href="#0-итог">0. Итог</a></li><li><a href="#1-профиль-текущего-ядра-метод-a-numpy">1. Профиль текущего ядра (метод A, numpy)</a></li><li><a href="#2-вариант-a-перенос-на-c">2. Вариант A: перенос на C</a></li><li><a href="#3-вариант-b-mathbb-zgdeltan-как-фактор-усечённой-свободной-алгебры">3. Вариант B: $\mathbb Z[G]/\Delta^n$ как фактор усечённой свободной алгебры</a></li><li><a href="#4-замеры">4. Замеры</a></li><li><a href="#5-сверка">5. Сверка</a></li><li><a href="#6-рекомендации">6. Рекомендации</a></li><li><a href="#7-литература-и-известен-ли-метод">7. Литература и известен ли метод</a></li></ol><div class="kernel"><p>Исходное ядро — эталонная реализация <code>dimsub.py</code> (метод A на numpy; она в отдельном, пока закрытом репозитории). Здесь — его профиль, перенос на C (вариант A), другой способ считать (вариант B) с доказательством корректности, сверка, замеры и рекомендации.</p>
+<p>Обозначения: $G$ — конечная $p$-группа, $x_1,\dots,x_d$ — её порождающие, $\Delta\subset\mathbb Z[G]$ — аугментационный идеал, $F$ — свободная группа на $x_1..x_d$, $\mathfrak f\subset\mathbb Z[F]$ — её аугментационный идеал, $A_n=\mathbb Z\langle a_1,\dots,a_d\rangle/(\text{степень}\ge n)$ — усечённая свободная ассоциативная алгебра, $A_n^+$ — её часть без константы, $M=\operatorname{rk}A_n^+=d+d^2+\dots+d^{n-1}$.</p>
+<h2 id="0-итог">0. Итог</h2>
+<ul>
+<li><strong>Вариант B верен</strong> (доказательство — §3) и <strong>подтверждён сверкой</strong>: 0 расхождений с <code>dimsub.py</code> на всех группах, где есть ответы (§5), и полное совпадение с независимой реализацией того же метода в обе стороны.</li>
+<li><strong>Скорость.</strong> На группах порядка $3^7$: numpy 80–330 с, A на C 7–22 с (×11–15), B 0.2–1.4 с (×230–380, вместе с запуском Python). Все 1202 кандидата порядка $3^7$ вариант B прошёл за 157 с на трёх потоках (у numpy — около 100 CPU-часов).</li>
+<li><strong>Главное — B не зависит от $|G|$.</strong> Группа Бартольди–Михайлова порядка $3^{494}$ ($d=7$): $\mathbb Z[G]/\Delta^4$ — за 15 с по модулю $3^{19}$, точный HNF над $\mathbb Z$ — 510 с, индексы совпадают. Рипсовские 2-группы порядков $2^{40}$–$2^{107}$ — секунды на группу.</li>
+<li><strong>Предел B</strong> — $M=\sum_{k&lt;n}d^k$: растёт как $d^{n-1}$. При $d=6$, $n=7$ (вопрос о плато из [IMP26, §3.3]) $M=55\,986$, и плотная линейная алгебра там не годится (оценка — §6.3).</li>
+<li><strong>FLINT <code>nmod_mat_howell_form</code></strong> на этих матрицах медленнее даже numpy (§2); своя форма Хауэлла для локального кольца $\mathbb Z/p^E$ — в 10–15 раз быстрее numpy.</li>
+</ul>
+<h2 id="1-профиль-текущего-ядра-метод-a-numpy">1. Профиль текущего ядра (метод A, numpy)</h2>
+<p>Метод A: $\Delta\cong\mathbb Z^{|G|-1}$, $\Delta^n=\mathrm{span}\{b(x_i-1)\}$ по базису $b$ решётки $\Delta^{n-1}$, форма Хауэлла по модулю $p^E$ ($E=19$ для $p=3$, $30$ для $p=2$), цикл по столбцам на Python, строки обрабатываются векторно.</p>
+<p>Замер <code>scripts/profile_dimsub.py</code> на тестовой машине, один процесс под <code>nice -n 10</code>. Машина общая с CI, средняя загрузка во время замеров 15–29 при 16 потоках, поэтому цифры шумят на десятки процентов.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$d$</th>
+<th>матрица на уровень</th>
+<th>howell по уровням $n=2,3,4,5$, с</th>
+<th>проверка $g\in D_n$, с</th>
+<th>всего, с</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2187 #171</td>
+<td>2</td>
+<td>4372 × 2186</td>
+<td>4.9 / 14.3 / 22.2 / 28.9</td>
+<td>1.8</td>
+<td>73.5</td>
+</tr>
+<tr>
+<td>2187 #4721</td>
+<td>3</td>
+<td>6558 × 2186</td>
+<td>62.3 / 37.4 / 67.7 / 76.2</td>
+<td>8.0</td>
+<td>253.6</td>
+</tr>
+<tr>
+<td>2187 #9066</td>
+<td>4</td>
+<td>8744 × 2186</td>
+<td>74.4 / 47.2 / 86.1 / 91.2</td>
+<td>6.7</td>
+<td>307.9</td>
+</tr>
+<tr>
+<td>512 #864</td>
+<td>2</td>
+<td>1022 × 511</td>
+<td>0.34 / 0.24 / 0.39</td>
+<td>0.06</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>512 #405386</td>
+<td>4</td>
+<td>2044 × 511</td>
+<td>0.94 / 0.81 / 1.31</td>
+<td>0.08</td>
+<td>3.3</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Всё время — форма Хауэлла</strong>, 95–98 %. Построение блоков $b\cdot(x_i-1)$ занимает доли секунды, проверка принадлежности — единицы процентов.</li>
+<li>Матрица на каждом уровне одного размера, $d(|G|-1)\times(|G|-1)$, ранг всегда $|G|-1$. Стоимость $\sim d|G|^3/2$ операций на уровень. Рост времени с $n$ даёт $p$-кручение $\Delta/\Delta^n$: строки $p^{E-v}\cdot$(опорная) возвращаются в пул.</li>
+<li>В исходном прогоне выборки 2187 (14 процессов параллельно) медиана была 278 с, максимум 659 с. Один процесс быстрее в 2–4 раза: при полной загрузке numpy упирается в память.</li>
+<li>Порядок $|G|^3$ — главный предел: $2^{10}$ на уровень в 8 раз дороже 512, а группу порядка $2^{38}$ перечислить нельзя вовсе.</li>
+</ul>
+<h2 id="2-вариант-a-перенос-на-c">2. Вариант A: перенос на C</h2>
+<p><code>c/dimsub_a.c</code> и <code>c/hw.h</code>: тот же алгоритм, те же $E$, тот же вывод, что у <code>dimsub.analyse</code>, в быстром режиме и с <code>--full</code>. Проверка «$\Delta^n$ — правый идеал» из <code>--full</code> не перенесена.</p>
+<ul>
+<li><strong>Своя форма Хауэлла</strong> (по умолчанию). Кольцо $\mathbb Z/p^E$ локальное, поэтому опорной берётся строка с минимальной $p$-адической оценкой в столбце, и она делит остальные: одно вычитание на элемент, без <code>xgcd</code> на парах строк. Строки хранятся как <code>uint32</code> ($p^E&lt;2^{31}$), <code>row -= f·piv</code> считается в <code>uint64</code> с редукцией через <code>double</code> ($q=\lfloor x/D\rfloor$ с ошибкой $\le1$ для $x&lt;2^{63}$, одна поправка), без деления. Цикл векторизуется (<code>-O3 -march=native</code>, на тестовой машине есть AVX-512DQ).</li>
+<li><strong>FLINT</strong> (<code>--flint</code>): <code>nmod_mat_howell_form</code> из FLINT 3.3 (conda-forge <code>libflint</code>). Она общая для $\mathbb Z/N$: на каждую пару строк — <code>xgcd</code> и унимодулярное преобразование $2\times2$; кроме того, требует строк не меньше, чем столбцов. На наших матрицах она <strong>медленнее numpy</strong> (таблица в §4).</li>
+<li>Отложенная редукция (копить несколько <code>row -= f·piv</code> без остатка) при $p^E\approx2^{31}$ в 64 бита не помещается: каждое произведение уже $\approx2^{62}$. Она имеет смысл только при меньшем $E$ (§6).</li>
+</ul>
+<h2 id="3-вариант-b-mathbb-zgdeltan-как-фактор-усечённой-свободной-алгебры">3. Вариант B: $\mathbb Z[G]/\Delta^n$ как фактор усечённой свободной алгебры</h2>
+<h3 id="31-утверждение">3.1. Утверждение</h3>
+<p>Пусть $G=F/N$, $\pi:\mathbb Z[F]\to\mathbb Z[G]$, $\mathfrak r=\ker\pi$, и $\mu:\mathbb Z[F]\to A_n$ — кольцевой гомоморфизм Магнуса $x_i\mapsto1+a_i$ (тогда $x_i^{-1}\mapsto\sum_{k&lt;n}(-a_i)^k$). Пусть $R_0\subset F$ нормально порождает $N$.</p>
+<p><strong>Теорема.</strong> $\mathbb Z[G]/\Delta^n\cong A_n/J_n$, где $J_n=\mathrm{span}_\mathbb Z\{\,u\,(\mu(r)-1)\,v : r\in R_0;\ u,v \text{ — мономы}\}$ — двусторонний идеал, порождённый элементами $\mu(r)-1$. Изоморфизм переводит $g$ в $\mu(w_g)$ для любого слова $w_g$, представляющего $g$. Поэтому $$g\in D_n(G)\iff \mu(w_g)-1\in J_n .$$ Кроме того, $A_n^+/J_n\cong\Delta/\Delta^n$ — конечная $p$-группа, а $\operatorname{rk}A_n^+=M$ не зависит от $|G|$.</p>
+<h3 id="32-доказательство">3.2. Доказательство</h3>
+<p><strong>(a) Усечённый изоморфизм Магнуса: $\mathbb Z[F]/\mathfrak f^n\cong A_n$.</strong> $\mu$ определён: элемент $1+a_i$ обратим в $A_n$ (обратный — $\sum_{k&lt;n}(-a_i)^k$, так как $a_i^n=0$), $F$ свободна, поэтому $x_i\mapsto1+a_i$ продолжается до гомоморфизма $F\to A_n^\times$, а линейно — до кольцевого $\mathbb Z[F]\to A_n$. Константа $\mu(f)$ равна аугментации $\varepsilon(f)$: оба отображения — кольцевые гомоморфизмы в $\mathbb Z$, совпадающие на $x_i$. Поэтому $\mu(\mathfrak f)\subseteq A_n^+$ и $\mu(\mathfrak f^n)\subseteq(A_n^+)^n=0$, и получается $\bar\mu:\mathbb Z[F]/\mathfrak f^n\to A_n$. Обратно, по универсальному свойству свободной ассоциативной алгебры есть кольцевой $\varphi:\mathbb Z\langle a\rangle\to\mathbb Z[F]/\mathfrak f^n$, $a_i\mapsto x_i-1$. Моном степени $\ge n$ переходит в произведение $n$ элементов $\mathfrak f$, то есть в $0$, так что $\varphi$ пропускается через $A_n$. Далее, $\bar\mu\varphi(a_i)=a_i$, значит $\bar\mu\varphi=\mathrm{id}$. И $\varphi\bar\mu(x_i)=x_i$, значит $\varphi\bar\mu$ тождественно на $F$ (на $x_i^{-1}$ — потому что кольцевой гомоморфизм сохраняет обратные), а $F$ аддитивно порождает $\mathbb Z[F]$. $\square$</p>
+<p>Глубокая теорема Магнуса ($\mu^{-1}(\deg\ge n)=\mathfrak f^n$ в $\mathbb Z\langle\langle a\rangle\rangle$) здесь не нужна: для усечения это утверждение элементарно.</p>
+<p><strong>(b) $\ker\pi=\mathfrak r$ — двусторонний идеал $I$, порождённый $\{r-1:r\in R_0\}$.</strong> Включение $I\subseteq\ker\pi$ очевидно. Для $n\in N$ имеем $n-1\in I$, так как $wrw^{-1}-1=w(r-1)w^{-1}$, $r^{-1}-1=-r^{-1}(r-1)$ и $ab-1=a(b-1)+(a-1)$ — индукция по длине $n$ как произведения сопряжённых $r^{\pm1}$. Наконец, $\ker\pi\subseteq\mathbb Z[F](N-1)$: если $\sum c_ff\in\ker\pi$, то в каждом смежном классе $tN$ сумма коэффициентов нулевая, и $\sum_{f\in tN}c_ff=t\sum c_f(t^{-1}f-1)$ с $t^{-1}f\in N$. $\square$</p>
+<p>(b′) Если $S$ порождает $N$ <strong>как подгруппу</strong> (например, $S$ — порождающие Шрайера), то $\ker\pi=\sum_{s\in S}(s-1)\mathbb Z[F]$, и достаточно <strong>правого</strong> идеала: $ns-1=(n-1)s+(s-1)$, $s^{-1}-1=-(s-1)s^{-1}$, а $\ker\pi=(N-1)\mathbb Z[F]$ по той же выкладке с правыми смежными классами.</p>
+<p><strong>(c) Сборка.</strong> $\pi(\mathfrak f)=\Delta$ (образ аугментационного идеала при сюръекции групповых колец), значит $\pi(\mathfrak f^n)=\Delta^n$ и $\mathbb Z[G]/\Delta^n\cong\mathbb Z[F]/(\mathfrak r+\mathfrak f^n)$. Под $\bar\mu$ подмодуль $(\mathfrak r+\mathfrak f^n)/\mathfrak f^n$ переходит в $\mu(\mathfrak r)$. Образ идеала при сюръективном кольцевом гомоморфизме — идеал, порождённый образами порождающих, то есть $\mu(\mathfrak r)=J_n$. Как абелева группа он натянут на $u\,\mu(r-1)\,v$ с мономами $u,v$, потому что $A_n$ аддитивно порождается мономами. Наконец, $g-1\in\Delta^n\iff w_g-1\in\mathfrak r+\mathfrak f^n
+\iff\mu(w_g)-1\in J_n$. $\square$</p>
+<p><strong>(d) Конечность и точность по модулю $p^E$.</strong> $\varepsilon(J_n)=0$, так что $A_n=\mathbb Z\oplus A_n^+$ и $A_n^+/J_n\cong\Delta/\Delta^n$. Умножение даёт эпиморфизм $(\Delta/\Delta^2)^{\otimes k}\to\Delta^k/\Delta^{k+1}$, а $\Delta/\Delta^2\cong G_{ab}$ — конечная $p$-группа. Значит, все $\Delta^k/\Delta^{k+1}$ и сама $\Delta/\Delta^n$ — конечные $p$-группы. Поэтому <strong>сертификат точности из dimsub.py переносится дословно</strong>. Непринадлежность $\mu(w_g)-1\notin J_n+p^EA_n^+$ точна всегда. Принадлежность точна, если $p^{E-1}A_n^+\subseteq J_n+p^EA_n^+$: тогда показатель $A_n^+/J_n$ делит $p^{E-1}$ и $p^EA_n^+\subseteq J_n$. Кроме того, $\log_p|A_n^+/(J_n+p^EA_n^+)|=\log_p|\Delta/(\Delta^n+p^E\Delta)|$, так что поле <code>index_logp</code> обязано совпасть с dimsub.py. В сверке оно совпадает.</p>
+<h3 id="33-откуда-брать-соотношения">3.3. Откуда брать соотношения</h3>
+<p><strong>Из таблицы умножения</strong> (<code>py/magnus.py</code>; вход — та же JSON-строка, что у dimsub.py). Поиск в ширину по графу Кэли даёт остовное дерево и слова $w_g$; каждому ребру $(g,x_i)$ сопоставляется $$\rho_{g,i}=\mu(w_g)(1+a_i)-\mu(w_{gx_i})=\big(\mu(s_{g,i})-1\big)\,\mu(w_{gx_i}),\qquad s_{g,i}=w_gx_iw_{gx_i}^{-1}.$$ Элементы $s_{g,i}$ — порождающие Шрайера ядра $N$ (порождают его как подгруппу), а $\mu(w_{gx_i})$ обратим. По (b′) $J_n=\mathrm{span}\{\rho_{g,i}\,v\}$: достаточно замыкания относительно умножения <strong>справа</strong> на $a_j$, а это сдвиг координат. Обратные элементы не нужны, все $\mu(w_g)$ считаются по дереву за $O(|G|\cdot M)$. Соотношений $(d-1)|G|+1$, но столбцов всего $M$, и форма Хауэлла набирается порциями.</p>
+<p><strong>Из pc-копредставления, без перечисления группы</strong> (<code>gap/export_pres.g</code> → <code>py/magnus_pres.py</code>). GAP строит pc-последовательность, уточняющую нижний центральный ряд. Слой $k$ — модулярный pcgs $\gamma_k/\gamma_{k+1}$, набранный просеиванием из коммутаторов $[b,x_j]$ ($b$ — элемент слоя $k-1$) и их $p$-х степеней, так что у элемента слоя $k$ слово $W\in\gamma_k(F)$. Соотношения такие: степенные $W_i^p=\prod W_j^{e_j}$, коммутаторные $[W_j,W_i]=\prod W_k^{e_k}$ и $x_j=\prod W_k^{e_k}$. Это копредставление $G$ на $x_1..x_d$ по Тице: отображения $G=\langle s\mid\text{pc}\rangle\to\Gamma$, $s_i\mapsto W_i$, и $\Gamma\to G$ взаимно обратны, что проверяется прямо на $s_i$ и на $x_j$.</p>
+<p><em>Отсечение по весу.</em> $\mu(\gamma_k(F))\subseteq1+A^{\ge k}$ — индукция по $k$ из тождества $[x,y]-1=x^{-1}y^{-1}\big((x-1)(y-1)-(y-1)(x-1)\big)$. Поэтому соотношение из $\gamma_n(F)$ даёт $\mu(r)-1=0$ в $A_n$ и его можно не выписывать. Отбрасываются степенные соотношения слоёв $\ge n$ и коммутаторные с $k_i+k_j\ge n$: их правые части лежат в $\gamma_{k_i+k_j}(G)$, то есть в слоях $\ge k_i+k_j$. По той же причине слова элементов слоёв $\ge n$ заменяются единицей. Без этого у группы $3^{494}$ слова глубоких слоёв не помещаются в 8 ГБ.</p>
+<h3 id="34-все-уровни-за-один-раз">3.4. Все уровни за один раз</h3>
+<p>$J_n$ — образ $J_N$ ($n&lt;N$) при отбрасывании степеней $\ge n$. Если столбцы упорядочены по возрастанию степени, то строки формы Хауэлла $J_N$ с опорным столбцом степени $&lt;n$, усечённые до степеней $&lt;n$, образуют форму Хауэлла $J_n$. Действительно, элемент проекции, равный нулю до столбца $c$, поднимается в $J_N$ с теми же первыми координатами и раскладывается по строкам с опорой $\ge c$. То же верно для HNF над $\mathbb Z$. <code>magnus_pres.py</code> считает $J_{n_{\max}}$ один раз.</p>
+<h3 id="35-проверка-подгруппы-кандидата-k-сито">3.5. Проверка подгруппы-кандидата $K$ (сито)</h3>
+<p>Если $K\subseteq D_{n-1}$ — элементарная абелева $p$-подгруппа с независимыми порождающими $g_1..g_r$, то $g\mapsto(g-1)\bmod\Delta^n$ на $K$ — гомоморфизм: $gh-1=(g-1)+(h-1)+(g-1)(h-1)$ и $(g-1)(h-1)\in\Delta^{2n-2}\subseteq\Delta^n$. Значит, $D_n\cap K$ — ядро $c\mapsto\sum c_iv_i$ по модулю $J_n$, $v_i=\mu(w_{g_i})-1$. Это одна форма Хауэлла матрицы $[J_n\mid0;\ V\mid I;\ 0\mid pI]$: строки с опорой в последних $r$ столбцах порождают ядро (<code>magnus_pres.py --kernel</code>). Нужны только слова для $g_1..g_r$, а не для всех элементов группы.</p>
+<h3 id="36-где-b-проигрывает">3.6. Где B проигрывает</h3>
+<p>Столбцов у B $M=\sum_{k=1}^{n-1}d^k$, у A — $|G|-1$. В выборке порядка $3^7$ ($d\le4$, $n\le5$) $M\le340$ против 2186; у выживших 512 ($d\le5$, $n\le4$) $M\le155$ против 511. Но при большом $d$ и большом $n$ ранг свободной алгебры обгоняет $|G|$: у $C_2^6$ при $n=6$ $M=9330$, у групп порядка $2^{10}$ с $d=6$ при $n=5$ $M=1554&gt;1023$. Отсюда два правила.</p>
+<ul>
+<li>В полном режиме сверки (все уровни до $n=6$) B на группах с $M&gt;500$ останавливался и сверялся по общему префиксу уровней (поле <code>truncated</code>; число таких групп — в §5).</li>
+<li>На каждую группу выбирать B, если $M&lt;|G|$, и A иначе.</li>
+</ul>
+<p>Настоящее лекарство — хранить не плотную $A_n$, а только «стандартные» мономы. При упорядочении, согласованном с умножением (deg-lex), моном, ведущий в строке $J$ с обратимым коэффициентом, остаётся ведущим с обратимым коэффициентом и во всех кратных $u\,w\,v$, то есть исключается вместе с ними. Остаётся порядок-идеал мономов, по размеру не меньше $\dim_{\mathbb F_p}\Delta_{\mathbb F_p}/\Delta_{\mathbb F_p}^n$ (§6.4). Это алгоритм нильпотентного фактора ассоциативной алгебры, но над кольцом $\mathbb Z/p^E$, а не над полем, как в ModIsom. В прототип он не вошёл (§6).</p>
+<h2 id="4-замеры">4. Замеры</h2>
+<p>Одна группа, один процесс, <code>nice -n 10</code>, тестовая машина под нагрузкой CI (<code>scripts/bench.sh</code>), время в секундах. У «B (Python)» около 0.15 с — запуск интерпретатора.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$d$</th>
+<th>numpy A (dimsub.py)</th>
+<th>A на C</th>
+<th>A на C, FLINT</th>
+<th>B (Python)</th>
+<th>A C / numpy</th>
+<th>B / numpy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2187 #171</td>
+<td>2</td>
+<td>79.4</td>
+<td>7.0</td>
+<td>111.2</td>
+<td>0.21</td>
+<td>×11</td>
+<td>×380</td>
+</tr>
+<tr>
+<td>2187 #4721</td>
+<td>3</td>
+<td>263.1</td>
+<td>14.8</td>
+<td>248.5</td>
+<td>0.75</td>
+<td>×18</td>
+<td>×350</td>
+</tr>
+<tr>
+<td>2187 #9066</td>
+<td>4</td>
+<td>332.4</td>
+<td>22.4</td>
+<td>272.6</td>
+<td>1.42</td>
+<td>×15</td>
+<td>×230</td>
+</tr>
+<tr>
+<td>512 #864</td>
+<td>2</td>
+<td>1.21</td>
+<td>0.11</td>
+<td>1.01</td>
+<td>0.21</td>
+<td>×11</td>
+<td>×6</td>
+</tr>
+<tr>
+<td>512 #405386</td>
+<td>4</td>
+<td>2.51</td>
+<td>0.21</td>
+<td>2.71</td>
+<td>0.31</td>
+<td>×12</td>
+<td>×8</td>
+</tr>
+</tbody>
+</table></div>
+<p>Целые наборы (по три потока, стена):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>набор</th>
+<th>групп</th>
+<th>B (Python)</th>
+<th>A на C</th>
+<th>numpy в исходном прогоне, CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>порядки 8–625, полный режим (8 наборов)</td>
+<td>2 762</td>
+<td>509 с</td>
+<td>9.1 с</td>
+<td>—</td>
+</tr>
+<tr>
+<td>729, все</td>
+<td>504</td>
+<td>9.2 с</td>
+<td>25.7 с</td>
+<td>13 780 с</td>
+</tr>
+<tr>
+<td>256, класс $\ge3$</td>
+<td>24 328</td>
+<td>1 196 с</td>
+<td>131 с</td>
+<td>44 370 с</td>
+</tr>
+<tr>
+<td>512, выжившие после сита</td>
+<td>2 792</td>
+<td>88 с</td>
+<td>65 с</td>
+<td>23 732 с</td>
+</tr>
+<tr>
+<td>2187, выборка</td>
+<td>49</td>
+<td>7.4 с</td>
+<td>248 с</td>
+<td>17 198 с</td>
+</tr>
+<tr>
+<td>2187, все кандидаты</td>
+<td>1 202</td>
+<td>157 с</td>
+<td>4 905 с</td>
+<td>≈ 420 000 с (оценка, ≈ 117 ч)</td>
+</tr>
+</tbody>
+</table></div>
+<p>На малых порядках (256, 512) A на C быстрее Python-варианта B: там $M$ сравним с $|G|$ (у групп порядка 256 с $d=6$ при $n=5$ $M=1554&gt;255$), а у Python есть постоянные издержки на группу. На порядке 2187 B быстрее A на C в 30 раз, а numpy — в сотни раз.</p>
+<p>Большие группы, только B по копредставлению:</p>
+<p>| группа | $|G|$ | $d$ | $n$ | соотношений после отсечения | $M$ | время | |---|---|---|---|---|---|---| | Бартольди–Михайлов [BM23] | $3^{494}$ | 7 | 4 | 6045 | 399 | 15 с mod $3^{19}$; 510 с точно (HNF над $\mathbb Z$, python-flint) | | рипсовское семейство (<code>gap/xcheck_fam.g</code>) | $2^{40}$–$2^{107}$ | 4 | 5 | 380–2330 | 340 | 1.7–9 с на группу |</p>
+<p>У группы $3^{494}$ индексы $\log_3|\Delta/\Delta^n|=59, 321, 1430$ ($n=2,3,4$) совпали по модулю и над $\mathbb Z$. На 394 проверенных элементах (pcgs слоёв 2–4) $D_n=\gamma_n$ при $n\le4$, что согласуется с теоремой Пасси ($D_4=\gamma_4$ для нечётных $p$).</p>
+<h2 id="5-сверка">5. Сверка</h2>
+<p>Эталон — ответы <code>dimsub.py</code> (хранятся вместе с ним, в отдельном репозитории). Сравниваются по уровням $|D_n|$, $|\gamma_n|$, <code>equal</code>, множество лишних элементов, <code>index_logp</code> и <code>certified</code>, где он посчитан в обоих.</p>
+<p><strong>Вариант B по перестановкам (<code>py/magnus.py</code>) и A на C (<code>c/dimsub_a</code>)</strong> — все эталонные наборы:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>набор</th>
+<th>групп</th>
+<th>уровней B</th>
+<th>уровней A</th>
+<th>расхождений B / A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8, 16, 32, 64, 81, 128, 243, 625 — полный режим</td>
+<td>2 762</td>
+<td>14 961</td>
+<td>16 575</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>729 — все</td>
+<td>504</td>
+<td>1 946</td>
+<td>1 946</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>256 — класс $\ge3$</td>
+<td>24 328</td>
+<td>100 691</td>
+<td>100 720</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>512 — выжившие после сита</td>
+<td>2 792</td>
+<td>11 168</td>
+<td>11 168</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>2187 — выборка</td>
+<td>49</td>
+<td>245</td>
+<td>245</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td><strong>всего</strong></td>
+<td><strong>30 435</strong></td>
+<td><strong>129 011</strong></td>
+<td><strong>130 654</strong></td>
+<td><strong>0 / 0</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Совпадают $|D_n|$, $|\gamma_n|$, лишние элементы, сертификаты и индексы $\log_p[\Delta:\Delta^n+p^E\Delta]$. B в полном режиме на 1 425 группах (почти все элементарно-абелевы или близкие, $M&gt;500$) остановлен потолком ранга и сверен по префиксу уровней. В быстром режиме такое случилось у 29 групп порядка 256 с $d=6$. A сверен целиком.</p>
+<p><strong>Вариант B по копредставлению (<code>gap/export_pres.g</code> → <code>py/magnus_pres.py</code>)</strong>, проверены все элементы каждой группы: порядки 64, 128, 243, 729, 512 (выжившие), 2187 (выборка) — 6 007 групп, 17 140 уровней, 0 расхождений, включая индексы. Отдельно: 20 групп порядка 64 точным HNF над $\mathbb Z$ (<code>--exact</code>) и 5 групп порядка 2187 с $n_{\max}=4&lt;\mathrm{cls}+1$ (проверка отсечения по весу) — 0 расхождений.</p>
+<p><strong>Перекрёстная сверка с независимой реализацией того же метода</strong> (не опубликована; словари мономов, явный перебор пар $u,v$, соотношения $G$ плюс все коммутаторы веса 4).</p>
+<ul>
+<li>Их код на наших группах (<code>scripts/xcheck_independent.py</code>; соотношения и слова из нашего экспорта) — те же 6 007 групп и 17 140 уровней, 0 расхождений, включая индексы.</li>
+<li>Наш код на их 14 рипсовских группах $Q=G/\gamma_4(G)$ порядков $2^{40}$–$2^{107}$ (<code>gap/xcheck_fam.g</code>). Копредставление строится заново из pc-группы $Q$, а не из копредставления $G$, так что общих у реализаций только метод и алгоритм Хауэлла.
+<ul>
+<li>$D_5\cap\Omega_1(\gamma_3\cap M_5)=1$ во всех 14 группах — как у них.</li>
+<li>$D_4\cap\Omega_1(\gamma_3\cap M_4)$ имеет ранг 1 ровно у $2^{84}$, $2^{90}$, $2^{107}$ и тривиально у остальных — как у них.</li>
+<li>$\alpha=[e_0,e_1]^{32}[e_0,e_2]^{64}[e_1,e_2]^{128}\in D_4$ у $2^{84}$ и $2^{90}$; у $2^{107}$ и двух других групп с $\alpha\ne1$ — $\alpha\notin D_4$; у прочих $\alpha=1$. Всё — как у них.</li>
+<li><strong>Сертификат точности</strong> ($p^{E-1}A_n^+\subseteq J_n+p^EA_n^+$) проходит во всех 42 случаях. Поэтому принадлежности по модулю $2^{30}$ здесь точные, и <strong>$D_4(Q)\ne1$ для $2^{84}$, $2^{90}$ и $2^{107}$ доказано вычислением</strong>, а не только как «кандидат по модулю».</li>
+</ul></li>
+</ul>
+<p><strong>Самодостаточная проверка в этом репозитории</strong> (<code>scripts/example.sh</code>): GAP сам выгружает SmallGroups порядков 64, 81 и 243, и вариант A, вариант B по перестановкам и вариант B по копредставлению сверяются между собой. Эталонные данные не нужны: 349 групп, 0 расхождений.</p>
+<h2 id="6-рекомендации">6. Рекомендации</h2>
+<h3 id="61-что-запускать">6.1. Что запускать</h3>
+<ul>
+<li><strong>Исходный перебор 3-групп порядка $3^7$ больше не нужен</strong>: все 3-группы порядка $\le3^7$ класса 4 метабелевы, а для них $D_5=\gamma_5$ по Гупте–Тахаре 1985. Для порядка $3^7$ это уже сделано: B прошёл все 1202 кандидата за 157 с на трёх потоках, везде $D_n=\gamma_n$ при всех $n$. Вариант A на C независимо дал то же (4 905 с на трёх потоках): 1 202 группы, 6 010 уровней, 0 расхождений с B. Смысл ядра теперь — большие группы и 3-группы порядка $3^8$ и выше.</li>
+<li><strong>Порядки $3^8$, $2^{10}$ и выше.</strong> Не экспортировать перестановки, а выгружать из GAP/ANUPQ pc-копредставление и только порождающие $K$ (<code>export_pres.g</code> + <code>magnus_pres.py --kernel</code>). Стоимость на группу — построение $J_5$ ($M=30..780$ при $d=2..5$, доли секунды–секунды) плюс экспорт в GAP. Узкое место — порождение и сито в GAP, а не решётка. При $d\ge6$ и $n=5$ ($M\ge1554$) выгоднее A на C по всей группе, пока $|G|\le2^{11}$.</li>
+<li><strong>Группа Рипса ($2^{38}$).</strong> Подходит B по копредставлению: группа класса 3, нужен $n=4$, $M=\sum_{k&lt;4}d^k\le399$ даже при $d=7$. Это то же, что уже посчитано для $3^{494}$ и для рипсовского семейства $2^{40}$–$2^{107}$ (секунды на группу). Не хватает копредставления самой группы Рипса: в открытых источниках оно не нашлось, нужна книга Михайлова–Пасси, LNM 1952. Поиск наименьших частных — это добавление одного соотношения и пересчёт $J_4$, тоже секунды.</li>
+</ul>
+<h3 id="62-что-делать-с-ядром-дальше">6.2. Что делать с ядром дальше</h3>
+<ol type="1">
+<li>Для B переписывать на C/FLINT имеет смысл только вместе с переходом к стандартным мономам (§3.6): на нынешних размерах ($M\le780$) Python не узкое место.</li>
+<li>A на C с одной группой на поток — запасной путь для $M\ge|G|$.</li>
+<li>Точность: в каждом найденном «$\in$» нужен сертификат (<code>certified</code>) или HNF над $\mathbb Z$ (<code>--exact</code>).</li>
+</ol>
+<h3 id="63-оценка-для-вопроса-о-плато-imp26-33-win-d_7">6.3. Оценка для вопроса о плато [IMP26, §3.3]: $w\in D_7$?</h3>
+<p>$d=6$, $n=7$: $M=6+6^2+\dots+6^6=55\,986$. Тяжёлое вычисление не запускалось.</p>
+<p><strong>Ответ — в §6.5 (17.10.2026): $w\notin D_7(G)$</strong>, с сертификатом; плотный счёт на GPU занял 8 минут.</p>
+<ul>
+<li><strong>Плотно (как сейчас).</strong> Одна форма Хауэлла $M\times M$ в <code>uint32</code> — 12.5 ГБ, с пулом строк вдвое больше. Число операций $\sim M^3/3\approx6\cdot10^{13}$ на один проход. На одном ядре (~$10^9$ операций/с в нашем C) — 15–20 часов. Но $J_7$ порождается не $M$, а $\sim\sum_r\sum_{t\le6-\operatorname{ord}r}(t+1)6^t$ строками: около $5\cdot10^4$ на соотношение с линейной частью, то есть порядка $10^6$ строк, и замыкание требует нескольких таких проходов. Итого $10^{14}$–$10^{15}$ операций — дни на тестовой машине, и по памяти она на пределе (61 ГБ, общий с CI). <strong>Не рекомендую.</strong></li>
+<li><strong>Стандартные мономы (§3.6).</strong> Столбцов останется порядка $\log_2|\Delta/\Delta^7|$ плюс мономы с необратимой опорой, то есть, вероятно, тысячи, а не $5.6\cdot10^4$. Это минуты. <strong>Замер в §6.4: нет, не меньше 23 354 столбцов.</strong> Нужна реализация (нильпотентный фактор ассоциативной алгебры над $\mathbb Z/2^E$) — несколько дней работы. Размер можно оценить заранее дёшево: посчитать $\log_2|\Delta/\Delta^n|$ для $n=2..5$ нынешним B ($M\le1554$) и экстраполировать.</li>
+<li><strong>Без $\Gamma$, через $G$.</strong> Если $G=M/K$ — конечная 2-группа, то её pc-копредставление с отсечением по весу $&lt;7$ уменьшает число соотношений, но не $M$. Поэтому от плотного варианта это не спасает.</li>
+</ul>
+<h3 id="64-замер-размер-базиса-из-стандартных-мономов-для-группы-плато">6.4. Замер: размер базиса из стандартных мономов для группы плато</h3>
+<p>Оценка из §6.3 («тысячи столбцов») не подтвердилась. Ниже замер, а не прикидка:</p>
+<ul>
+<li><strong>Группа.</strong> <code>gap/plateau.g</code> строит $M$ и $\varphi$ как в листинге 1 из [IMP26] и выписывает $G=M/K$ копредставлением на $x_1..x_6$: девять соотношений (3.12), $[[x_i,x_j],[x_k,x_l]]$, $c\,a^{-e_c}$ для левонормированных $c$ веса 4 (это $K$) и коммутаторы веса 5 — всего 3 895 соотношений. Повторный запуск nq на этом копредставлении подтверждает его: класс 4, $G&#39;&#39;=1$, $\gamma_4(G)=\langle a\rangle\cong C_{2^{14}}$, $w=a^{2^{13}}\ne1$. Степени $A^{-e_c}$ длинного слова $A$ элемента $a$ записаны как произведения степеней (<code>[[c,1],[A,-e]]</code>, их читает <code>magnus_pres.py</code>), иначе вход весит 340 МБ.</li>
+<li><strong>$G$ бесконечна.</strong> $G_{ab}=\mathbb Z^2\oplus\mathbb Z/8\oplus\mathbb Z/64\oplus\mathbb Z/1024\oplus\mathbb Z/16384$ (у $x_4$, $x_6$ нет степенных соотношений); ранги без кручения у $\gamma_k/\gamma_{k+1}$ — $2,1,2,0$. Значит, $\Delta/\Delta^n$ бесконечна, $\log_2|\Delta/\Delta^n|$ не определён и сертификат §3.2(d) неприменим; замена ему — ниже.</li>
+<li><strong>Правильная мера</strong> числа столбцов — минимальное число образующих $A_n^+/J_n$, то есть $\dim_{\mathbb F_2}A_n^+/(J_n+2A_n^+)=\dim_{\mathbb F_2}\Delta_{\mathbb F_2}/\Delta_{\mathbb F_2}^n$. В любом мономиальном базисе $\mathbb Z[G]/\Delta^n$, в том числе из стандартных мономов, мономов не меньше. <code>magnus_pres.py</code> теперь выводит это число как <code>generators</code> ($M_n$ минус ранг строк формы Хауэлла по модулю $p$; от $E$ не зависит).</li>
+<li><strong>Дженнингс.</strong> По теореме Дженнингса эта размерность — сумма коэффициентов при $t^1..t^{n-1}$ у $\prod_k(1+t^k)^{d_k}$, $d_k=\dim M_k/M_{k+1}$ (<code>py/jennings.py</code>). GAP даёт $G/P_7(G)$ порядка $2^{347}$ ($P_7\subseteq M_7$, поэтому $d_k$ при $k\le6$ — те же, что у $G$): $d_k=6,21,68,22,0,68$; $d_5=0$, так как $\gamma_5(G)=1$.</li>
+</ul>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>$n$</th>
+<th>$M_n$ (плотно)</th>
+<th><code>generators</code>, вариант B</th>
+<th>Дженнингс</th>
+<th>время B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>42</td>
+<td>42</td>
+<td>42</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>258</td>
+<td>256</td>
+<td>256</td>
+<td>5 с</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1 554</td>
+<td>1 226</td>
+<td>1 226</td>
+<td>31 с</td>
+</tr>
+<tr>
+<td>6</td>
+<td>9 330</td>
+<td>5 492</td>
+<td>5 492</td>
+<td>820 с, 13 ГБ</td>
+</tr>
+<tr>
+<td>7</td>
+<td>55 986</td>
+<td>—</td>
+<td><strong>23 354</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Вариант B и счёт по Дженнингсу совпадают везде, где B запускался. Поле <code>generators</code> сверено с Дженнингсом и на всех SmallGroups порядков 64, 81 и 243 ($n\le5$; <code>gap/export_jennings.g</code>, <code>scripts/compare_jennings.py</code>): 349 групп, 1 396 уровней, 0 расхождений. Время — у <code>magnus_pres.py</code> (numpy, одно ядро) на тестовой машине. Попутно B воспроизводит $w\in D_5,D_6$ и $a\notin D_5$ [IMP26, (3.15)]; для бесконечной $G$ для этого нужен сертификат ниже.</p>
+<p><strong>Точность для бесконечной $G$.</strong> $A_n^+/J_n\cong\mathbb Z^{r}\oplus T$, где $T$ — конечная 2-группа с инвариантами $2^{v_i}$, поэтому <code>index_logp</code> по модулю $2^E$ равен $\sum_i\min(v_i,E)+Er$. Ранг $r$ известен точно: по теореме Квиллена $\mathrm{gr}\,\mathbb Q[G]\cong U(\mathrm{gr}\,G\otimes\mathbb Q)$, так что $r_n$ — сумма коэффициентов при $t^1..t^{n-1}$ у $\prod_i(1-t^i)^{-h_i}$, где $h=(2,1,2,0)$ — ранги без кручения: $r_n=2,6,14,27,47,78$ при $n=2..7$; при $n\le6$ это совпадает с числом столбцов без опоры в B. Если $\mathrm{index}(E_2)-\mathrm{index}(E_1)=r(E_2-E_1)$, то все $v_i\le E_1$, и для элемента конечного порядка (его образ — кручение) принадлежность по модулю $2^{E_2}$, $E_2&gt;E_1$, точна. Замер с <code>--E</code>:</p>
+<p>| $n$ | $r_n$ | index, $E=20$ | $E=25$ | $E=30$ | $\log_2|T|$ | |---|---|---|---|---|---| | 2 | 2 | 73 | 83 | 93 | 33 | | 3 | 6 | 380 | 410 | 440 | 260 | | 4 | 14 | 1 815 | 1 885 | 1 955 | 1 535 | | 5 | 27 | 7 286 | 7 421 | 7 556 | 6 746 | | 6 | 47 | 28 326 | — | 28 796 | 27 386 |</p>
+<p>Разности ровно $5r_n$ (при $n=6$ — $10r_6=470$), значит, экспонента $T$ не больше $2^{20}$, и принадлежности по модулю $2^{30}$ выше доказаны: $w\in D_6(G)$ и $a\notin D_5(G)$, как в [IMP26, (3.15)]. Тот же сертификат понадобится при $n=7$ в плотном счёте.</p>
+<p>При $n=7$ в любом мономиальном базисе не меньше <strong>23 354</strong> столбцов — 42 % от $M$. Реализация стандартных мономов сэкономила бы не больше чем в ~2.4 раза по столбцам, ~14 по кубу и ~6 по памяти; это несколько дней работы (нильпотентный фактор над $\mathbb Z/2^E$), и дни в минуты она не превращает. Граница достигается, только если все образующие можно взять мономами; сколько столбцов добавит кручение (порядки до $2^{14}$ есть уже в $\Delta/\Delta^2$), не замерялось.</p>
+<p><strong>Вывод.</strong> Для $d=6$, $n=7$ путь через стандартные мономы на CPU не даёт ожидавшихся «тысяч столбцов»; остаётся плотный счёт (на GPU или на CPU с ≥ 64 ГБ и днями). Для бесконечной $G$ ответ «$\in$» по модулю $2^E$ точен при сертификате выше; ответ «$\notin$» точен, как и раньше.</p>
+<h3 id="65-gpu-ядро-плотной-формы-хауэлла-по-модулю-232-прототип">6.5. GPU-ядро плотной формы Хауэлла по модулю $2^{32}$ (прототип)</h3>
+<p><code>gpu/howell_gpu.py</code>; для бесплатного GPU — <code>gpu/howell_colab.ipynb</code> (Colab или Kaggle, T4 16 ГБ). При $p=2$, $E\le32$ арифметика — переполнение uint32 (по модулю $2^E$, $E&lt;32$, — то же и маска).</p>
+<ul>
+<li><strong>Алгоритм.</strong> Форма Хауэлла из §2, блоками по $b=256$ столбцов. В панели участвуют только строки, ненулевые в ней; шаги по столбцам — как в <code>c/hw.h</code> (опора наименьшей 2-адической оценки, нормировка к $2^v$, точное деление, строка $2^{E-v}\cdot$опора в пул), и каждый шаг записывается коэффициентами $G$ при опорных строках. Затем опорные строки на хвосте — $(I-SG_{\rm piv})^{-1}SO$ (обращение унитреугольной матрицы удвоением), а прочие строки получают $O+G\cdot P$: одно произведение (строки $\times b$)$\cdot$($b\times$ хвост) — основная работа.</li>
+<li><strong>Произведение по модулю $2^{32}$ точно.</strong> Три способа, каждый при старте сверяется с точным целым произведением: <code>u32</code> (целочисленный matmul с переполнением), <code>f32</code> (байты во float32: при сдвиге $s$ сумма $\sum_{i+j=s}a_ib_j$ по 64 столбцам $&lt;2^{24}$, точна; 10 произведений байтов, $i+j\le3$) и <code>i8</code> (байты со знаком на тензорных ядрах INT8 через <code>torch._int_mm</code>; аккумулятор int32 не переполняется) — схема по аналогии с Ozaki-II. На CPU работают первые два.</li>
+<li><strong>Сверка.</strong> Две формы Хауэлла одного подмодуля сравниваются после приведения к приведённой форме Хауэлла, которая единственна: побайтно, по SHA-256. Случайные матрицы (все оценки, неполный ранг, $E$ от 1 до 30, ширина панели 1–256; 1 500 случаев): расхождений с <code>c/hw.h</code> нет.</li>
+<li><strong>Группа плато</strong> (вход <code>gpu/data/plateau_G.jsonl.gz</code>, вывод <code>gap/plateau.g</code>). Замыкание из <code>magnus_pres.J_howell</code> идёт поверх блочной формы: сдвиги подаются по два, остановка — «индекс не изменился» ($\mathrm{span}\,H\subseteq\mathrm{span}\,H&#39;$ при равном индексе — равенство). Счёт по модулю $2^{32}$; канонические формы образов по модулю $2^{30}$ и $2^{20}$ совпали с <code>magnus_pres.py</code> с <code>c/hw.h</code> при $E=30,20$, а по модулю $2^{32}$ — с <code>magnus_pres.py</code> с <code>py/howell.py</code> (<code>gpu/reference.json</code>), при $n=4,5,6$. Числа §6.4 воспроизведены (<code>generators</code> 256, 1 226, 5 492; $a\notin D_5,D_6$, $w\in D_4,D_5,D_6$), свободных столбцов ровно $r_n$ Квиллена (14, 27, 47), и $\mathrm{index}(2^{32})-\mathrm{index}(2^{20})=12r_n$: сертификат выполнен.</li>
+<li><strong>Замер на CPU</strong> (numpy-путь того же кода, на машине из §6.4): замыкание при $n=6$ — 305 с, из них 269 с — произведения на хвосте ($8{,}4\cdot10^{11}$ умножений-сложений по модулю $2^{32}$), шагов по столбцам 275 062; <code>magnus_pres.py</code> — 820 с. От $n=5$ к $n=6$ произведения растут как $M^{2{,}55}$.</li>
+<li><strong>На GPU</strong> (Colab, A100-SXM4 40 ГБ, 16.10.2026, main 93a6259): <code>u32</code> точен, 11,2 Т умножений-сложений по модулю $2^{32}$ в секунду на $8192\times256\times8192$; <code>f32</code> точен, 0,67 Т/с; <code>i8</code> недоступен (<code>CUBLAS_STATUS_NOT_SUPPORTED</code>). Замыкание при $n=4,5,6$: 2,3 / 17,6 / 127,9 с, все проверки PASS, канонические формы совпали с CPU. При $n=6$ на произведения ушло 3,2 с из 128, остальное — шаги по столбцам, 0,88 мс на шаг (синхронизация с хостом и около двадцати малых ядер на столбец).</li>
+<li><strong>Для $n=7$</strong> ($M=55\,986$, $r_7=78$, то есть ожидается ранг $55\,908$):
+<ul>
+<li><p><em>Строки соотношений.</em> <code>Words</code> строит $\mu(r)-1$ сдвигами: $v\cdot\mu(x_g^e)=\sum_kC(e,k)\,v\,a_g^k$, а $v\cdot a_g$ переносит блок степени $k$ в степень $k+1$ одной индексной записью; произведения степеней слов по-прежнему через <code>Alg.mul</code>. На пуле процессов: $n=6$ — 1,8 с вместо 54 с, строки те же побайтно; $n=7$ — 11 с на 8 ядрах, 3 894 строки, 0,8 ГиБ.</p></li>
+<li><p><em>Память.</em> Форма хранится блоками (строки панели — только с её первого столбца: половина плотной $k\times M$, 5,8 ГиБ при $n=7$). <code>howell()</code> принимает строки кусками $(c_0,R)$ по возрастанию $c_0$ и кладёт кусок в пул только на панели, содержащей $c_0$; до неё его строки ни в одном шаге не участвуют, так что результат тот же (проверено: куски против целой матрицы, канонические формы совпали). Замыкание подаёт прежнюю форму блок за блоком и освобождает каждый блок по ходу; сдвиги берутся только от строк, ненулевых ниже старшей степени (около 9 300 строк при $n=7$, 2,1 ГБ на матрицу сдвигов). Пик замыкания при двух матрицах сдвигов на вызов (замер на CPU через <code>tracemalloc</code>): 16,8 / 2,24 / 1,88 плотной матрицы $M^2$ uint32 при $n=4,5,6$, доля падает с ростом $M$; при $n=7$ это не больше $1{,}88\cdot11{,}7\approx22$ ГиБ [экстраполяция].</p></li>
+<li><p><em>Первый прогон $n=7$ на A100 (16.10.2026, main 53658b5) упёрся в память</em>: раунды 0–3 за 3 / 26 / 57 / 85 с (ранг 3 962 → 20 975 → 33 142 → 38 258), пик пула 3,7 → 12,3 → 25,0 → 38,8 ГиБ, в раунде 4 не нашлось 3,4 ГБ. Замер на CPU не увидел двух вещей, заметных только при $n=7$: сдвиги подавались целиком с нулевого столбца, и все их строки входили в пул на первой панели во всю ширину; обновление хвоста шло плитками по 16 384 строки — 3,7 ГБ на временный массив при $M=55\,986$, и таких четыре (выбранные строки, произведение, сумма, маска), плюс три копии размером с пул при его пересборке. Теперь: сдвиг — поток кусков по 2 048 строк $B$, каждый строится, когда <code>howell()</code> доходит до его первого столбца (сдвиги переводят столбцы монотонно, так что куски идут по возрастанию $c_0$; потоки сливаются по $c_0$) — сдвинутые строки начинаются в основном в старшей степени, поэтому входят поздно и уже; плитки по $2^{29}$ байт, временных массивов два; пул пересобирается в один новый буфер; кэш CuPy отдаётся драйверу, когда в нём больше 4 ГиБ свободного; шаг 8 берёт один сдвиг на вызов (<code>--group 1</code>). На CPU результаты те же ($n=4,5,6$, все хэши), замыкание при $n=6$ — 203 с вместо 368 с, пик — 1,64 плотной матрицы вместо 1,88.</p></li>
+<li><p><strong>Результат при $n=7$</strong> (Modal, A100-SXM4 80 ГБ, 16.10.2026, main 9114cb9, <code>gpu/modal_run.py</code>; шаги по столбцам <code>cuda</code>, один сдвиг на вызов). Сначала проходят <code>selftest</code>, <code>random --big</code> (все три режима шагов) и $n=4,5,6$ против <code>gpu/reference.json</code>. Замыкание: раунды 0–6 за 2 / 31 / 52 / 69 / 100 / 117 / 118 с (ранг 3 962 → 20 975 → 33 142 → 38 258 → 51 072 → 55 908 → 55 908; индекс 1 666 980 → … → 108 940 → 108 940), всего 488 с, 73 вызова Howell, $5{,}1\cdot10^{14}$ умножений-сложений по модулю $2^{32}$ за 227 с, 3,75 млн шагов по столбцам; пик пула 16,4 ГиБ (в раунде 3 — 10,2 ГиБ против прежних 38,8); форма 5,86 ГиБ. Сводка, канонические формы и образы по модулю $2^{30},2^{20}$ — 138 с.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>$E$</th>
+<th>индекс</th>
+<th>ранг</th>
+<th>каноническая форма, sha256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32</td>
+<td>108 940</td>
+<td>55 908</td>
+<td><code>e060b5e742633ba9…</code></td>
+</tr>
+<tr>
+<td>30</td>
+<td>108 784</td>
+<td>55 908</td>
+<td><code>464917aa22bfe1dd…</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>108 004</td>
+<td>55 908</td>
+<td><code>905de7e5675eb7b7…</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Свободных столбцов $78=r_7$; $\mathrm{index}(2^{32})-\mathrm{index}(2^{30})=156=2r_7$ и $\mathrm{index}(2^{32})-\mathrm{index}(2^{20})=936=12r_7$, так что кручение имеет экспоненту $\le2^{20}$ и принадлежности точны: <strong>$a\notin D_7(G)$, $w\notin D_7(G)$</strong>; вместе с §6.4 $w\in D_6(G)\setminus D_7(G)$. Ранг по модулю 2 даёт 23 354 образующих — ровно нижнюю оценку §6.4 для мономиального базиса. [CPU-эталона при $n=7$ нет: результат проверяют только сертификат и сверка с $r_7$.] Форма по модулю $2^{32}$ лежит в томе Modal <code>cflint-runs</code>, <code>20261016-195219_9114cb9/J7_E32.npz</code>.</p></li>
+<li><p><em>Шаги по столбцам.</em> Три реализации одной арифметики в одном порядке: <code>host</code> (как было, синхронизация на каждом столбце), <code>dev</code> (скаляры на устройстве, без синхронизации; обратный к единице — итерацией Ньютона), <code>cuda</code> (три ядра на столбец: редукция для опоры — наименьшая оценка, затем первая строка; опорная строка со столбцом множителей; обновление ранга один). На CPU <code>host</code> и <code>dev</code> совпали с <code>c/hw.h</code> на всех случайных матрицах и с <code>gpu/reference.json</code> при $n=4,5$ (<code>dev</code>) и $n=4,5,6$ (<code>host</code>). <code>cuda</code> проверяется в блокноте (шаг 3) до использования.</p></li>
+<li><p><em>Каноническая форма и принадлежность</em> — блоками, на устройстве. Форму можно сохранить (<code>--save</code>).</p></li>
+<li><p>Шаг 8 блокнота считает $n=7$ на GPU не меньше 38 ГБ. CPU-эталона при $n=7$ нет: проверки — свободные столбцы против $r_7$ и сертификат $\mathrm{index}(2^{32})-\mathrm{index}(2^{30})=2r_7$, $\mathrm{index}(2^{32})-\mathrm{index}(2^{20})=12r_7$.</p></li>
+</ul></li>
+</ul>
+<h3 id="66-math-43-поиск-метабелевой-группы-класса-4-с-d_7ne1-первый-проход">6.6. MATH-43: поиск метабелевой группы класса 4 с $D_7\ne1$ (первый проход)</h3>
+<p>Подробности, таблица семейств и числа — в английской версии, <code>docs/analysis.md</code> §6.6; сырые строки — в <code>results/c4/</code>.</p>
+<ul>
+<li><strong>Сведение</strong> [на бумаге]: достаточно коциклических факторов $G_\varphi=M/\ker\varphi$, $M=\Gamma/\gamma_5\Gamma&#39;&#39;$, $\varphi:\gamma_4(M)\twoheadrightarrow C_{2^m}$, и в каждом — одного элемента $A^{2^{m-1}}$ порядка 2 в $\gamma_4(G_\varphi)$. Ответ «$\notin$» по модулю $2^{32}$ точен без сертификата.</li>
+<li><strong>Конвейер</strong>: GAP+nq в Docker (<code>gap/docker</code>, <code>scripts/gap.sh</code>) → <code>gap/c4search.g</code> (семейства <code>gap/c4_plateau_quot.g</code>, <code>gap/c4_lie1.g</code>, <code>gap/c4_rand.g</code>) → <code>gpu/howell_gpu.py batch</code> (CPU) или <code>gpu/modal_batch.py</code> (Modal A10G: $d=6$, $n=7$ — 8–9 мин на группу). Проверка: группа плато, пересобранная заново, даёт индексы 1983, 7610, 28 890 и 108 940 при $n=4..7$, как раньше.</li>
+<li><strong>Итог</strong>: ни в одной из проверенных групп $D_7\cap\gamma_4\ne1$ нет. $D_6\cap\gamma_4\ne1$ — только у самого плато и тех его факторов, где $w$ выживает. Плато жёсткое: любое изменение одного показателя в (3.12) и любое отождествление $x_5$ убивают $w$ уже в $M$. Групповой вариант $L_1$ теряет степень ($D_5\ne1$, $D_6\cap\gamma_4=1$).</li>
+</ul>
+<h3 id="67-класс-5-math-43-сдвиг-плато-imp26-33">6.7. Класс 5 (MATH-43): сдвиг плато [IMP26, §3.3]</h3>
+<p>Вопрос: есть ли метабелева группа класса 5 с $D_8\ne1$ (групповой аналог кольца $L_2$ из теоремы A [IMP26]), и тогда $D_9\ne1$? Плотный тест $D_9$ посилен только при $d\le4$ образующих ($M=87\,380$; при $d=5$ — $488\,280$).</p>
+<p><strong>Инструменты.</strong> <code>gap/plateau5_lib.g</code> по копредставлению $\Gamma$ на $x_1..x_d$ строит $M=\Gamma/\gamma_{c+1}\Gamma&#39;&#39;$ (nq), проекцию $\varphi$ группы $\gamma_c(M)$ на один циклический множитель её базиса Смита, на котором $w\ne1$, и $G=M/\ker\varphi$ в виде копредставления (соотношения; $[U,V]$ для левонормированных $U,V$ весов $\ge2$ с суммой $\le c$; $C\,c_0^{-e_C}$ для левонормированных $C$ веса $c$; коммутаторы веса $c+1$) в JSON для <code>gpu/howell_gpu.py</code>. Строение $G$ (класс, $G&#39;&#39;=1$, $\gamma_k/\gamma_{k+1}$, ранги без кручения для сертификата Квиллена, $|w|$) читается с pcp-фактора $M/\ker\varphi$; повторный nq на записанном копредставлении (как в <code>gap/plateau.g</code>) — по желанию: на этих показателях nq переполняется (<code>CombiCollect</code>). Семейства — <code>gap/plateau5_cands.g</code>, прогон GAP и замыкания — <code>scripts/plateau5_scan.py</code>, то же на Modal — <code>gpu/modal_c5.py</code> (GAP 4.14 + nq на CPU-контейнере, замыкание на A100 80 ГБ), GAP в Docker локально — <code>scripts/gap5.sh</code>. <code>howell_gpu.py plateau</code> теперь принимает любой вход и любое число тестов (<code>test_names</code>); с CPU-эталоном сверяется только вход по умолчанию. <code>random</code> и <code>plateau --n 4 5 6</code> на CPU по-прежнему проходят против <code>gpu/reference.json</code>.</p>
+<p><strong>Сверка на [IMP26, §3.3].</strong> Библиотека с $\varphi$, выбранной по $a$ (листинг 1), даёт $w\in D_6$, $a\notin D_6$ (сертифицировано), как в §6.4–6.5.</p>
+<p><strong>Какие соотношения (3.12) нужны</strong> ($n=6$, всё сертифицировано). Без четвёртого соотношения $x_5^{1024}d_2^{16}$ теряется $w\in D_6$; без любого из пяти остальных ($d_5^{2048}$, $d_1^{16}$, $d_2^{128}$ и двух верхних) — нет, и без всех пяти сразу тоже. Совсем без $x_5$ $w\notin D_6$; без $d_5^{16}$ во втором соотношении $w=1$. Свободный образующий $x_6$ можно заменить на $x_3$ ($t=[x_4,x_3]$): пять образующих, $w\in D_6$. Итак, плато класса 4 живёт на пяти образующих с четырьмя соотношениями: $$x_1^8d_2d_3^4,\quad x_2^{64}d_1^{-1}d_3^{-16}d_5^{16},\quad x_3^{16384}d_1^{-4}d_2^{16},\quad x_5^{1024}d_2^{16},
+\qquad d_i=[x_4,x_3,x_i].$$</p>
+<p><strong>Четыре образующих, класс 4: во всех попытках $w\notin D_6$ или $w=1$.</strong> Группа типа Рипса из [BM23, §1.2] с $z$, заменённым на $t=[z,e_2]$, и её масштабирования: $w\in D_5\setminus D_6$ (и для её жадного максимального фактора); (3.12) без $x_5$, $t=[x_4,x_3]$: $w\in D_5\setminus D_6$; $x_5$, слитый с образующим $t$, или $x_5:=W(x_1..x_4)$ для восьми слов $W$, или $t$ только из образующих с кручением (десять вариантов): $w=1$ в $M$.</p>
+<p><strong>Класс 5.</strong> $t=[x_4,x_3,x_3]$, $d_i=[t,x_i]\in\gamma_4$, те же соотношения, $c=5$, $\gamma_5(G)\cong C_{2^{14}}$:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$d$</th>
+<th>$D_6$</th>
+<th>$D_7$</th>
+<th>$D_8$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>типа [BM23], $t=[z,e_2,e_2]$ (три масштаба)</td>
+<td>4</td>
+<td>$w\in$</td>
+<td>$w\notin$</td>
+<td></td>
+</tr>
+<tr>
+<td>(3.12) без $x_5$</td>
+<td>4</td>
+<td>$w\in$</td>
+<td>$w\notin$</td>
+<td></td>
+</tr>
+<tr>
+<td>(3.12) со сдвигом, пять образующих (<code>plateau5_c5i5</code>)</td>
+<td>5</td>
+<td>$w\in$</td>
+<td>$w\in$</td>
+<td>$w\notin$</td>
+</tr>
+<tr>
+<td>то же с четырьмя соотношениями; с удвоенными $L_{13},L_{23}$; с $E_5=512$</td>
+<td>5</td>
+<td>$w\in$</td>
+<td>$w\in$</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Всё сертифицировано (свободные столбцы $=r_n$, разности индексов $2r_n$ и $12r_n$). Для <code>plateau5_c5i5</code> при $n=8$: $M=97\,655$, замыкание за 7 раундов и 1 829 с на A100 80 ГБ (пик 58,8 ГиБ), ранг 97 648, свободных столбцов $7=r_8$, индекс 169 278, $\mathrm{index}(2^{32})-\mathrm{index}(2^{30})=14$, $-\mathrm{index}(2^{20})=84$. Так как $\gamma_5(G)$ циклическая и $w$ — её элемент порядка 2, из $w\notin D_8$ следует $D_8\cap\gamma_5=1$; для варианта с четырьмя соотношениями тесты $u_3^{2^j}$ дают $D_6\cap\gamma_5=\langle w\rangle$. Итак, у этой группы $D_7\ne1$ ($f_{\rm met}(5)\ge7$), но не $D_8\ne1$.</p>
+<p><strong>Почему сдвиг останавливается на $D_7$ (лемма о спаривании).</strong> Если $x^E\in\gamma_k$, $E=2^s\ge4$, то $E(x-1)\in\Delta^2$, $2E(x-1)\in\Delta^3$, $4E(x-1)\in\Delta^4$ (разложить $x^E-1=\sum_m\binom Em(x-1)^m$; на последнем шаге $4\binom E3=\frac{(E-1)(E-2)}3\cdot2E$ и $3\mid(E-1)(E-2)$). Отсюда $(x-1)(\zeta^{2^{k-2}E}-1)\in\Delta^{2k}$ при $\zeta\in\gamma_k$, $k\le4$: это множители $x_1^{16}=x_1^{2E_1}$, $x_2^{128}=x_2^{2E_2}$ в (3.14) ($k=3$). Для класса 5 ($k=4$) аналог требует $g_i=\prod_jx_j^{L_{ij}}=\zeta_i^{4E_i}$, а в (3.12) $g_1=\zeta_1^{16}$, $g_2=\zeta_2^{128}$, то есть $2E_i$. <code>scripts/plateau5_pairing.py</code> перебирает масштабирования степенями двойки $E_i$, строк матрицы показателей и $L_{ij}$, при которых $g_i\in4E_iD$ по модулю $\gamma_c$ (121 644 варианта); у 80 самых дешёвых, построенных в классе 4, везде $w=1$ в $M$. В этом семействе два требования тянут в разные стороны: для $w\ne1$ нужно $L_{ij}&lt;E_iE_j$ хотя бы для одной пары (множители вида $[x_j,x_i^{E_i}]$ имеют порядок, делящий $E_j$), а учетверённое спаривание поднимает $L_{ij}$.</p>
+<p><strong>Кольца Ли на четырёх образующих</strong> (на бумаге, по доказательствам [IMP26, §3.1–3.2]). В $L_N$ свободный образующий $x_5$ можно заменить на $x_3$: на $x_1..x_4$ с порядком $x_3&lt;x_1&lt;x_2&lt;x_4$, $t=[x_4,x_3,\dots,x_3]$ ($N$ букв $x_3$), с теми же $r_i$ и (ii)–(iv), получается $D_{N+4}=\dots=D_{2N+4}=\langle a\rangle\cong\mathbb Z/2$, $D_{2N+5}=0$. Меняется вот что: в лемме о верхнем слое скобка $e_3[x_3,\dots]$ веса $N+3$ теперь может попасть в $u_1,u_2$, но $64\mu(u_1)$, $64\mu(u_2)\equiv0\bmod256$; в лемме о последней начальной форме $c_i$-координата скобки с $r_3$ кратна $e_3=64$, а на неё делятся $e_1,e_2$. При $N=2$: класс 5, $D_6=D_7=D_8\ne0=D_9$ на четырёх образующих. Именно групповой аналог этого кольца таблица выше построить не смогла.</p>
+<p><strong>Как повторить.</strong> Группа класса 5 (пять образующих): <code>scripts/gap5.sh plateau5_cands.g 'P5NAME := "c5i5"; P5I5 := rec(cls := 5); P5OUT := "/data/c5i5.jsonl";'</code> (около 9 мин; Docker, образ из <code>gap/Dockerfile.plateau5</code>), затем <code>python3 gpu/howell_gpu.py plateau --input gpu/data/plateau5/plateau5_c5i5.jsonl.gz --n 6 7 8 --h 1 0 0 0 0 --group 1</code> на GPU с памятью от 64 ГБ для $n=8$ (закоммиченный <code>plateau5_c5i5.jsonl.gz</code> — этот файл). На Modal: <code>modal deploy gpu/modal_c5.py</code>, затем <code>python gpu/modal_c5.py cpu|gpu '&lt;команда&gt;' ...</code> (в фоне; результаты в томе <code>math43-c5</code>). Перебор кандидатов: <code>python3 scripts/plateau5_scan.py LOG 'name|I5rec(cls:=4, ...)|5,6'</code> (<code>SCAN_DEVICE=gpu</code>, <code>SCAN_REUSE=1</code> — только замыкание). Расход Modal на весь §6.7 — около 8 долларов. Жадный максимальный фактор группы класса 5 с сохранением $w$ (<code>P5_Quot</code>, 65 баз) за 1 ч 45 мин GAP не досчитался и был остановлен.</p>
+<h3 id="68-math-43-класс-4-пробел-d_7notsubseteqgamma_4-и-все-ksubseteqgamma_4m-сразу">6.8. MATH-43, класс 4: пробел $D_7\not\subseteq\gamma_4$ и все $K\subseteq\gamma_4(M)$ сразу</h3>
+<p>Подробности и доказательства — в английской версии, <code>docs/analysis.md</code> §6.8; строки — <code>results/c4/q3/</code>, <code>results/c4/kfree/</code>.</p>
+<p><strong>(а) Фактор ступени 3.</strong></p>
+<ul>
+<li><strong>Лемма 1</strong> [на бумаге]. $Q$ конечно порождена, нильпотентна ступени $\le3$, $n\in\{4,5\}$. Тогда $D_n(Q)\subseteq\tau(\gamma_3(Q))$ ($D_3=\gamma_3$ [MP09] †; рациональные размерные подгруппы — изоляторы, Jennings †), и $g\mapsto g-1$ — гомоморфизм $\gamma_3(Q)\to\Delta^3/\Delta^n$ (так как $(g-1)(h-1)\in\Delta^6$). Значит, при 2-группе $\tau(\gamma_3(Q))$: $D_n(Q)=1$ ⟺ этот гомоморфизм инъективен на элементах порядка 2.</li>
+<li><strong>Следствие 2</strong> [на бумаге]. Если $\gamma_5(G)=1$ и $D_5(G/\gamma_4)=1$, то из $D_r(G)\cap\gamma_4=1$ следует $D_r(G)=1$ ($r\ge5$).</li>
+<li>$G_\varphi/\gamma_4=\Gamma/\gamma_4(\Gamma)\Gamma&#39;&#39;$ не зависит от $\varphi$: 80 групп $Q$ покрывают все 844 группы §6.6.</li>
+<li><strong>Счёт</strong> [компьютер]: во всех 80 $\tau(\gamma_3(Q))$ — 2-группа, и инъективность есть уже при $n=4$, т. е. <strong>$D_4(Q)=1$</strong>. Инъективность по модулю $2^{32}$ точна без сертификата (сертификаты всё равно выполнены).</li>
+<li><strong>Итог (а)</strong> [компьютер + на бумаге]: группа плато $G$ и три группы P6 — $D_7=1$ (для $G$ теперь без опоры на описание $D_6(G)$ из [IMP26]); 16 выживших факторов R, R2 — $D_7=1$; 62 группы L — $D_6=1$ (54 из них — $D_5=1$); 16 групп S и 746 групп T — $D_5=1$. Это утверждения о проверенных коциклических $G_\varphi$, а не о $M$.</li>
+<li><strong>Связь с MATH-41</strong> [на бумаге]: элемент $D_7(G)\setminus\gamma_4$ дал бы $D_5\ne1$ в конечной 2-группе ступени 3 (финитная аппроксимируемость конечными 2-группами на 2-элементах, Gruenberg †) — отрицательный ответ на MATH-41. Закрытый здесь пробел — ровно частные случаи MATH-41; среди 80 групп три конечные (Rf15, Rf16, Rd46f15), у всех $D_4=1$. Это примеры, а не общий аргумент.</li>
+</ul>
+<p><strong>(б) Все $K$ сразу.</strong> $M=\Gamma/\gamma_5\Gamma&#39;&#39;$, $A_4=\gamma_4(M)$, $\psi(k)=k-1$, $n\le8$.</p>
+<ul>
+<li><p><strong>Лемма 3</strong> [на бумаге]. $\psi:A_4\to\Delta^4/\Delta^n$ аддитивно; $v\in D_n(M/K)$ ⟺ $v-1\in\Delta^n+\sum_k\psi(k)R$, $R$ — константа и мономы $(x_{j_1}-1)\cdots(x_{j_l}-1)$, $1\le l\le n-5$, $k$ по образующим $K$. При фиксированном $K$ — линейная задача.</p></li>
+<li><p><strong>Где ломается линейность</strong> [на бумаге]. «Существует $K$» — это объединение по подгруппам: нужна точка аффинного смежного класса $\Lambda^{-1}(\psi(w))\subseteq A_4^{R}$, координаты которой порождают подгруппу без $w$. Двойственно — условие ранга один на тензор в $\widehat{A_4}\otimes\widehat R$; линейным оно не является. Одной формой Хауэлла ответ «да» не получить.</p></li>
+<li><p><strong>Предложение 4</strong> [на бумаге] — то, что остаётся линейным. $U_n=J_n+\Lambda(A_4\otimes R_+)$. Если $\bar\psi:A_4\to A/U_n$ инъективно, то $D_n(M/K)\cap\gamma_4=1$ для <strong>всех</strong> $K\subseteq\gamma_4(M)$; вместе с (а) — $D_n(M/K)=1$. Ядро $\bar\psi$ содержит все кандидаты (фильтр). Ядро — кручение (по Квиллену), поэтому достаточно элементов порядка 2; инъективность по модулю $2^{32}$ точна; из инъективности при $n$ следует она же при больших $n$.</p></li>
+<li><p><strong>Реализация</strong>: <code>gap/c4_q3.g</code> (<code>Q3_C=4</code>) → <code>scripts/c4_q3.py prep --kgens</code> (решение по модулю $2^{32}$, проверка по точным целым) → <code>howell_gpu.py batch --kfree</code>.</p></li>
+<li><p><strong>Результаты</strong> [компьютер]:</p>
+<ul>
+<li>T (40 баз, $d=4$): $\bar\psi_5$ инъективно во всех — $D_5(M/K)=1$ для всех $K$;</li>
+<li>L: $\bar\psi_6$ инъективно у всех 7 (у L1x2, L1x4 уже $\bar\psi_5$) — $D_6(M/K)=1$ для всех $K$;</li>
+<li>S (16 баз): $\bar\psi_5$ инъективно — $D_5(M/K)=1$ для всех $K$;</li>
+<li><strong>плато P6</strong> ($M=\Gamma/\gamma_5\Gamma&#39;&#39;$ для (3.12), $d=6$, $\gamma_4(M)=\mathbb Z^3\oplus$ 2-группа, 205 элементов порядка 2): при $n=5,6$ (CPU) ядро $\bar\psi$ — ровно $\langle w\rangle$, и $D_5(M)\cap\gamma_4=D_6(M)\cap\gamma_4=\langle w\rangle$; при $n=7$ (Modal A10G, 890 с, пик 20,2 ГиБ; сертификат $J_7$: свободных столбцов $99=r_7$ при $h=(2,1,2,3)$, разности индексов $198=2r_7$, $1188=12r_7$) $\bar\psi_7$ <strong>инъективно</strong> (205 из 205).</li>
+</ul></li>
+<li><p><strong>Итог (б)</strong> [компьютер + на бумаге]: для группы плато $D_7(M/K)=1$ для <strong>любой</strong> $K\subseteq\gamma_4(M)$ — то есть для всех метабелевых групп ступени 4 вида $\Gamma/N$, $\gamma_5\Gamma&#39;&#39;\subseteq N\subseteq\gamma_4(\Gamma)\gamma_5\Gamma&#39;&#39;$, включая все $\varphi$, которые §6.6 не перебирал. Для баз T, S — $D_5(M/K)=1$, для L — $D_6(M/K)=1$ при всех $K$: перебор $\varphi$ в §6.6 для них оказался полным.</p></li>
+<li><p><strong>Факторы плато по соотношениям вне $\gamma_4$</strong> (R, R2; у каждого своё $M$) [компьютер]: при $n=6$ у всех 11 построенных баз ядро ранга ровно 1 (место $w$). При $n=7$ прогнана одна база, <strong>Rd46</strong> ($[x_4,x_6,x_4]=[x_4,x_6,x_6]=1$): A10G, 885 с; сертификат $J_7$ ($49=r_7$ при $h=(2,1,0,0)$, $98=2r_7$, $588=12r_7$); $\bar\psi_7$ инъективно (197 из 197) — $D_7(M/K)=1$ при всех $K$.</p></li>
+<li><p><strong>Остальные 10 баз R2 при $n=7$</strong> [компьютер]. Та же процедура: $M$ строит <code>gap/c4_q3.g</code> (<code>Q3_C=4</code>) на CPU-контейнере Modal (8 ядер, 4 параллельных GAP, 9,6–10,1 мин на базу; логи <code>results/c4/kfree/gap_m4_R2n7{a,b,c,d}.log</code>), затем по одному прогону A10G на базу (<code>gpu/modal_batch.py spawn --ref 8ed65af ... -- --n 7 --kfree --group 1</code>, 804–845 с; строки <code>results/c4/kfree/m4_&lt;база&gt;_n7.out.jsonl</code>). У всех десяти $h=(2,1,2,3)$, $r_7=99$, $\dim A_7=55\,986$; сертификат $J_7$ выполнен: свободных столбцов $99=r_7$, разности индексов $198=2r_7$ и $1188=12r_7$; ни один элемент порядка 2 из $\tau(\gamma_4(M))$ не лежит в $J_7$; $\bar\psi_7$ <strong>инъективно</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>база</th>
+<th>соотношение</th>
+<th>образующих $\gamma_4(M)$</th>
+<th>эл-тов порядка 2</th>
+<th>индекс $J_7$ ($2^{32}$/$2^{30}$/$2^{20}$)</th>
+<th>индекс $U_7$</th>
+<th>ранг по модулю $U_7$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rk14</td>
+<td>$[x_1,x_4]$</td>
+<td>186</td>
+<td>183</td>
+<td>137 835 / 137 637 / 136 647</td>
+<td>101 781</td>
+<td>183 из 183</td>
+</tr>
+<tr>
+<td>Rk15</td>
+<td>$[x_1,x_5]$</td>
+<td>186</td>
+<td>183</td>
+<td>137 907 / 137 709 / 136 719</td>
+<td>101 786</td>
+<td>183 из 183</td>
+</tr>
+<tr>
+<td>Rk16</td>
+<td>$[x_1,x_6]$</td>
+<td>186</td>
+<td>183</td>
+<td>137 835 / 137 637 / 136 647</td>
+<td>101 781</td>
+<td>183 из 183</td>
+</tr>
+<tr>
+<td>Rk24</td>
+<td>$[x_2,x_4]$</td>
+<td>186</td>
+<td>183</td>
+<td>132 116 / 131 918 / 130 928</td>
+<td>97 590</td>
+<td>183 из 183</td>
+</tr>
+<tr>
+<td>Rk26</td>
+<td>$[x_2,x_6]$</td>
+<td>186</td>
+<td>183</td>
+<td>132 116 / 131 918 / 130 928</td>
+<td>97 590</td>
+<td>183 из 183</td>
+</tr>
+<tr>
+<td>Rk34</td>
+<td>$[x_3,x_4]$</td>
+<td>187</td>
+<td>184</td>
+<td>127 666 / 127 468 / 126 478</td>
+<td>94 254</td>
+<td>184 из 184</td>
+</tr>
+<tr>
+<td>Rk35</td>
+<td>$[x_3,x_5]$</td>
+<td>187</td>
+<td>184</td>
+<td>128 896 / 128 698 / 127 708</td>
+<td>95 148</td>
+<td>184 из 184</td>
+</tr>
+<tr>
+<td>Rk36</td>
+<td>$[x_3,x_6]$</td>
+<td>187</td>
+<td>184</td>
+<td>127 666 / 127 468 / 126 478</td>
+<td>94 254</td>
+<td>184 из 184</td>
+</tr>
+<tr>
+<td>Rk45</td>
+<td>$[x_4,x_5]$</td>
+<td>187</td>
+<td>184</td>
+<td>128 879 / 128 681 / 127 691</td>
+<td>95 147</td>
+<td>184 из 184</td>
+</tr>
+<tr>
+<td>Rk56</td>
+<td>$[x_5,x_6]$</td>
+<td>187</td>
+<td>184</td>
+<td>128 879 / 128 681 / 127 691</td>
+<td>95 147</td>
+<td>184 из 184</td>
+</tr>
+</tbody>
+</table></div>
+<p>Пары Rk14/Rk16, Rk24/Rk26, Rk34/Rk36, Rk45/Rk56 дают одинаковые числа (видимо, симметрия $x_4\leftrightarrow x_6$ в (3.12); не проверялось). При $n=6$ у каждой было ядро ранга 1, при $n=7$ оно исчезает — как у плато. С (а) и Предложением 4: <strong>$D_7(M/K)=1$ для всех $K\subseteq\gamma_4(M)$</strong> для каждой из 10 баз.</p></li>
+<li><p><strong>Последние 5 баз — R (Rd4, Rd6, Rf15, Rf16) и Rd46f15 — при $n=7$</strong> [компьютер]. Та же процедура: $M$ строит <code>gap/c4_q3.g</code> (<code>Q3_C=4</code>, <code>Q3_NQTOP := false</code>) на CPU-контейнере Modal (5 ядер / 28 ГиБ, пять GAP параллельно с лимитом 1900 с, <code>scripts/c4_rest_gap.sh</code>; логи <code>results/c4/kfree/gap_m4_&lt;база&gt;.log</code>; приложение <code>math43-c4rest-gap</code>), 10–15 мин на базу; затем два вызова A10G (<code>gpu/modal_batch.py spawn --ref efecbc5 ... -- --n 7 --kfree --group 1</code>, приложение <code>math43-c4rest</code>), 820–901 с на базу, пик GPU 20,2–20,9 ГиБ; строки <code>results/c4/kfree/m4_&lt;база&gt;_n7.out.jsonl</code>. Везде $\dim A_7=55\,986$, ни один элемент порядка 2 из $\tau(\gamma_4(M))$ не лежит в $J_7$, и $\bar\psi_7$ <strong>инъективно</strong>:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>база</th>
+<th>соотношения к (3.12)</th>
+<th>$M$</th>
+<th>$h$</th>
+<th>образующих $\gamma_4(M)$</th>
+<th>эл-тов порядка 2</th>
+<th>индекс $J_7$ ($2^{32}$/$2^{30}$/$2^{20}$)</th>
+<th>сертификат</th>
+<th>индекс $U_7$</th>
+<th>ранг по модулю $U_7$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rd4</td>
+<td>$[x_4,x_6,x_4]$</td>
+<td>бесконечна</td>
+<td>$(2,1,1,1)$</td>
+<td>202</td>
+<td>201</td>
+<td>145 421 / 145 281 / 144 581</td>
+<td>$70=r_7$, $140=2r_7$, $840=12r_7$: выполнен</td>
+<td>107 728</td>
+<td>201 из 201</td>
+</tr>
+<tr>
+<td>Rd6</td>
+<td>$[x_4,x_6,x_6]$</td>
+<td>бесконечна</td>
+<td>$(2,1,1,1)$</td>
+<td>202</td>
+<td>201</td>
+<td>145 421 / 145 281 / 144 581</td>
+<td>как Rd4: выполнен</td>
+<td>107 728</td>
+<td>201 из 201</td>
+</tr>
+<tr>
+<td>Rf15</td>
+<td>$x_4^{2^{15}},x_6^{2^{15}}$</td>
+<td>конечна</td>
+<td>0</td>
+<td>208</td>
+<td>208</td>
+<td>147 440 / 147 440 / 147 440</td>
+<td>$r_7=0$, разности 0: выполнен</td>
+<td>108 327</td>
+<td>208 из 208</td>
+</tr>
+<tr>
+<td>Rf16</td>
+<td>$x_4^{2^{16}},x_6^{2^{16}}$</td>
+<td>конечна</td>
+<td>0</td>
+<td>208</td>
+<td>208</td>
+<td>147 662 / 147 662 / 147 660</td>
+<td>разность к $2^{20}$ равна 2: <strong>не выполнен</strong></td>
+<td>108 476</td>
+<td>208 из 208</td>
+</tr>
+<tr>
+<td>Rd46f15</td>
+<td>$[x_4,x_6,x_4],[x_4,x_6,x_6],x_4^{2^{15}},x_6^{2^{15}}$</td>
+<td>конечна</td>
+<td>0</td>
+<td>197</td>
+<td>197</td>
+<td>141 071 / 141 071 / 141 071</td>
+<td>$r_7=0$, разности 0: выполнен</td>
+<td>104 751</td>
+<td>197 из 197</td>
+</tr>
+</tbody>
+</table></div>
+<p>Сертификат Rf16 не выполнен, как и в §6.6 ($A/J_7$ имеет элементы порядка $&gt;2^{20}$), но здесь он не нужен: все ответы — «$\notin$»/инъективность, а они точны по модулю $2^{32}$ без сертификата. Rd4 и Rd6 дают одинаковые числа (видимо, $x_4\leftrightarrow x_6$). С (а) и Предложением 4: <strong>$D_7(M/K)=1$ для всех $K\subseteq\gamma_4(M)$</strong> для всех пяти.</p></li>
+<li><p><strong>Почему nq «шёл часами»</strong> [компьютер]: не воспроизвелось. <code>gap/c4_q3.g</code> теперь печатает время этапов. На Modal (GAP 4.14, Debian trixie), без передачи в nq коммутаторов веса 5 (<code>Q3_NQTOP := false</code>: при <code>class := 4</code> они избыточны, в выходных соотношениях остаются): nq — 4 с для бесконечных Rd4, Rd6 и 132 с (Rf15, Rd46f15), 267 с (Rf16) для конечных: большие показатели $2^{15},2^{16}$ дороже в 30–60 раз, но это минуты. Дальше у всех одинаково: нижний центральный ряд ~1 с, инварианты и snf-базис $\gamma_4$ 30–43 с, показатели 540 коммутаторов 8 с, а затем ~570 с (90 % процессорного времени GAP) — проверка, что дополнительное тестовое слово $w$ лежит в $\gamma_4(M)$ и нетривиально (<code>MappedWord</code> длинного слова и принадлежность $\gamma_4$). Именно это, а не nq, даёт 10 мин на базу (видимо, и для R2 — там времён этапов в логах нет). Были ли часы в Docker из-за 3240 лишних соотношений для конечной группы или из-за памяти Docker VM — не проверялось.</p></li>
+<li><p><strong>Итог первого прохода класса 4 для «всех $K$»</strong> [компьютер + на бумаге]: тест проведён при решающем $n$ для <strong>всех</strong> 80 баз §6.6: P6, 12 баз R2 (Rk14…Rk56, Rd46, Rd46f15) и 4 базы R (Rd4, Rd6, Rf15, Rf16) — $D_7(M/K)=1$ (17 баз); L — $D_6(M/K)=1$ (7); T и S — $D_5(M/K)=1$ (56), при любой $K\subseteq\gamma_4(M)$. Ни одна метабелева группа ступени 4, получаемая из этих копредставлений центральной модификацией $\gamma_4$, не имеет $D_7\ne1$; для контрпримера нужна база $\Gamma$ вне этого семейства.</p></li>
+<li><p><strong>Дальше</strong>: (1) сделано для всех баз первого прохода (выше); (2) при неинъективном $\bar\psi_n$ ядро — список кандидатов; для $v\in\ker\bar\psi_n$ представление $\psi(v)=\sum\psi(k_j)m_j$ по модулю $J_n$ с $v\notin\langle k_j\rangle$ даёт контрпример $M/\langle k_j\rangle$ — нужны коэффициенты (расширенная форма Хауэлла), не реализовано; (3) тот же тест для класса 5 (группа §6.7: $\psi$ аддитивно по модулю $\Delta^{10}$).</p></li>
+<li><p><strong>Расход Modal на §6.8</strong>: <span>$</span>0,79 (CPU-контейнер для GAP — <span>$</span>0,07; два прогона A10G при $n=7$ — <span>$</span>0,72), приложение <code>math43-kfree</code> остановлено. 10 баз R2 при $n=7$: <span>$</span>4,03 (CPU-контейнер для GAP, 8 ядер / 48 ГиБ, 35 мин — <span>$</span>0,44, <code>math43-r2n7-gap</code>; десять прогонов A10G — <span>$</span>3,59, <code>math43-r2n7</code>, остановлено). Последние 5 баз (R, Rd46f15) при $n=7$: <span>$</span>1,87 (CPU для GAP, 5 ядер / 28 ГиБ, 15 мин — <span>$</span>0,12, <code>math43-c4rest-gap</code>; два вызова A10G, 28 + 43 мин — <span>$</span>1,75, <code>math43-c4rest</code>; оба остановлены). Всего на §6.8: <span>$</span>6,69.</p></li>
+<li><p>Ссылки († — не сверено с источником): [MP09] Mikhailov–Passi, LNM 1952 — $D_3=\gamma_3$ †; S. A. Jennings, Canad. J. Math. 7 (1955) — рациональные размерные подгруппы †; K. W. Gruenberg, Proc. LMS (3) 7 (1957) — финитная аппроксимируемость $p$-группами †.</p></li>
+</ul>
+<h3 id="69-math-43-кольцо-l_2-на-четырёх-образующих-проверка-на-компьютере-его-групповой-аналог">6.9. MATH-43: кольцо $L&#39;_2$ на четырёх образующих, проверка на компьютере; его групповой аналог</h3>
+<p><strong>Кольцо</strong> (§6.7, последний абзац). $L&#39;_N$: свободное метабелево кольцо Ли на $x_1..x_4$, порядок Холла $x_3&lt;x_1&lt;x_2&lt;x_4$, $t=[x_4,x_3,\dots,x_3]$ ($N$ букв $x_3$), $c_i=[t,x_i]$, $u_i=[c_i,x_i]$, соотношения $r_1=4x_1+2c_3+c_2$, $r_2=16x_2+4c_3-c_1$, $r_3=64x_3-4c_2-2c_1$, (ii) $\gamma_{N+4}=0$, (iii) все элементы базиса Холла веса $N+3$, кроме $u_1,u_2,u_3$, равны $0$, (iv) $u_1=16u_3$, $u_2=4u_3$, $64u_3=0$; $a=32[x_1,x_2]+64[x_1,x_3]+128[x_2,x_3]$. Утверждалось: $D_{N+4}=\dots=D_{2N+4}=\langle a\rangle\cong\mathbb Z/2$, $D_{2N+5}=0$.</p>
+<p><strong>Метод</strong> (<code>py/lie_L2.py</code>, <code>c/lie_howell.c</code>). $U(L)=\mathbb Z\langle X\rangle/(\text{соотношения})$, поэтому $U(L)/\varpi^n=A_n/J_n$, где $J_n=\mathrm{span}\{u\rho v\}$ с обрезкой по длине $n$, и элемент Ли $\ell$ лежит в $D_n(L)$ тогда и только тогда, когда $\ell\in J_n$ (PBW: $L\to U(L)$ инъективно). $L=W/\bar R$, где $W$ — линейная оболочка левонормированных скобок веса $\le N+3$ в $A_n$, $\bar R$ — оболочка скобок $[\rho,x_{j_1},\dots,x_{j_k}]$, обрезанных по весу $N+3$; значит, $D_n(L)=(W\cap J_n)/\bar R$. <em>Градуировка:</em> при $\deg x_1=\deg x_2=\deg x_3=1$, $\deg x_4=-N$ все соотношения однородны ($\deg c_i=\deg x_i$), и всё распадается на компоненты; $a$ имеет степень 2. При $n\le6$ все компоненты считаются точно над $\mathbb Z$ (HNF в python-flint), при $n=7,8$ — компонента $a$; при $n=9$ компонента $a$ ($20\,826$ столбцов, $172\,674$ разреженных строк $u\rho v$) — формой Хауэлла по модулю $2^E$, построенной вставкой строк на C (2 мин; свойство Хауэлла проверяется редукцией $2^{E-v}P$ для каждой ведущей строки). Ответ «$\notin$» по модулю $2^E$ точен; «$\in$» сертифицируется совпадением индекса при нескольких $E$ без свободных столбцов. Метабелевы соотношения — $[U,V]$ для всех левонормированных $U,V$ весов $\ge2$ с $w(U)+w(V)\le N+3$ плюс все левонормированные скобки веса $N+4$. <em>(Одни скобки $[[x_i,x_j],[x_k,x_l]]$ не порождают $F&#39;&#39;$ как идеал Ли: с ними $x_2[c_2,t]\notin J_9$, то есть $4c_1\ne0$, и (3.9) при $n=9$ не выполнялось. Это была ошибка первой версии скрипта; групповая библиотека <code>gap/plateau5_lib.g</code> делает это правильно.)</em></p>
+<p><strong>Сверка с [IMP26, теорема A], $N=1$</strong> (<code>--var orig</code>, пять образующих, $\mathbb Z^2$-градуировка): $D_5(L_1)=\langle a\rangle\cong\mathbb Z/2$ (точно, все 25 компонент), $a\in D_6$ (точно), $a\notin D_7$ (по модулю $2^{16}$ и $2^{32}$), $a\equiv c_1c_3-c_2^2\bmod\varpi^7$.</p>
+<p><strong>$L&#39;_2$</strong> [компьютер]:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>$n$</th>
+<th>как</th>
+<th>результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td>точно, все 15 компонент</td>
+<td>$D_6=\langle a\rangle\cong\mathbb Z/2$ ($a\ne0$, $2a=0$ в $L$)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>точно, компонента $a$</td>
+<td>$D_7=\langle a\rangle$</td>
+</tr>
+<tr>
+<td>8</td>
+<td>точно (компонента $a$) и по модулю $2^8,2^{16},2^{32}$ (индекс 745 во всех трёх, свободных столбцов нет)</td>
+<td>$a\in D_8$, значит $D_8=\langle a\rangle$</td>
+</tr>
+<tr>
+<td>9</td>
+<td>по модулю $2^8,2^{12},2^{20},2^{32}$ (индекс 14 050 во всех, свободных столбцов нет)</td>
+<td>$a\notin\varpi^9$, значит $D_9=0$</td>
+</tr>
+</tbody>
+</table></div>
+<p>($D_7,D_8,D_9\subseteq D_6=\langle a\rangle$, так что начиная с $n=7$ достаточно компоненты $a$.) Ещё при $n=9$: $4c_1=16c_2=64c_3=0$ (3.8) и $a\equiv c_1c_3-c_2^2$ (3.9), а $c_1c_3-c_2^2\notin\varpi^9$. Итак, утверждение §6.7 верно: <strong>$D_6(L&#39;_2)=D_7=D_8=\langle a\rangle\cong\mathbb Z/2$, $D_9=0$, на четырёх образующих, класс 5.</strong> $D_9=0$ даёт и теорема C; вычисление с ней согласно.</p>
+<p><strong>Плато задаётся градуировкой</strong> [на бумаге]. В компоненте $a$ (степень 2) у слова с $k$ буквами $x_4$ остальных букв $2+Nk$, так что его длина $2+(N+1)k\in\{2,\,N+3,\,2N+4,\dots\}$; то же для $L_N$ из [IMP26] с градуировкой $\deg x_5=(0,1)$, $\deg x_4=(0,-N)$, $\deg x_{1,2,3}=(1,0)$. Так как $\varpi^n$ натянут на слова длины $\ge n$, $\varpi^{N+4}\cap U(L)_2=\varpi^{2N+4}\cap U(L)_2$, откуда $D_{N+4}\cap L_2=D_{2N+4}\cap L_2$: если $D_{N+4}\subseteq L_2$, длина плато $N+1$ — это промежуток между допустимыми длинами $N+3$ и $2N+4$. (Посчитано: при $N=2$ компонента $a$ в $A_6,A_7,A_8$ одна и та же — 414 столбцов и 1 791 строка.) У группового кольца такой градуировки нет: $\mu(x^E)-1=\sum_k\binom Eka^k$ смешивает все длины.</p>
+<p><strong>Групповой аналог</strong> [компьютер]. Буквальный перевод <code>L2g</code> (<code>gap/plateau5_cands.g</code>, семейство <code>I5cand</code>, $d=4$): $t=[x_4,x_3,x_3]$, $d_l=[t,x_l]$, $$x_1^4d_2d_3^2,\quad x_2^{16}d_1^{-1}d_3^4,\quad x_3^{64}d_1^{-2}d_2^{-4},\quad [d_1,x_1][d_3,x_3]^{-16},\quad
+[d_2,x_2][d_3,x_3]^{-4},\quad[d_3,x_3]^{64},\quad[d_l,x_m]\ (l\ne m),\ [d_4,x_4],$$ $w=[x_1,x_2^{32}][x_1,x_3^{64}][x_2,x_3^{128}]$ (образ $a$). Тогда $G_{\rm ab}=\mathbb Z\oplus\mathbb Z/4\oplus\mathbb Z/16\oplus\mathbb Z/64$, как у $L&#39;_2$, $\gamma_5(G)\cong\mathbb Z/64=\langle u_3\rangle$, $u_3=[d_3,x_3]$, $w=u_3^{32}$; GAP 13 мин. Тесты $u_3^{2^j}$ (CPU, <code>howell_gpu.py</code>, сертифицировано): $D_5\cap\gamma_5=\gamma_5$, $D_6\cap\gamma_5=\langle w\rangle$, $D_7\cap\gamma_5=1$. <strong>Групповой аналог останавливается на $D_6$, на два уровня ниже кольца.</strong> С удвоенными или учетверёнными $L_{ij}$ $w=1$ уже в $M$.</p>
+<p><strong>Где ломается</strong> (лемма о спаривании из §6.7, с точностью). В кольце $e_ix_i=-C_i\in\gamma_4\subseteq\varpi^4$, и (3.9) — это $a=\sum_ix_ig_i=\sum_i(e_ix_i)\zeta_i\in\varpi^{4+4}$ при $g_i=\sum_jL_{ij}x_j=e_i\zeta_i$. В группе из $x_i^{E_i}\in\gamma_4$ следует лишь $2^jE_i(x_i-1)\in\Delta^{2+j}$ ($j\le2$), и это точно, когда $\bar x_i$ порождает циклическое прямое слагаемое $\mathbb Z/o$ в $G_{\rm ab}$ (как в <code>L2g</code>, $o=E_i$): при отображении в $C_o$ наименьшее $F$ с $F(x-1)\in\Delta^k(C_o)$ равно $2^{k-2}o$ [компьютер, <code>scripts/cyclic_pairing_check.py</code>, $o=2,\dots,256$, $k=2..5$; на бумаге при $k\le4$: $o(x-1)\equiv-\binom o2(x-1)^2\not\equiv0$ и $2o(x-1)\equiv\frac{o(o^2-1)}6(x-1)^3\not\equiv0$ в $\Delta^k/\Delta^{k+1}(C_o)\cong\mathbb Z/o$]. Поэтому член $(e_ix_i)\zeta_i$ превращается в $\Delta^{2+4}=\Delta^6$ — ровно там, где останавливается <code>L2g</code>; для $\Delta^8$ нужно $g_i\in4E_iD$ (множитель 4, $D=\gamma_4/\gamma_5$). С другой стороны, порядок $u_{lm}=[d_l,x_m]$ делит порядок $o_m$ элемента $\bar x_m$ в $G_{\rm ab}$ ($[d_l,x_m^{o_m}]\in[\gamma_4,\gamma_2]=1$ в классе 5), а $w$ — комбинация $u_{lm}$ с коэффициентами $L_{ij}/E_j$; множитель поднимает $L_{ij}$ во столько же раз. В билинейной модели двух верхних слоёв для схемы коэффициентов $L&#39;_2$ (<code>scripts/lie_L2_pairing_screen.py</code>: $E_i=2^{a_i}$, $a_i\le12$, все допустимые $L_{ij}$) при множителе 1 есть 84 решения с $w\ne0$ (самое дешёвое — само $L&#39;_2$, $w=8u_{22}=a$), при множителях 2 и 4 — ни одного [компьютер, модель]. (3.12) получает множитель 2 в классе 4 только за счёт пятого образующего $x_5$ большого порядка, который несёт $w$ (§6.7); все попытки на четырёх образующих из §6.7 (класс 4, множитель 2) не удались, а у 80 самых дешёвых масштабирований (3.12) с множителем 4 (пять образующих) $w=1$. [Гипотеза] метабелевой группе класса 5 с $D_8\ne1$, если она есть, нужен механизм, отличный от подстановки $e_ix_i\mapsto x_i^{E_i}$ (например, образующий, несущий $w$, порядок которого не связан с порядками спариваемых, как $x_5$ в (3.12)); на четырёх образующих такого у нас нет.</p>
+<p><strong>Тест $D_9$.</strong> Не запускался: группы с $w\in D_8$ не нашлось. Стоимость, если она появится ($d=4$, $n=9$, $M=87\,380$): плотная форма — 30,5 ГБ (uint32), пик замыкания $\approx1{,}64\times$ это $\approx50$ ГБ, то есть A100 80 ГБ; прогон $d=5$, $n=8$ ($M=97\,655$) шёл 30 мин, так что около 30 мин, $\approx1{,}3$ доллара по 2,5 доллара/ч, плюс сборка GAP на CPU-контейнере. Расход Modal на §6.9: 0 (всё локально).</p>
+<p><strong>Как повторить.</strong> <code>python3 py/lie_L2.py exact --var prime --N 2 --n 6 --full-upto 6</code> (точный $D_6$, все компоненты; нужен python-flint; 20 мин), <code>... --n 7 8</code> (компонента $a$); <code>--var orig --N 1 --n 5 --full-upto 5</code> (сверка). Для $n=9$: <code>python3 py/lie_L2.py rows --var prime --N 2 --n 9 --out F.bin</code>, <code>cc -O3 -o c/build/lie_howell c/lie_howell.c</code>, <code>c/build/lie_howell F.bin F.bin.tests 12 [1]</code>; тождества: <code>python3 scripts/lie_L2_identities.py prime 2 9 T &amp;&amp; c/build/lie_howell F.bin T 12</code>. Группа: <code>python3 scripts/plateau5_scan.py LOG 'L2g|I5rec(...)|5,6,7'</code> со спецификацией из <code>results/L2/scan_L2g.jsonl</code> (JSON группы — <code>gpu/data/plateau5/L2g.jsonl.gz</code>). Сырые выводы — <code>results/L2/</code>.</p>
+<h3 id="610-math-43-класс-5-все-ksubseteqgamma_5m-сразу-для-сдвинутого-плато">6.10. MATH-43, класс 5: все $K\subseteq\gamma_5(M)$ сразу для сдвинутого плато</h3>
+<p>Тест §6.8(b) (Предложение 4), перенесённый на группу класса 5 из §6.7 (<code>plateau5_c5i5</code>: пять образующих, $t=[x_4,x_3,x_3]$, $d_i=[t,x_i]$, девять соотношений (3.12); там $G=M/\ker\varphi$, $\gamma_5(G)\cong C_{2^{14}}$ и $w\in D_7(G)\setminus D_8(G)$, сертифицировано). Здесь $\Gamma$ — это копредставление, $M=\Gamma/\gamma_6(\Gamma)\Gamma&#39;&#39;$, $A_5=\gamma_5(M)$, $A=\mathbb Z[M]$, $n\le10$. Данные — <code>results/c5/kfree/</code>.</p>
+<p><strong>Лемма 5</strong> [на бумаге] (Лемма 3 для $c=5$). (i) $\psi:A_5\to\Delta^5/\Delta^n$, $k\mapsto k-1$, — гомоморфизм при $n\le10$: $kk&#39;-1=(k-1)+(k&#39;-1)+(k-1)(k&#39;-1)$ и $(k-1)(k&#39;-1)\in\Delta^{10}$. (ii) Для $K\subseteq A_5$: $(K-1)A+\Delta^n=\Delta^n+\sum_k\psi(k)R$, $R=\mathrm{span}\{1\}\cup\{(x_{j_1}-1)\cdots(x_{j_l}-1):1\le l\le n-6\}$, $k$ по образующим $K$ ($K$ централен, $\psi(k)\Delta^{n-5}\subseteq\Delta^n$, а $\Delta/\Delta^{n-5}$ натянуто на эти мономы). Доказательство — как у Леммы 3 с заменой $4\to5$.</p>
+<p><strong>Предложение 6</strong> [на бумаге] (Предложение 4 для $c=5$). Пусть $U_n=J_n+\Lambda(A_5\otimes R_+)$, $R_+$ — мономы степени $1..n-6$, $\bar\psi_n:A_5\to A/U_n$. Если $\bar\psi_n$ инъективно, то $D_n(M/K)\cap\gamma_5(M)/K=1$ для <strong>всех</strong> $K\subseteq A_5$. Обратно, всякий $v\in D_n(M/K)\cap A_5$, $v\notin K$, даёт $1\ne vk^{-1}\in\ker\bar\psi_n$ для некоторого $k\in K$, и $D_n(M)\cap A_5\subseteq\ker\bar\psi_n$. Далее: $\ker\bar\psi_n$ периодично ($z\in\ker\bar\psi_n$ даёт $z-1\in\Delta^6$, т.е. $z\in D_6(M)\subseteq\sqrt{\gamma_6(M)}=\tau(M)$, Дженнингс), поэтому достаточно проверить элементы порядка 2 из $\tau(A_5)$; $\ker\bar\psi_{n+1}\subseteq\ker\bar\psi_n$ ($n+1\le10$); инъективность по модулю $2^{32}$ точна. При $n=6$ $R_+=\varnothing$ и $U_6=J_6$: тест — просто $D_6(M)\cap\gamma_5$.</p>
+<p><strong>Как снять $\cap\,\gamma_5$</strong> [на бумаге]. Для $K\subseteq\gamma_5(M)$: $(M/K)/\gamma_5(M/K)=M/\gamma_5(M)=\Gamma/\gamma_5(\Gamma)\Gamma&#39;&#39;=:Q$ — группа класса 4, не зависящая ни от $K$, ни от $\varphi$ (и $G/\gamma_5(G)=Q$). Образ $D_n(M/K)$ в $Q$ лежит в $D_n(Q)$. Итак, $$D_n(Q)=1\ \text{и}\ \bar\psi_n\ \text{инъективно}\ \Longrightarrow\ D_n(M/K)=1\ \text{для всех}\ K\subseteq\gamma_5(M).$$ $D_8(Q)=1$ известно <strong>не было</strong>: §6.8(a) — о факторах класса 3 баз класса 4, а §6.7 проверял только $D_n(G)\cap\gamma_5$. Так как $D_8(Q)\subseteq D_5(Q)$, достаточно $D_5(Q)=1$, а по Следствию 2 (с $Q_3=Q/\gamma_4(Q)=\Gamma/\gamma_4(\Gamma)\Gamma&#39;&#39;$) оно следует из $D_5(Q_3)=1$ (Лемма 1) и $D_5(Q)\cap\gamma_4(Q)=1$ (отображение $\gamma_4(Q)\to\Delta^4/\Delta^5$ аддитивно, ядро периодично; элементы порядка 2 должны остаться независимыми по модулю $J_5(Q)$). Отдельный тест, но дешёвый ($n=5$, $\dim A_5=780$).</p>
+<p><strong>Вычисление</strong> [компьютер]. <code>scripts/c4_q3.py gapin</code> теперь читает и записи <code>gap/plateau5_lib.g</code> (отбрасывает 1 250 соотношений $\ker\varphi$ и 6 250 коммутаторов веса 6, оставляя 9 соотношений $\Gamma$ и 545 метабелевых); <code>gap/c4_q3.g</code> с <code>Q3_C</code> $=3,4,5$ строит $Q_3$, $Q$, $M$ (nq на CPU-контейнере Modal, 2 ядра; с коммутаторами веса 6 на входе nq прогон класса 5 не кончился за 30 мин и был остановлен, без них, <code>Q3_NQTOP := false</code>, занял 33 мин, почти всё — GAP после nq); <code>howell_gpu.py batch --kfree</code> теперь берёт степени $R_+$ из класса записи ($1..n-c-1$).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$\gamma_c$ (ранги без кручения $h$)</th>
+<th>элементов порядка 2</th>
+<th>$n$</th>
+<th>индекс $J_n$ ($2^{32}$/$2^{30}$/$2^{20}$), сертификат</th>
+<th>итог</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$Q_3$, $c=3$</td>
+<td>$C_8^{20}C_{64}^{12}C_{1024}^6C_{16384}^2$, $h=(1,0,0)$</td>
+<td>40</td>
+<td>4; 5</td>
+<td>983/977/947; 3 308/3 300/3 260, $r_n=3,4$, выполнен</td>
+<td>40 из 40: $D_4(Q_3)=1$</td>
+</tr>
+<tr>
+<td>$Q$, $c=4$</td>
+<td>$C_8^{60}C_{64}^{30}C_{1024}^{12}C_{16384}^3$, $h=(1,0,0,0)$</td>
+<td>105</td>
+<td>5; 6</td>
+<td>3 830/3 822/3 782; 13 704/13 694/13 644, выполнен</td>
+<td>105 из 105: $D_5(Q)=1$</td>
+</tr>
+<tr>
+<td>$M$, $c=5$</td>
+<td>$C_4^2C_8^{137}C_{16}C_{32}C_{64}^{57}C_{256}C_{512}C_{1024}^{18}C_{16384}^4$, $h=(1,0,0,0,0)$</td>
+<td>222</td>
+<td>6</td>
+<td>14 722/14 712/14 662, $r_6=5$, выполнен</td>
+<td>221 из 222</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>7</td>
+<td>54 097/54 085/54 025, $r_7=6$, выполнен</td>
+<td>221 из 222</td>
+</tr>
+</tbody>
+</table></div>
+<p>(Для $M$ при $n=7$: $U_7$ добавляет 1 110 строк $\psi(b_t)a_j$ для 222 образующих $b_t$ группы $\gamma_5(M)$, индекс $U_7=49\,496$.) Прогоны: $Q_3$, $Q$ и $M$ при $n=6$ — локально на CPU (6 с, 4,5 мин, 4 мин); $M$ при $n=7$ — Modal A10G (194 с, пик GPU 5,2 ГиБ, ref <code>0ac93a8</code> — промежуточный коммит этой ветки с тем же кодом); прогон $n=7$ на CPU дал те же ранги и индексы в раундах 0–3 и был остановлен (<code>m5_n7_cpu_partial.log</code>). Строки: <code>results/c5/kfree/{q3,q4}.out.jsonl</code>, <code>m5_n6.out.jsonl</code>, <code>m5_n7_a10g.out.jsonl</code>.</p>
+<p><strong>Что это даёт.</strong></p>
+<ul>
+<li>[компьютер + на бумаге] $D_4(Q_3)=1$ и $D_5(Q)=1$, значит $D_8(Q)=1$. Вместе с §6.7 ($D_8(G)\cap\gamma_5(G)=1$) это замыкает утверждение §6.7, что у группы класса 5 $G$ $D_8(G)=1$: $D_8(G)$ отображается в $D_8(Q)=1$, т.е. $D_8(G)\subseteq\gamma_5(G)$. Также $D_7(G)\subseteq\gamma_5(G)$ и $D_n(M/K)\subseteq\gamma_5(M)/K$ для всех $K$ и $n\ge5$.</li>
+<li>[компьютер] При $n=6$ и $n=7$ в ядре $\bar\psi_n$ ровно один независимый элемент порядка 2, и $w\in J_n(M)$ (вместе с $w_{12},w_{13},w_{23}$; $u_3\notin J_n$): $w\in D_7(M)$ уже для самой $M$, а не только для $G$. Значит, $\ker\bar\psi_7$ — нетривиальная циклическая 2-группа, содержащая $w$, а $D_7(M)\cap\gamma_5(M)$ — её нетривиальная подгруппа. Порядок $w$ в $M$ не вычислялся (в $G$ он равен 2); элемент порядка 2 ядра — $z=w^{|w|/2}$.</li>
+<li>[на бумаге] Поэтому весь вопрос «есть ли $K\subseteq\gamma_5(M)$ с $D_8(M/K)\ne1$» сводится к одному биту: $\ker\bar\psi_8\subseteq\ker\bar\psi_7$ циклично, так что $\bar\psi_8$ инъективно iff $z\notin U_8$, т.е. iff <code>socle_bits</code> $=222$ при $n=8$. Если да — $D_8(M/K)=1$ для всех $K\subseteq\gamma_5(M)$: ни одна центральная модификация сдвинутого плато не даёт $D_8\ne1$. Если нет — $z\in D_8(M/K)$ ещё не следует (тест — фильтр, как в §6.8), и следующий шаг — представление $\psi(z)=\sum_j\psi(k_j)m_j$ по модулю $J_8$ с $z\notin\langle k_j\rangle$ (расширенная форма Хауэлла из §6.8, не реализована).</li>
+</ul>
+<p><strong>$n=8$</strong> [компьютер] (Modal A100-SXM4-80GB, ref <code>ab3023d</code>, <code>gpu/modal_batch.py spawn --gpu a100 ... -- --n 8 --kfree --verbose --group 1</code>, приложение <code>math43-c5kfree-n8</code>; всего 2 622 с, из них замыкание — 7 раундов, 1 881 с; пик GPU 61,0 ГиБ). $J_8(M)$: $6\,804$ строк соотношений, ранг $97\,648$, свободных столбцов $7=r_8$ при $h=(1,0,0,0,0)$, индекс $195\,779$ по модулю $2^{32}$, $195\,765$ по модулю $2^{30}$, $195\,695$ по модулю $2^{20}$: разности $14=2r_8$ и $84=12r_8$, сертификат выполнен. $w,u_3,w_{12},w_{13},w_{23}\notin J_8(M)$. $U_8$ добавляет $6\,660$ строк $\psi(b_t)a_j$, $\psi(b_t)a_ja_{j&#39;}$, индекс $170\,084$; 222 элемента порядка 2 группы $\gamma_5(M)$ порождают по модулю $U_8$ подгруппу порядка $2^{222}$: <strong>$\bar\psi_8$ инъективно</strong> (<code>socle_bits</code> $=222$; это точно и без сертификата, который всё равно выполнен). Строка: <code>results/c5/kfree/m5_n8_a100.out.jsonl</code>.</p>
+<p><strong>Вывод</strong> [компьютер + на бумаге, Предложение 6, $D_8(Q)=1$ выше]. Для всех $K\subseteq\gamma_5(M)$, $M=\Gamma/\gamma_6(\Gamma)\Gamma&#39;&#39;$, $\Gamma$ — сдвинутое плато (<code>plateau5_c5i5</code>): <strong>$D_8(M/K)=1$</strong>. Значит, ни одна метабелева группа класса $\le5$ вида $\Gamma/N$ с $\gamma_6(\Gamma)\Gamma&#39;&#39;\subseteq N\subseteq\gamma_5(\Gamma)\gamma_6(\Gamma)\Gamma&#39;&#39;$ не имеет $D_8\ne1$ — все центральные модификации группы §6.7 сразу, при любом $\varphi$; в частности $D_8(M)=1$, хотя $w\in D_7(M)$. Кандидата $z$ нет: $\ker\bar\psi_8=1$. Для $D_8\ne1$ в классе 5 это $\Gamma$ исчерпано; нужно другое копредставление (ср. §6.9).</p>
+<p><strong>Расход Modal на §6.10:</strong> <span>$</span>2,56: <span>$</span>0,40 на $n\le7$ (GAP на CPU-контейнере: остановленная первая попытка <span>$</span>0,12 и прогон <span>$</span>0,19, <code>math43-c5kfree-gap</code>; один прогон A10G при $n=7$ — <span>$</span>0,08, <code>math43-c5kfree-n7</code>) и <span>$</span>2,16 на $n=8$ (A100-80GB, 44,5 мин с контейнером <code>modal_batch.py</code>, 4 CPU и 32 ГиБ, около 2,9 доллара/ч; <code>math43-c5kfree-n8</code>). Всё остановлено.</p>
+<h3 id="611-math-144-на-чём-держится-312-и-что-нужно-копредставлению-класса-5">6.11. MATH-144: на чём держится (3.12) и что нужно копредставлению класса 5</h3>
+<p>Вопрос: найти метабелеву группу класса 5 с $D_8\ne1$ или объяснить, почему подход §6.7–6.10 её не даёт. Здесь механизм (3.12) разложен на три части, которые проверяются по отдельности, точным тождеством в групповом кольце (Лемма 7, проверена на компьютере); каждая часть измерена в имеющихся группах (c4a = (3.12) с $x_6\to x_3$, она же без $x_5$, буквальная групповая версия <code>L2g</code> кольца $L&#39;_2$, сдвинутое плато <code>c5i5</code>). Данные: <code>results/c5/presentation/</code>.</p>
+<p><strong>Итог.</strong></p>
+<ul>
+<li>[на бумаге] $w-1\equiv S-X\!V-\sum_{i&lt;j}B_{ij}\pmod{\Delta^{2k}}$ (Лемма 7): $S$ — «кольцевая часть» (спаривание), $X\!V$ — коммутаторная поправка, $B_{ij}$ — биномиальные члены степеней $x_j^{A_{ij}}$. В кольце Ли есть только $S$.</li>
+<li>[компьютер] В (3.12) пятая образующая $x_5$ <strong>не</strong> нужна для спаривания: точное спаривание $g_i\in(\gamma_3)^{2E_i}$ выполнено и с $x_5$, и без неё, и $S\in\Delta^6$ в обоих случаях. Она нужна для биномиальной ошибки: без $x_5$ (или без её соотношения $x_5^{1024}d_2^{16}$) $B_{12}\notin\Delta^6$, точнее $128(x_2-1)^2(x_1-1)\notin\Delta^6$; с ней $B_{12}\in\Delta^6$ и $B_{13}+B_{23}\in\Delta^6$ (по отдельности — нет).</li>
+<li>[на бумаге] Два препятствия в классе 5, оба величиной $c-3$ уровня: (i) спаривание требует множителя $2^{k-2}=4$ (§6.7, §6.9); (ii) для пары, несущей $w$ ($A_{ij}&lt;E_iE_j$ вынуждено, Лемма 9), лемма о спаривании гарантирует биномиальную ошибку лишь до $\Delta^{c+1}$ (Лемма 10), а для $\Delta^{2c-2}$ нужно ещё $c-3$ уровня от других соотношений. Наблюдение [компьютер]: без носителя $w$ доходит ровно до $D_{c+1}$ (c4b: $D_5$; <code>L2g</code>: $D_6$), с одним носителем — до $D_{c+2}$ (c4a: $D_6$; <code>c5i5</code>: $D_7$).</li>
+<li>[компьютер] Не работают три новых семейства: «расщепление $(c-2,c)$» ($w=1$ во всех 62 построенных группах), корневые расширения $x_i\mapsto y_i^m$ ($w=1$) и решения билинейной модели с равными порядками (в 3 из 4 $w=1$, в четвёртой все $g_i=1$ и $w\in D_5\setminus D_6$).</li>
+<li>[гипотеза] Для $D_8\ne1$ в классе 5 нужны два независимых механизма-носителя, т.е. не меньше шести образующих. Плотная проверка такой группы при $n=8$ недоступна ($\dim A_8=335\,923$ при $d=6$).</li>
+</ul>
+<h4 id="a-разложение">(a) Разложение</h4>
+<p>Обозначения. $G$ — любая группа, $\Delta$ — её идеал аугментации, $X_i=x_i-1$ для $x_1,x_2,x_3\in G$; $A$ — кососимметричная целочисленная матрица с $h_{ij}:=x_j^{A_{ij}}\in\gamma_k(G)$ ($i\ne j$); $g_i=\prod_{j\ne i}h_{ij}$, $u_{ij}=[x_i,h_{ij}]$ ($[a,b]=a^{-1}b^{-1}ab$), $v_i=\prod_{j&gt;i}u_{ij}$, $w=\prod_{i&lt;j}u_{ij}=[x_1,x_2^{A_{12}}][x_1,x_3^{A_{13}}][x_2,x_3^{A_{23}}]$ (тот самый $w$ из (3.12), §6.7, <code>L2g</code>), и $$S=\sum_iX_i(g_i-1),\qquad X\!V=\sum_iX_i(v_i-1),\qquad
+B_{ij}=\sum_{m\ge2}\Big[\tbinom{A_{ij}}m X_j^mX_i+\tbinom{-A_{ij}}m X_jX_i^m\Big].$$</p>
+<p><strong>Лемма 7</strong> [на бумаге]. $w-1\equiv S-X\!V-\sum_{i&lt;j}B_{ij}\pmod{\Delta^{2k}}$. <em>Доказательство.</em> $(h-1)(h&#39;-1)\in\Delta^{2k}$ для $h,h&#39;\in\gamma_k$, поэтому $g_i-1\equiv\sum_jH_{ij}$, $H_{ij}=h_{ij}-1$. Из $x_ih=hx_i[x_i,h]$: $X_iH_{ij}-H_{ij}X_i=hx_i(u_{ij}-1)=(u_{ij}-1)+(X_i+H_{ij}+H_{ij}X_i)(u_{ij}-1)$, и $u_{ij}\in\gamma_{k+1}$, так что $X_iH_{ij}\equiv H_{ij}X_i+(u_{ij}-1)+X_i(u_{ij}-1)$. Далее $H_{ij}X_i+X_jH_{ji}=\sum_{m\ge1}\binom AmX_j^mX_i+\sum_{m\ge1}\binom{-A}mX_jX_i^m$ ($A=A_{ij}$, $H_{ji}=x_i^{-A}-1$; для отрицательного показателя биномиальный ряд конечен по модулю $\Delta^{2k}$), и члены $m=1$ сокращаются: это $B_{ij}$. Сумма по $i&lt;j$: $S\equiv\sum_{i&lt;j}(u_{ij}-1)+X\!V+\sum B_{ij}$; наконец, $\sum_{i&lt;j}(u_{ij}-1)\equiv w-1$, так как $(u-1)(u&#39;-1)\in\Delta^{2k+2}$, и $\sum_{j&gt;i}X_i(u_{ij}-1)\equiv X_i(v_i-1)$. $\square$</p>
+<p>От $G$ не требуется ничего, кроме $h_{ij}\in\gamma_k$ (даже метабелевости). В кольце Ли аналог точен и $X\!V=B=0$: $a=\sum_{i,j}A_{ij}x_ix_j=\sum_ix_ig_i$ [IMP26, (3.9)]. Итак, $w\in D_{2k}$ iff $S-X\!V-\sum B_{ij}\in\Delta^{2k}$, и три части — три места, где группа может проиграть кольцу уровни.</p>
+<p><strong>Лемма 8</strong> [на бумаге] (достаточные условия). Пусть $x_i^{E_i}\in\gamma_k$, $E_i=2^{a_i}\ge4$, $k\le4$ (так что верна лемма о спаривании из §6.7: $2^sE_iX_i\in\Delta^{2+s}$ при $2+s\le k$). (i) Если $g_i=\zeta^Fs^{F&#39;}$, $\zeta\in\gamma_k$, $s\in\gamma_{k+1}$, $F=2^{k-2}E_i$, $F&#39;=2^{k-3}E_i$, то $X_i(g_i-1)\in\Delta^{2k}$. (ii) Если $v_i\in(\gamma_{k+1})^{2^{k-3}E_i}$, то $X_i(v_i-1)\in\Delta^{2k}$. <em>Доказательство.</em> $\zeta^F-1\equiv F(\zeta-1)$ по модулю $\Delta^{2k}$, и $X_i\cdot F(\zeta-1)=(FX_i)(\zeta-1)\in\Delta^{k+k}$; так же $X_i(s^{F&#39;}-1)\equiv(F&#39;X_i)(s-1)\in\Delta^{(k-1)+(k+1)}$; перекрёстный член $(\zeta^F-1)(s^{F&#39;}-1)\in\Delta^{2k+1}$. (ii) — вторая половина (i). $\square$</p>
+<p>Это «точное спаривание»: множитель $2^{k-2}$ на $\gamma_k$-части $g_i$ (2 для (3.12), 4 в классе 5) и $2^{k-3}$ на её $\gamma_{k+1}$-части. Условие (ii) выполнено, как только в верхнем слое есть элементы большого порядка (в $G$ из (3.12) и из §6.7 $\gamma_c(G)=C_{2^{14}}$).</p>
+<p><strong>Лемма 9</strong> [на бумаге]. Пусть $G$ метабелева класса $c$, $k=c-1$, $x_i^{E_i}=P_i\in\gamma_k$ и $E_iE_j\mid A_{ij}$. Тогда $u_{ij}=1$. Значит, $w\ne1$ требует $E_iE_j\nmid A_{ij}$ для некоторой пары $i&lt;j$ (для степеней двойки: $A_{ij}&lt;E_iE_j$). <em>Доказательство.</em> $u_{ij}=[x_i,P_j^q]=[x_i,P_j]^q$, $q=A_{ij}/E_j$, так как $[x_i,P_j]\in\gamma_c$ централен; и $[x_i,P_j]^{E_i}=[x_i^{E_i},P_j]=[P_i,P_j]=1$ ($\gamma_k\subseteq G&#39;$ абелева). $\square$</p>
+<h4 id="b-какая-часть-ломается-измерение">(b) Какая часть ломается: измерение</h4>
+<p><code>scripts/c5_lintests.py</code> записывает $S$, $\mathrm{Err}=S-(w-1)$, $X\!V$, $B_{12},B_{13},B_{23}$, $\sum B$, $X\!V+\sum B$ и $\mathrm{chk}=\mathrm{Err}-X\!V-\sum B$ как целочисленные комбинации $\sum_kc_k(w_k-1)$ слов (поле <code>lintests</code> записи); <code>gpu/howell_gpu.py</code> (новое: строки $\sum_kc_k(\mu(w_k)-1)$ таких комбинаций, выводятся после обычных тестов) даёт их принадлежность $J_n$, т.е. $\Delta^n$; <code>scripts/c5_lintests_extra.py</code> добавляет любой многочлен от $X_i$. Все прогоны локальные (CPU), все сертификаты выполнены (свободных столбцов $=r_n$, разности индексов $2r_n$, $12r_n$).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$c$, $k$</th>
+<th>$n$</th>
+<th>$w$</th>
+<th>$S$</th>
+<th>$X\!V$</th>
+<th>$B_{12}$</th>
+<th>$B_{13}$</th>
+<th>$B_{23}$</th>
+<th>$\sum B$</th>
+<th>chk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4a: (3.12), $x_6\to x_3$ (<code>plateau5_c4i5</code>)</td>
+<td>4, 3</td>
+<td>5</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>6</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>7</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td>c4b: c4a без $x_5$</td>
+<td>4, 3</td>
+<td>5</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>6</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td>c4a без $x_5^{1024}d_2^{16}$</td>
+<td>4, 3</td>
+<td>6</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td><code>L2g</code> (§6.9)</td>
+<td>5, 4</td>
+<td>6</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>7</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td><code>c5i5</code> (§6.7)</td>
+<td>5, 4</td>
+<td>8</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\notin$</td>
+<td>$\in$</td>
+</tr>
+</tbody>
+</table></div>
+<p>chk $\in\Delta^n$ везде, как и утверждает Лемма 7. Куски $B_{12}\equiv128\big(X_2X_1^2-X_2^2X_1\big)$ (по модулю $\Delta^6$, Лемма 10 ниже):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$n$</th>
+<th>$128X_2X_1^2$</th>
+<th>$128X_2^2X_1$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4a</td>
+<td>6</td>
+<td>$\in$</td>
+<td>$\in$</td>
+</tr>
+<tr>
+<td>c4a</td>
+<td>7</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+</tr>
+<tr>
+<td>c4b</td>
+<td>6</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+</tr>
+<tr>
+<td>c4a без $x_5^{1024}d_2^{16}$</td>
+<td>6</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+</tr>
+<tr>
+<td><code>c5i5</code></td>
+<td>8</td>
+<td>$\in$</td>
+<td>$\notin$</td>
+</tr>
+</tbody>
+</table></div>
+<p>(Контроль: $16X_1$, $128X_2$, $8X_1^2$, $64X_2^2$ $\notin\Delta^6$ в обеих, как и должно быть.)</p>
+<p><strong>Точное спаривание</strong> (<code>gap/c5_ep.g</code>, в $M=\Gamma/\gamma_{c+1}\Gamma&#39;&#39;$ и в $G=M/\ker\varphi$; наибольшее $a$ с $g_i\in(\gamma_k)^{2^a}\gamma_c$ и правильна ли $\gamma_c$-часть, Лемма 8(i)) [компьютер]:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$g_1$</th>
+<th>$g_2$</th>
+<th>$g_3$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4a ($E=8,64,16384$)</td>
+<td>ровно $(\gamma_3)^{16}$: множитель 2</td>
+<td>ровно $(\gamma_3)^{128}$: 2</td>
+<td>$g_3=1$</td>
+</tr>
+<tr>
+<td>c4b</td>
+<td>так же</td>
+<td>так же</td>
+<td>$g_3=1$</td>
+</tr>
+<tr>
+<td><code>c5i5</code> (класс 5, $k=4$)</td>
+<td>$(\gamma_4)^{16}$, но не $(\gamma_4)^{32}\gamma_5$: множитель 2, нужно 4</td>
+<td>только $(\gamma_4)^{128}$: 2, нужно 4</td>
+<td>$g_3=1$</td>
+</tr>
+</tbody>
+</table></div>
+<p>(То же в $M$ и в $G$ для всех трёх; $w$ имеет порядок 2 в $M$ во всех трёх. Журналы <code>ep_c4a.log</code>, <code>ep_c4b.log</code>, <code>ep_c5i5.log</code>.)</p>
+<p>Итак, в (3.12) спаривание $x_5$ вообще не видит (те же множители, та же точность, в $M$ и в $G$), и $S\in\Delta^6$ с ней и без неё. <strong>Что делает $x_5$</strong> [компьютер]: переводит $128X_2^2X_1=2E_2\,X_2^2X_1$ в $\Delta^6$ (одна лемма о спаривании даёт $\Delta^5$), отсюда $B_{12}\in\Delta^6$, и делает $B_{13}+B_{23}\in\Delta^6$, хотя ни одно слагаемое там не лежит. Если убрать только её степенное соотношение $x_5^{1024}d_2^{16}$, первый эффект пропадает. Подъём ровно на один уровень: при $n=7$ в c4a $128X_2^2X_1\notin\Delta^7$ (CPU, 3,8 ч на загруженной машине, сертификат выполнен; <code>c4a_lin2_n7.log</code>). (Какое тождество в $\mathbb Z[G]$ это делает, на бумаге не найдено.) <code>L2g</code> ломается при $n=7$ на $S$ (множитель 1 там, где нужен 4) и на каждом $B_{ij}$.</p>
+<h4 id="c-подсчёт-уровней-почему-носитель-покупает-один-уровень">(c) Подсчёт уровней: почему носитель покупает один уровень</h4>
+<p><em>Гарантированный уровень</em> монома $N\,X_{t_1}\cdots X_{t_m}$ ($N$ — степень двойки) — наибольшая сумма $\sum_r\ell_r$ по разложениям $N=\prod_rN_r$, где $\ell_r$ — уровень, который лемма о спаривании даёт $N_rX_{t_r}$ (1, если $N_r&lt;E_{t_r}$, иначе $\min(2+\log_2(N_r/E_{t_r}),k)$). Это нижняя оценка истинного уровня; соотношения могут дать больше.</p>
+<p><strong>Лемма 10</strong> [на бумаге]. Пусть $E_i\le E_j$, $A=A_{ij}=2^\alpha&lt;E_iE_j$ (пара из Леммы 9). Гарантированный уровень $\binom A2X_j^2X_i$ не больше $k+2=c+1$. <em>Доказательство.</em> $v_2\binom A2=\alpha-1\le a_i+a_j-2$. Поднять $X_j$ до уровня $\ge2$ стоит $\ge a_j$, и остаётся $\le a_i-2&lt;a_i$: два других множителя остаются на уровне 1, всего $\le k+2$. Иначе поднимается только $X_i$, до $\le k$: всего $\le k+2$. $\square$</p>
+<p>Тот же подсчёт даёт $S$ гарантированный уровень $k+\min(2+\log_2m,k)$ при множителе $m$, а $X\!V$ — уровень $2k$ при Лемме 8(ii). Значит, одной леммой о спаривании разложение гарантирует в лучшем случае $w\in D_{c+1}$, а для $D_{2c-2}$ нужно ещё $c-3$ уровня для биномиального члена $w$-пары: один в классе 4, два в классе 5. Данные ложатся точно:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$c$</th>
+<th>носитель</th>
+<th>множитель</th>
+<th>гарантировано ($S$; $B_w$)</th>
+<th>наблюдается</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4b, c4a без соотношения $x_5$</td>
+<td>4</td>
+<td>нет</td>
+<td>2</td>
+<td>6; 5</td>
+<td>$w\in D_5\setminus D_6$</td>
+</tr>
+<tr>
+<td>c4a ((3.12))</td>
+<td>4</td>
+<td>$x_5$</td>
+<td>2</td>
+<td>6; 5 (+1 от $x_5$, измерено)</td>
+<td>$w\in D_6$, $D_7(M/K)=1$ (§6.8)</td>
+</tr>
+<tr>
+<td><code>L2g</code></td>
+<td>5</td>
+<td>нет</td>
+<td>1</td>
+<td>6; 6</td>
+<td>$w\in D_6\setminus D_7$</td>
+</tr>
+<tr>
+<td><code>c5i5</code> (§6.7)</td>
+<td>5</td>
+<td>$x_5$</td>
+<td>2</td>
+<td>7; 6</td>
+<td>$w\in D_7\setminus D_8$</td>
+</tr>
+</tbody>
+</table></div>
+<p>[гипотеза H] Соотношение-носитель вроде $x_5^{1024}d_2^{16}$ поднимает биномиальную ошибку $w$-пары на один уровень, не больше; тогда для $D_8$ в классе 5 нужны множитель 4 <em>и</em> два таких механизма. В пяти образующих (больше плотный тест при $n=8$ не вмещает) место есть для одного.</p>
+<h4 id="d-что-нужно-копредставлению-класса-5">(d) Что нужно копредставлению класса 5</h4>
+<p>При $k=c-1=4$, по Леммам 7–10 [на бумаге]:</p>
+<ul>
+<li>(R1) спаривание: $g_i\in(\gamma_4)^{4E_i}(\gamma_5)^{2E_i}$ для всех $i$ — или сокращение $S\equiv X\!V+\sum B$ по модулю $\Delta^8$ иного рода;</li>
+<li>(R2) $v_i\in(\gamma_5)^{2E_i}$: верхний слой с элементами порядка $\gg E_i$ (циклическая $\gamma_5(G)$ большого порядка, как в §6.7);</li>
+<li>(R3) биномиальная ошибка $w$-пары в $\Delta^8$: на два уровня выше гарантированного леммой о спаривании;</li>
+<li>(R4) $w\ne1$: $A_{ij}&lt;E_iE_j$ для некоторой пары (Лемма 9) — именно это делает трудным (R3) (Лемма 10), а в шаблоне $L&#39;_2$ — ещё и невозможным (R1) (§6.9: при множителях 2 и 4 решений нет).</li>
+</ul>
+<p>Билинейная модель §6.9 со <em>свободными</em> коэффициентами $p_{il}$ решения с множителем 4 имеет. [на бумаге] Если в соотношениях только $d_2$ ($x_1^{E_1}=d_2^{p_{12}}$, $x_3^{E_3}=d_2^{p_{32}}$), условия сводятся к $v_2(q_{21}p_{12})=v_2(q_{23}p_{32})&lt;a_2$ и двум неравенствам, верным при большом $A_{13}$; при $E_1=E_2=E_3$ множитель вообще не входит ($d_l$ имеют порядок $\le E_l$, и $\gcd(4E_i,E_l)=E_l$). [компьютер, <code>scripts/c5_split_screen.py</code>] При равных порядках $E\le2^6$, $p_{il}\in\{0,\pm1,\pm2\}$: 40 решений, самое дешёвое — $E=4$, $A=(4,8,4)$, $p_{12}=\pm2$, $p_{32}=\pm2$. Но «$w\ne0$» модели ненадёжно: из четырёх таких групп, построенных в GAP (<code>eq4a</code>, <code>eq4b</code>, <code>eq8a</code>, <code>eq8b</code>: $E=4$ или $8$ у всех трёх, $P_1=d_2^{\pm2}$, $P_3=d_2^{2}$, класс 5, $t=[x_4,x_3,x_3]$), в трёх $w=1$ в $M$, а в <code>eq8a</code> ($w$ порядка 2) все $g_i=1$ точно — $S=0$, $w$ — чистая биномиальная ошибка, и $w\in D_5\setminus D_6$ (сертифицировано) [компьютер].</p>
+<h4 id="e-другие-кандидаты-и-почему-они-не-работают">(e) Другие кандидаты и почему они не работают</h4>
+<ol type="1">
+<li><strong>Расщепление $(c-2,c)$.</strong> Спаривать на весе $c-2$, а второй множитель брать в центре: если $x_i^{E_i}\in\gamma_{c-2}$ и $g_i\in(\gamma_c)^{2^{c-4}E_i}$, то $X_i(g_i-1)\in\Delta^{2c-2}$ (как в Лемме 8: $2^{c-4}E_iX_i\in\Delta^{c-2}$), с множителем 2 в классе 5, как в (3.12). (Лемма 7 тогда верна лишь по модулю $\Delta^{2c-4}$; члены ошибки больше.) [на бумаге, набросок] В кольце Ли это не может нести $D_{2c-2}$: ретракция из доказательства [IMP26, теорема C] (на $T$, нулевая на $Z(T)\cdot T$) убивает $\sum_i(e_ix_i)\zeta_i$ с центральными $\zeta_i$ и оставляет $a$ на месте; в сдвинутом семействе $\gamma_c$-часть $g_i$ берётся только из биномов ($E_ld_l=-\binom{E_l}2[d_l,x_l]$), так что в кольце она нулевая. [компьютер] Лабораторная проверка в классе 4 (расщепление $(2,4)$: $d=[x_4,x_a]$ или $[x_a,x_b]$, $v$ веса 4 от $x_3,x_4$, $x_i^{E_i}=d^{p_i}$, $d^o=v^s$; 60 случайных наборов, проходящих модель с одним $d$, <code>scripts/c5_split_gen.py 4 60 1</code> = <code>gap/c5_spl_c4_1.g</code>, <code>gap/c5_split.g</code>): $w=1$ в $M$ во всех 60. Явные попытки <code>lab24a</code>, <code>lab24b</code>: $w=1$.</li>
+<li><strong>Корневые расширения</strong> $x_i\mapsto y_i^m$ (<code>gap/c5_roots.g</code>). Для $x=y^m$ множитель падает [компьютер, <code>scripts/c5_cyclic_power_check.py</code>: в $\mathbb Z[C_N]$ для $x=g^m$ порядка $E$ условие $F(x-1)\in\Delta^k$ требует $F/E=2^{k-2}$ при $m=1$, $(1,1,2,2)$ при $m=2$ и $1$ при $m\ge4$, $k=2..5$]. Но это замена координат, а не новый механизм: в кольце $a$ умножается на $m^2$, а порядки — только на $m$, и $a$ умирает [на бумаге]. В GAP: у <code>L1</code> (групповая версия $L_1$, §6.6) $w$ порядка 2 в $M$, у её расширения квадратными корнями <code>L1r2</code> $w=1$ в $M$ [компьютер].</li>
+<li><strong>Два носителя</strong> (предложение, не построено). По гипотезе H: (3.12), сдвинутое в класс 5, со вторым носителем $x_6$, повторяющим роль $x_5$ для оставшегося уровня. Шесть образующих: плотный тест при $n=8$ имеет $\dim A_8=335\,923$ (около 450 ГБ в <code>uint32</code>), что не помещается ни на один GPU; даже $n=7$ ($55\,986$) покажет только $D_7$. Статус: [гипотеза], не проверено.</li>
+</ol>
+<h4 id="f-в-сторону-f_rm-met57">(f) В сторону $f_{\rm met}(5)=7$</h4>
+<p>Доказано утверждение о методе, а не о группах: для копредставления вида (3.12) (спаренные образующие с $x_i^{E_i}\in\gamma_{c-1}$, $w=\prod[x_i,x_j^{A_{ij}}]$) $w-1$ раскладывается по Лемме 7; $w\ne1$ требует пары с $A_{ij}&lt;E_iE_j$ (Лемма 9); для этой пары лемма о спаривании гарантирует биномиальную ошибку лишь до $\Delta^{c+1}$ (Лемма 10), а кольцевую часть — до $\Delta^{k+\min(2+\log_2m,k)}$. Значит, любое доказательство $w\in D_8$ в классе 5 в этом семействе должно получить два уровня от соотношений, отличных от степенных соотношений спаренных образующих, плюс множитель 4 (или сокращение между $S$ и ошибками). Во всех измеренных группах выигранных уровней ровно столько, сколько носителей (таблица в (c)). Для теоремы $f_{\rm met}(5)=7$ нужна оценка сверху на $D_8$, не проходящая через это разложение; здесь её нет.</p>
+<h4 id="g-c5i5-при-n8-ломается-и-на-s-и-на-b">(g) <code>c5i5</code> при $n=8$: ломается и на $S$, и на $B$</h4>
+<p>[компьютер] (Modal A100-SXM4-80GB, main 98e827c, <code>C4BATCH_APP=math144-c5i5-n8</code>, <code>gpu/modal_batch.py spawn --gpu a100 --input results/c5/presentation/records/c5i5_lin.jsonl.gz -- --n 8 --h 1 0 0 0 0 --verbose</code>; 1 567 с, замыкание за 7 раундов, пик GPU 54,8 ГиБ.) $M=97\,655$, $8\,054$ строк соотношений, ранг $97\,648$, свободных столбцов $7=r_8$, индекс $169\,278$ / $169\,264$ / $169\,194$ по модулю $2^{32}/2^{30}/2^{20}$ (разности $14=2r_8$, $84=12r_8$): сертификат выполнен. Строки для таблиц (b): $w,S\notin\Delta^8$, $X\!V\in\Delta^8$, $B_{12},B_{13},B_{23},\sum B\notin\Delta^8$, chk $\in\Delta^8$; $128X_2X_1^2\in\Delta^8$, $128X_2^2X_1\notin\Delta^8$. Строка и журнал: <code>results/c5/presentation/c5i5_lin_n8_a100.out.jsonl</code>, <code>.log</code>.</p>
+<p>Итак, <code>c5i5</code> ломается на $D_8$ ровно так же, как c4a и <code>L2g</code> на $D_7$: в части спаривания $S$ (множитель 2 вместо нужных 4, (b)) <strong>и</strong> в биномиальной ошибке $w$-пары, через тот же моном $2E_2X_2^2X_1$. Носитель $x_5$ не поднимает биномиальную ошибку с гарантированного $\Delta^{c+1}=\Delta^6$ до $\Delta^8$: не больше одного уровня, как и в классе 4 (при $n=7$ части не измерялись; там известно только $w\in D_7$, §6.10). Это предсказание гипотезы H; альтернатива «только $S$» (H неверна) исключена. H остаётся гипотезой (две группы, по одной на класс).</p>
+<p><strong>Дальше.</strong> (1) Сделано: (g). (2) Тождество, стоящее за «$x_5$ поднимает $128X_2^2X_1$», на бумаге — оно сказало бы, каким должен быть второй носитель (сделано: §6.12). (3) Для проверки $D_8$ на шести образующих нужен метод, отличный от плотной формы (стандартные мономы или градуировка).</p>
+<p><strong>Перезапуск.</strong> <code>scripts/gap5.sh c5_ep.g 'P5NAME := "c4a"; P5I5 := rec(cls := 4);'</code> (и запись c4b из таблицы); <code>python3 scripts/c5_lintests.py IN OUT --A 256 16384 32768</code>, <code>python3 scripts/c5_lintests_extra.py IN OUT 'T12=128*X2*X2*X1'</code>, <code>python3 gpu/howell_gpu.py --device numpy plateau --input OUT.gz --n 6 --h 1 0 0 0 --steps host</code>; <code>mkdir -p gpu/data/plateau5/spl &amp;&amp; scripts/gap5.sh c5_split.g 'Read("c5_spl_eq.g"); SPLDIR := "/data/spl";'</code>; <code>scripts/gap5.sh c5_roots.g 'ROOTBASE := "L1"; ROOTM := 2;'</code>. Журналы и строки: <code>results/c5/presentation/</code>; записи с <code>lintests</code>: <code>results/c5/presentation/records/</code>.</p>
+<p><strong>Расход Modal на §6.11:</strong> около <span>$</span>1,4 на (g) (один прогон A100-80GB, 26 мин с контейнером, приложение <code>math144-c5i5-n8</code>, остановлено); остальное локально (GAP в Docker, замыкания на CPU).</p>
+<h3 id="612-math-170-тождество-носителя-почему-он-даёт-один-уровень-и-что-нужно-конструкции-класса-5">6.12. MATH-170: тождество носителя, почему он даёт один уровень и что нужно конструкции класса 5</h3>
+<p>Вопрос §6.11(b): какое тождество в $\mathbb Z[G]$ кладёт $128X_2^2X_1$ в $\Delta^6$ в c4a ((3.12) с $x_6\to x_3$), причём только при соотношении носителя $x_5^{1024}d_2^{16}$. Обозначения §6.11: $t=[x_4,x_3]$ (класс 4) или $[x_4,x_3,x_3]$ (класс 5), $d_l=[t,x_l]\in\gamma_k$, $k=c-1$, $X_i=x_i-1$, $D_l=d_l-1$, $E_i=2^{e_i}$ — порядок $x_i$ по модулю $\gamma_k$, $P_i=x_i^{E_i}\in\gamma_k$. В c4a: $P_1=d_2^{-1}d_3^{-4}$, $P_2=d_1d_3^{16}d_5^{-16}$, $P_3=d_1^4d_2^{-16}$, $x_5^{1024}=d_2^{-16}$, $E=(8,64,16384)$, $(A_{12},A_{13},A_{23})=(256,16384,32768)$. Данные: <code>results/c5/carrier/</code>.</p>
+<p><strong>Итог.</strong></p>
+<ul>
+<li>[на бумаге, каждый шаг проверен на компьютере] Тождество короткое. Перенести скаляр $128=2E_2=16E_1$ с $X_2$ на $X_1$: $$128X_2^2X_1\equiv X_2^2\,(x_1^{128}-1),\qquad x_1^{128}=P_1^{16}=d_2^{-16}d_3^{-64}=x_5^{1024}\,d_3^{-64}\pmod{\Delta^6},$$ далее $X_2^2(x_5^{1024}-1)\equiv1024X_2^2X_5\in\Delta^6$, потому что $512X_2^2\in\Delta^5$ (Лемма 13, «квадратичное спаривание»), и $64X_2^2D_3=(64X_2)X_2D_3\in\Delta^{2+1+3}$. Используются только соотношения $x_1$, $x_2$, $x_5$ и класс $\le4$ (Теорема 14). Без носителя те же шаги приводят к $-16X_2^2D_2$, а это $\notin\Delta^6$ [компьютер].</li>
+<li>[на бумаге] Итак, носитель превращает $d_2$-часть $d_2^{-16}$ элемента $x_1^{128}$ — <em>малую</em> степень элемента $\gamma_k$, которую $X_2^2$ гарантирует лишь до $\Delta^5$, — в <em>большую</em> степень $x_5^{1024}$ образующей, которую поглощает квадратичное спаривание. $d_3$-часть $d_3^{-64}$ не переносится: обычное спаривание кладёт её в $\Delta^{k+3}$, а это $\Delta^6$ в классе 4.</li>
+<li>[на бумаге] Лемма 15: если спаривание выполнено с множителем 1, то $w=[x_2,x_1^{A_{12}}]=\prod_l[x_2,d_l]^{-a_lA_{12}/E_1}$ ($P_1=\prod_ld_l^{-a_l}$), и всякая $d_l$-часть, которую спаривание гарантирует само, даёт $1$. Значит, для $w\ne1$ нужна часть, которую спаривание не гарантирует, т.е. перенесённая носителем: носитель вынужден, а не случаен.</li>
+<li>(b) [на бумаге] Только один уровень: непереносимая часть $64X_2^2D_3$ стоит ровно на $\Delta^{k+3}$ (= $\Delta^6$ в c4a); всё остальное в тождестве гарантировано на уровень выше. Предсказание «при $n=7$ ломается кусок $64X_2^2D_3$, а кусок носителя и биномы $x_1$ — нет» подтверждено [компьютер, Modal A10G, сертифицировано]: тождество верно по модулю $\Delta^7$, и вне $\Delta^7$ только $64X_2^2D_3$ (см. (b)).</li>
+<li>(c) [на бумаге] Условия для $NX_2^2X_1\in\Delta^{2k}$ ($N=A_{12}/2$): каждая $d_l$-часть $x_1^N$ либо переносится степенью $x_\kappa^F$ образующей с $2^kE_2\mid F$, либо имеет $v_2(a_lN/E_1)\ge e_2+k-3$ (Предложение 16, достаточное условие); второй носитель нужен, когда два куска не выполняют второе условие. В <code>c5i5</code> не выполняет $d_3$-часть ($64&lt;2E_2$) — поэтому там $128X_2^2X_1\notin\Delta^8$ (§6.11(g)). [компьютер] Построено семь копредставлений: второй носитель на <code>c5i5</code> (<code>c5i6</code>, шесть образующих), две конструкции с множителем 4 и четыре варианта с одним изменением — <strong>$w=1$ в $M=\Gamma/\gamma_6\Gamma&#39;&#39;$ во всех</strong> ((d)). Единственной группой этого семейства с $w\ne1$ в классе 5 остаётся <code>c5i5</code>.</li>
+</ul>
+<h4 id="a-тождество">(a) Тождество</h4>
+<p><strong>Какие соотношения его несут</strong> [компьютер, <code>scripts/c5_carrier_ablate.sh</code>, $n=6$, CPU]. В тестовой записи §6.11 (c4a = $G$ из <code>plateau5_c4i5</code>, 1 554 соотношения: 9 из (3.12), 45 метабелевых, 250 из $\ker\varphi$, 1 250 коммутаторов веса 5) удаление пяти соотношений $d_l^{N_l}$ и двух верхних, или 45 метабелевых, или 250 из $\ker\varphi$ сохраняет $128X_2^2X_1\in\Delta^6$ (сертифицировано); удаление соотношения $x_3$ тоже сохраняет (принадлежность найдена; для сертификата нужно другое $h$, не переделывалось); удаление соотношения $x_1$ или $x_2$ его теряет (не сертифицировано по той же причине), как и удаление соотношения $x_5$ (§6.11, сертифицировано). Перекладывание скаляра: в c4a, c4b и c4a без соотношения $x_5$ ($h=(2,1,2,0)$, $r_6=47$, сертификат выполнен), с $e_1=2D_1X_2X_1$, $e_2=32D_3X_2X_1$, $e_3=32D_5X_2X_1$, $e_4=32X_2^4X_1$: $128X_2^2X_1\equiv e_1+e_2-e_3+3969\,e_4$ (соотношение $x_2$), $e_2,e_3,e_4\in\Delta^6$ во всех трёх, а $e_1\in\Delta^6$ только в c4a: весь эффект сидит в $2D_1X_2X_1$, а это снова $128X_2^2X_1$, прочитанное через соотношение $x_2$. Выход — читать скаляр через соотношение $x_1$.</p>
+<p><strong>Лемма 13</strong> [на бумаге] (квадратичное спаривание). Пусть $k\in\{3,4\}$, $G$ класса $\le k+1$, $x^E=P=\prod_ld_l^{e_l}$, $d_l\in\gamma_k$, $E=2^e\ge4$, $X=x-1$, $s\in\{0,1\}$, $2+s\le k$. Пусть для каждого $l$ либо $E\mid8e_l$, либо $d_l^{2^{s+3}e_l}\in\gamma_{k+1+s}$. Тогда $2^{s+3}E\,X^2\in\Delta^{k+2+s}$.</p>
+<p><em>Доказательство.</em> $x^E-1=\sum_{m\ge1}\binom EmX^m$, поэтому $2^{s+3}EX^2=2^{s+3}(P-1)X-\sum_{m\ge2}2^{s+3}\binom EmX^{m+1}$. По модулю $\Delta^{2k}$ $P-1\equiv\sum_le_lD_l$. Член $2^{s+3}e_lD_lX$ равен $D_l\cdot\frac{8e_l}E\,(2^sEX)\in\Delta^{k+2+s}$ в первом случае (лемма о спаривании §6.7: $2^sEX\in\Delta^{2+s}$) и $(d_l^{2^{s+3}e_l}-1)X\in\Delta^{k+2+s}$ с точностью до $\Delta^{2k}$ во втором. При $m=2$: $2^{s+2}E(E-1)X^3$ есть $(4EX)X^2\in\Delta^{\min(4,k)+2}=\Delta^{k+2}$ при $s=0$ и $(E-1)X(8EX^2)\in\Delta^{k+3}$ при $s=1$ (по случаю $s=0$). При $m\ge3$ $v_2\binom Em=e-v_2(m)$, и член — обратимое кратное $(2^{s+3-v_2(m)}EX)X^m$ уровня $\ge\min(2+\max(0,s+3-v_2(m)),k)+m\ge k+2+s$. $\square$</p>
+<p>Откуда второй случай [на бумаге]: если $t\in\gamma_{k-1}$, $d_1=[t,x_1]$ и $x_1^{E_1}\in\gamma_k$, то $1=[t,x_1^{E_1}]=d_1^{E_1}[d_1,x_1]^{\binom{E_1}2}$ (класс $k+1$, $[\gamma_{k-1},\gamma_k]\subseteq\gamma_{2k-1}=1$), т.е. $d_1^{E_1}\in\gamma_{k+1}$, а $[d_1,x_1]^{E_1}=[d_1^{E_1},x_1]=1$ даёт $d_1^{2E_1}=1$. Для c4a ($x=x_2$, $E=64$, $e_1=1$, $e_3=16$, $e_5=-16$, $E_1=8$): $512X_2^2\in\Delta^5$ и $1024X_2^2\in\Delta^6$. Измерено [компьютер]: $2^sX_2^2\in\Delta^5$ тогда и только тогда, когда $s\ge9$, причём $512X_2^2\in\Delta^6$ уже (лучше гарантированного); $2^sX_2\notin\Delta^4$ при всех $s\le14$ — выигрыш действительно квадратичный, а не лучшее линейное спаривание.</p>
+<p>Явный вид при $n=5$ [компьютер, <code>scripts/c5_carrier_rows.py --ddmin</code>, <code>scripts/c5_carrier_solve.sage</code>]: хватает 14 сдвинутых строк соотношений (только $r_1=x_1^8d_2d_3^4$ и $r_2=x_2^{64}d_1^{-1}d_3^{-16}d_5^{16}$, ни одного коммутаторного), и над $\mathbb Z$ $$512X_2^2\equiv8X_2(r_2-1)-252X_2^2(r_2-1)+2730X_2(r_2-1)X_2^2-2(r_2-1)\big(\Lambda_3+\Lambda_5\big)
++X_2\big[(r_1-1),\,X_3X_4-X_4X_3\big]\pmod{\Delta^5},$$ $\Lambda_3=-X_3X_3X_4+2X_3X_4X_3-X_4X_3X_3$, $\Lambda_5=-X_3X_4X_5+X_4X_3X_5+X_5X_3X_4-X_5X_4X_3$ (старшие формы $D_3$, $D_5$ с точностью до знака), $[a,b]=ab-ba$: три ингредиента доказательства — соотношение $x_2$ с биномиальными поправками, $2D_l\cdot64X_2$ и $[t,x_1^8]=1$ — видны буквально (это зеркальный вариант, с $X_2$ слева).</p>
+<p><strong>Теорема 14</strong> [на бумаге]. Пусть $G$ класса $\le4$, $t\in\gamma_2$, $d_l=[t,x_l]$ и $x_1^8=d_2^{-1}d_3^{-4}$, $x_2^{64}=d_1d_3^{16}d_5^{-16}$, $x_5^{1024}=d_2^{-16}$. Тогда $128X_2^2X_1\in\Delta^6$.</p>
+<p><em>Доказательство.</em> (1) $128X_2^2X_1=X_2^2(x_1^{128}-1)-\sum_{m=2}^5\binom{128}mX_2^2X_1^m$. Сумма лежит в $\Delta^6$: $\binom{128}2=127\cdot64$ и $64X_1^2=(8X_1)^2\in\Delta^4$; $\binom{128}3=2^7\cdot2667$ и $128X_1^3=(8X_1)(16X_1)X_1\in\Delta^6$; при $m\ge4$ степень $\ge6$. (2) $\gamma_3$ абелева ($[\gamma_3,\gamma_3]\subseteq\gamma_6$), поэтому $x_1^{128}=(d_3^{-4}d_2^{-1})^{16}=d_3^{-64}d_2^{-16}=d_3^{-64}x_5^{1024}$ и $x_1^{128}-1=(d_3^{-64}-1)+(x_5^{1024}-1)+(d_3^{-64}-1)(x_5^{1024}-1)$, последний член в $\Delta^3\Delta^3$. (3) $X_2^2(d_3^{-64}-1)\equiv-64X_2^2D_3=-(64X_2)X_2D_3\in\Delta^{2+1+3}$. (4) $X_2^2(x_5^{1024}-1)=\sum_{m\ge1}\binom{1024}mX_2^2X_5^m$: при $m=1$ это $2(512X_2^2)X_5\in\Delta^6$ по Лемме 13; $\binom{1024}2=512\cdot1023$ даёт $(512X_2^2)X_5^2\in\Delta^7$; $\binom{1024}3$ делится на $1024$; при $m\ge4$ степень $\ge6$. $\square$</p>
+<p>То есть как тождество: $$128X_2^2X_1\;\equiv\;\underbrace{X_2^2(x_5^{1024}-1)}_{\text{носитель, Лемма 13}}\;-\;\underbrace{64X_2^2D_3}_{\text{спаривание}}\;-\;
+\underbrace{\textstyle\sum_{m\ge2}\binom{128}mX_2^2X_1^m}_{\text{биномы }x_1}\pmod{\Delta^6}.$$ Используются соотношения: $x_1$ (16 раз, через $x_1^{128}=P_1^{16}$), $x_5$ (один раз), $x_2$ (внутри Леммы 13) и класс $\le4$; не используются соотношение $x_3$, $G&#39;&#39;=1$, $d_l^{N_l}$ и верхние соотношения — как и говорит абляция. Без носителя шаг (2) заканчивается на $d_2^{-16}$, а шаг (4) — на $-16X_2^2D_2=-(16X_2)X_2D_2$, гарантированном лишь в $\Delta^5$; измерено $\notin\Delta^6$ в c4b и в c4a без соотношения $x_5$ [компьютер].</p>
+<p>[компьютер, <code>results/c5/carrier/t6.py</code>, c4a, $n=6$, сертификат выполнен] каждый кусок: $128X_2^2X_1-X_2^2(x_1^{128}-1)$, $x_1^{128}-x_5^{1024}+64D_3$, $X_2^2(x_5^{1024}-1)$, $64X_2^2D_3$, $1024X_2^2X_5$, биномы $x_1$ и $x_5$, $512X_2^2$, $8D_1X_2$, $128D_3X_2$, $128D_5X_2$ и $128X_2^2X_1-\big(X_2^2(x_5^{1024}-1)-64X_2^2D_3-\sum_{m\ge2}\binom{128}mX_2^2X_1^m\big)$ — все в $\Delta^6$.</p>
+<p><strong>Лемма 15</strong> [на бумаге] (где живёт $w$). Пусть $G$ класса $c=k+1$, $x_i^{E_i}=P_i\in\gamma_k$, $E_j\mid A_{ij}$, $g_1\in(\gamma_k)^{E_1}\gamma_c$, $g_2\in(\gamma_k)^{E_2}\gamma_c$ (спаривание с множителем 1). Тогда $$w=[x_2,x_1^{A_{12}}]=\prod_l[x_2,d_l]^{-a_lA_{12}/E_1}\qquad(P_1=\textstyle\prod_ld_l^{-a_l}).$$ <em>Доказательство.</em> Для $y,z\in\gamma_k$ $[x_i,yz]=[x_i,y][x_i,z]$ и $[x_i,y^{E_i}]=[x_i^{E_i},y]=[P_i,y]=1$ ($[x_i,y]$ централен, $\gamma_k$ абелева). Поэтому $u_{12}u_{13}=[x_1,g_1]=1$ и $u_{23}=[x_2,h_{23}]=[x_2,g_2][x_2,h_{21}]^{-1}=[x_2,x_1^{A_{12}}]$. $\square$</p>
+<p>Так как $[x_2,d_l]^{E_2}=1$, $d_l$-часть с $E_2\mid a_lA_{12}/E_1$ ничего не даёт. В c4a и <code>c5i5</code> спаривание выполнено с множителем 2 (§6.11(b)), поэтому $w=[x_2,d_2]^{-32}[x_2,d_3]^{-128}=[x_2,d_2]^{-32}$: <strong>$w$ — это ровно $d_2$-часть, перенесённая носителем.</strong> Это не совпадение (Предложение 16 ниже): часть, которую спаривание гарантирует само, имеет $E_2\mid a_lA_{12}/E_1$ и в $w$ исчезает; значит, для $w\ne1$ нужна часть, которую обязательно переносить.</p>
+<h4 id="b-почему-один-уровень">(b) Почему один уровень</h4>
+<p>Прогоним доказательство Теоремы 14 против $\Delta^7$ (c4a, $k=3$). Шаги (1) и (4) проходят на уровень дальше: $64X_1^2=8E_1X_1^2\in\Delta^5$ (Лемма 13 для $x_1$, $s=0$: $e_2=1$, $E_1\mid8$; $e_3=4$) кладёт биномы $x_1$ в $\Delta^7$, а $1024X_2^2X_5=(16E_2X_2^2)X_5$ при $1024X_2^2\in\Delta^6$ (Лемма 13, $s=1$) лежит в $\Delta^7$. Шаг (3) — нет: у $64X_2^2D_3=(E_2X_2)X_2D_3$ гарантированный уровень $2+1+3=6$ и не больше, а $64$ — это показатель, который даёт соотношение $x_1$ ($a_3N/E_1=4\cdot128/8$). Итак, носитель поднимает свою часть ($d_2$-часть) на два уровня над спариванием (с $1+1+k$ до $\ge2k+1$), а останавливает часть, которую он не переносит. [компьютер] (Modal A10G, ref <code>ae122f7</code>, приложение <code>math170-n7</code>, <code>gpu/modal_batch.py spawn --ref ae122f7 --gpu a10g --input results/c5/carrier/records/c4a_pieces.jsonl.gz -- --n 7 --h 1 0 0 0 --verbose</code>; 91 с, замыкание 6 раундов, пик GPU 5,5 ГиБ; локальная попытка на CPU <code>c4a_pieces_n7.log</code> была остановлена после раунда 2.) $M=19\,530$, 1 554 строки соотношений, ранг 19 524, свободных столбцов $6=r_7$, индекс $34\,830$ / $34\,818$ / $34\,758$ по модулю $2^{32}/2^{30}/2^{20}$ (разности $12=2r_7$, $72=12r_7$): <strong>сертификат выполнен</strong>; ранг, индекс и пять $w$-тестов совпадают с <code>c4a_lin2_n7.log</code>. Принадлежность $\Delta^7$ (c4a):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>кусок</th>
+<th>$\in\Delta^7$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$128X_2^2X_1$ ($T_{12}$)</td>
+<td>нет</td>
+</tr>
+<tr>
+<td>$X_2^2(x_5^{1024}-1)$ (перенесённая $d_2$-часть)</td>
+<td><strong>да</strong></td>
+</tr>
+<tr>
+<td>$64X_2^2D_3$ (непереносимая $d_3$-часть)</td>
+<td><strong>нет</strong></td>
+</tr>
+<tr>
+<td>$\sum_{m\ge2}\binom{128}mX_2^2X_1^m$ (биномы $x_1$) $=-(128X_2^2X_1-X_2^2(x_1^{128}-1))$</td>
+<td><strong>да</strong> (обе формы)</td>
+</tr>
+<tr>
+<td>$8128X_2^2X_1^2$ (её член $m=2$)</td>
+<td>да</td>
+</tr>
+<tr>
+<td>$1024X_2^2X_5$; биномы $x_5$</td>
+<td>да; да</td>
+</tr>
+<tr>
+<td>$128X_2^2X_1-\big(X_2^2(x_5^{1024}-1)-64X_2^2D_3-\sum_{m\ge2}\binom{128}mX_2^2X_1^m\big)$ (остаток тождества)</td>
+<td><strong>да</strong></td>
+</tr>
+<tr>
+<td>$x_1^{128}-x_5^{1024}+64D_3$ (без множителя $X_2^2$; входит только как $X_2^2\cdot(\ldots)\in\Delta^8$)</td>
+<td>нет</td>
+</tr>
+<tr>
+<td>$512X_2^2$, $1024X_2^2$, $2048X_2^2$</td>
+<td>нет, нет, нет</td>
+</tr>
+<tr>
+<td>$8D_1X_2$; $128D_3X_2$, $128D_5X_2$</td>
+<td>да; нет, нет</td>
+</tr>
+<tr>
+<td>$16X_2^2D_2$ ($d_2$-часть, прочитанная без носителя)</td>
+<td>да</td>
+</tr>
+</tbody>
+</table></div>
+<p>Итак, тождество Теоремы 14 верно по модулю $\Delta^7$, и все его члены, кроме $64X_2^2D_3$, лежат в $\Delta^7$: $128X_2^2X_1\equiv-64X_2^2D_3\pmod{\Delta^7}$, и <strong>непереносимая $d_3$-часть — единственное препятствие в $\Delta^7$ в c4a</strong>: предсказание этого пункта подтверждено [компьютер]. $1024X_2^2\in\Delta^6$ ($n=6$), но $2^sX_2^2\notin\Delta^7$ при $s\le11$: член носителя лежит в $\Delta^7$ через $(1024X_2^2)X_5\in\Delta^6\Delta$, как в доказательстве. Попутно: $16X_2^2D_2\in\Delta^7$ в c4a (в c4b и без соотношения $x_5$ было $\notin\Delta^6$), т.е. при соотношении $x_5$ $d_2$-часть гарантирована и при прямом чтении; доказательство через Лемму 13 не записано [гипотеза: это $(16X_2)X_2D_2$ при $d_2^{16}=x_5^{-1024}$ и Лемме 13 для $x_5$]. Строка и лог: <code>results/c5/carrier/c4a_pieces_n7_a10g.out.jsonl</code>, <code>.out.log</code>.</p>
+<h4 id="c-условия-и-второй-носитель">(c) Условия и второй носитель</h4>
+<p><strong>Предложение 16</strong> [на бумаге]. Пусть $k\in\{3,4\}$, $G$ класса $k+1$, $P_1=\prod_ld_l^{-a_l}$, $N=A_{12}/2=2^\nu$. Пусть (i) для $x_2$ выполнена Лемма 13 с $s=k-3$; (ii) $\frac N2X_1^2\in\Delta^{2k-2}$ (при $k=3$: $N\ge2E_1^2$; при $k=4$: Лемма 13 для $x_1$ с $s=0$ и $N\ge16E_1$); (iii) для каждого $l$ либо</p>
+<ul>
+<li>(спаривание) $v_2(a_lN/E_1)\ge e_2+k-3$, либо</li>
+<li>(носитель) $d_l^{-a_lN/E_1}=x_\kappa^{F}$ для образующей $x_\kappa$ и $2^kE_2\mid F$.</li>
+</ul>
+<p>Тогда $NX_2^2X_1\in\Delta^{2k}$. <em>Доказательство:</em> Теорема 14 с этими числами: непереносимая часть есть $(\frac{a_lN}{E_1}X_2)X_2D_l$ при $2^{e_2+k-3}X_2\in\Delta^{k-1}$; перенесённая — $X_2^2(x_\kappa^F-1)$, её первый член $(2^kE_2X_2^2)X_\kappa$ при $2^kE_2X_2^2\in\Delta^{2k-1}$ (Лемма 13 с $s=k-3$), а у второго $v_2\binom F2\ge e_2+k-1$. $\square$</p>
+<p>По Лемме 15 части типа «спаривание» в $w$ не видны (при $k\ge3$ $v_2(a_lA_{12}/E_1)\ge e_2+k-2\ge e_2$), так что несущая $w$ часть $P_1$ обязана удовлетворять условию носителя. <strong>Значит, Предложение 16 требует второго носителя, когда условие спаривания не выполняют две $d_l$-части.</strong> Данные:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$k$</th>
+<th>$d_2$-часть $x_1^{N}$</th>
+<th>$d_3$-часть</th>
+<th>$N X_2^2X_1$ (предсказание)</th>
+<th>измерено</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4b</td>
+<td>3</td>
+<td>$d_2^{-16}$, без носителя, $v_2=4&lt;6$</td>
+<td>$d_3^{-64}$, $6\ge6$</td>
+<td>не гарантировано в $\Delta^6$</td>
+<td>$\notin\Delta^6$</td>
+</tr>
+<tr>
+<td>c4a</td>
+<td>3</td>
+<td>носитель $x_5^{1024}$, $2^3E_2=512\mid1024$</td>
+<td>$6\ge6$</td>
+<td>$\in\Delta^6$</td>
+<td>$\in\Delta^6$</td>
+</tr>
+<tr>
+<td>c4a, цель $\Delta^7$</td>
+<td>3</td>
+<td>носитель (Лемма 13, $s=1$)</td>
+<td>$6&lt;7$</td>
+<td>не гарантировано в $\Delta^7$</td>
+<td>$\notin\Delta^7$ (§6.11); вне $\Delta^7$ только $64X_2^2D_3$ ((b))</td>
+</tr>
+<tr>
+<td><code>c5i5</code></td>
+<td>4</td>
+<td>носитель, $2^4E_2=1024\mid1024$</td>
+<td>$6&lt;7$</td>
+<td>не гарантировано в $\Delta^8$</td>
+<td>$\notin\Delta^8$ (§6.11(g))</td>
+</tr>
+<tr>
+<td><code>c5i6</code> (ниже)</td>
+<td>4</td>
+<td>носитель $x_5$</td>
+<td>носитель $x_6^{1024}$</td>
+<td>$\in\Delta^8$</td>
+<td>— ($d=6$, $n=8$ недоступно)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Так что гипотезу H из §6.11 следует читать так: носитель целиком чинит одну $d_l$-часть; сколько уровней это даёт для $w$, решает худшая <em>непереносимая</em> часть, а она стоит на $\Delta^{k+3}=\Delta^{c+2}$ в (3.12) и <code>c5i5</code>. Это и есть наблюдённое «один носитель — один уровень».</p>
+<h4 id="d-кандидаты-класса-5-построенные-в-gap">(d) Кандидаты класса 5, построенные в GAP</h4>
+<p>[компьютер, <code>scripts/c5_carrier_gap.sh</code> = <code>gap/c5_ep.g</code> на записях <code>I5cand</code>, Docker, локально; журналы <code>results/c5/carrier/ep_*.log</code>]</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>имя</th>
+<th>$d$</th>
+<th>изменение относительно <code>c5i5</code></th>
+<th>множитель (по построению)</th>
+<th>Предл. 16 для $128X_2^2X_1$ в $\Delta^8$</th>
+<th>$\lvert w\rvert$ в $M$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>c5i5</code> (§6.7)</td>
+<td>5</td>
+<td>—</td>
+<td>2</td>
+<td>$d_3$-часть не проходит</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>c5i6</code></td>
+<td>6</td>
+<td>$+x_6$, соотношение $x_6^{1024}d_3^{64}$ (второй носитель)</td>
+<td>2</td>
+<td>выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>c5m4</code></td>
+<td>5</td>
+<td>$P_1=d_2^{-4}d_3^{-8}$, $P_3=d_1^{-4}d_2^{-32}$, $x_5^{1024}=d_2^{-64}$, $A_{23}=4E_3$</td>
+<td>4</td>
+<td>выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>c5m4b</code></td>
+<td>5</td>
+<td>$P_1=d_2^{-1}d_3^{-8}$, $P_2=d_1^4d_3^{64}d_5^{-16}$, $P_3=d_1^8d_2^{-16}$, $A_{13}=A_{23}=2E_3$</td>
+<td>4</td>
+<td>выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>v1</code></td>
+<td>5</td>
+<td>только $A_{13}=2E_3$</td>
+<td>—</td>
+<td>не выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>v2</code></td>
+<td>5</td>
+<td>только $P_1=d_2^{-1}d_3^{-8}$</td>
+<td>—</td>
+<td>выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>v3</code></td>
+<td>5</td>
+<td>только $P_2=d_1^4d_3^{64}d_5^{-16}$</td>
+<td>—</td>
+<td>не выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>v4</code></td>
+<td>5</td>
+<td>только $P_3=d_1^8d_2^{-16}$</td>
+<td>—</td>
+<td>не выполнено</td>
+<td><strong>1</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>(Остальные соотношения как в <code>c5i5</code>: $d_1^{16}$, $d_2^{128}$, $d_5^{2048}$, два верхних. Множители — по построению, из точных $g_i$ в $\gamma_4$: для <code>c5m4b</code> $g_1=d_1^{32}d_2^{-32}d_3^{256}d_5^{-64}\in(\gamma_4)^{32}$, $g_2=d_1^{16}d_3^{256}\in(\gamma_4)^{256}$, $g_3=1$; <code>c5_ep.g</code> останавливается на «$w=1$ в $M$» раньше своего отчёта о множителях. Каждый прогон — 1–2 ч GAP/nq в Docker на нагруженной машине. <code>c5m4x6</code> = <code>c5m4</code> $+x_6^{1024}d_3^{128}$ и <code>c5m4b6</code> = <code>c5m4b</code> $+x_6^{1024}d_3^{128}$ остановлены вручную: копредставление, содержащее все соотношения другого на большем числе образующих, переводит $w\mapsto w$, так что и там $w=1$ [на бумаге].)</p>
+<p>Что говорит таблица:</p>
+<ul>
+<li><code>c5m4</code> [на бумаге, Лемма 15]: при множителе $\ge1$ $w=[x_2,P_1^{32}]=[x_2,d_2]^{-128}[x_2,d_3]^{-256}$ и $[x_2,d_l]^{64}=1$: $w=1$ вынуждено. Увеличение $a_2$ ради спаривания убивает несущую $w$ часть — Лемма 15 в действии.</li>
+<li><code>c5m4b</code> сохраняет $a_2=1$, и Лемма 15 даёт $w=[x_2,d_2]^{-32}$, как в <code>c5i5</code>; всё равно $w=1$: здесь падает порядок $[x_2,d_2]$. Варианты с одним изменением показывают, что <strong>каждое</strong> из четырёх изменений делает это само по себе; и так же второй носитель <code>c5i6</code>, не трогающий ни $P_1$, ни $P_2$, ни $P_3$, ни $A$. [гипотеза] Порядок $[x_2,d_2]$ в $\gamma_5$ связан с $d_3$-частью через соотношение $x_1$ (в кольце Ли $[x_1^8d_2d_3^{a_3},x_2]$ связывает $[d_2,x_2]$ с $a_3[d_3,x_2]$ и с $8[x_1,x_2]$), поэтому, делая $d_3$-часть безвредной для $T_{12}$ — носителем или $a_3=8$, — мы делаем тривиальным и $[x_2,d_2]^{32}$. Не доказано.</li>
+<li>Плотные проверки: кандидата с $w\ne1$ нет, поэтому не запускались ($\dim A_6=9\,330$ при $d=6$ был бы посилен CPU, $\dim A_7=55\,986$ и $\dim A_8=335\,923$ — нет).</li>
+</ul>
+<h4 id="e-статус">(e) Статус</h4>
+<ul>
+<li>Доказано [на бумаге]: Лемма 13, Теорема 14 (тождество для c4a), Лемма 15, Предложение 16; точный вид Леммы 13 при $n=5$ [компьютер, над $\mathbb Z$].</li>
+<li>Вычислено [компьютер, сертифицировано]: каждый кусок Теоремы 14 в $\Delta^6$ (c4a), $e_1\notin\Delta^6$ в c4b и без соотношения носителя, абляция, уровни $2^sX_2$ и $2^sX_2^2$; GAP: $w=1$ во всех семи новых копредставлениях. При $n=7$ (A10G): все куски, кроме $64X_2^2D_3$, в $\Delta^7$, т.е. $d_3$-часть — единственное препятствие в $\Delta^7$ в c4a ((b)).</li>
+<li>Гипотезы: что в семействе (3.12) с $t=[x_4,x_3,x_3]$ условие Предложения 16 для $T_{12}$ в классе 5 и $w\ne1$ исключают друг друга ((d)).</li>
+<li>Не сделано: копредставление класса 5 с множителем 4, обеими починенными частями $T_{12}$ и $w\ne1$. Следующие кандидаты должны сохранить $P_1=d_2^{-1}d_3^{-4}$ и $A$ из <code>c5i5</code> и чинить $d_3$-часть образующей, не входящей в лиево соотношение $x_1$ с $x_2$ (например, носитель для $d_3^{64}$ в соотношении $x_3$ вместо нового степенного соотношения) — не проверено.</li>
+</ul>
+<p><strong>Перезапуск.</strong> Проверки: <code>python3 scripts/c5_carrier_tests.py results/c5/presentation/records/c4a_lin2.jsonl.gz OUT.jsonl.gz --replace --file results/c5/carrier/t6.py</code>, затем <code>python3 gpu/howell_gpu.py --device numpy plateau --input OUT.jsonl.gz --n 6 --h 1 0 0 0 --steps host</code> (около 15 мин на нагруженной машине; <code>results/c5/carrier/summ.py LOG</code> печатает таблицу). Абляция: <code>scripts/c5_carrier_ablate.sh BASE TESTS.py 6 TAG "4-8" "54-303" "0" ...</code>. Минимальные строки и точное тождество: <code>python3 scripts/c5_carrier_rows.py results/c5/presentation/records/c4a_lin2.jsonl.gz --n 5 --target '512*X2*X2' --ddmin OUT.json --ddmin-rels</code>, <code>python3 scripts/c5_carrier_exact.py OUT.json EX.json</code>, <code>sage scripts/c5_carrier_solve.sage EX.json</code>. GAP: <code>scripts/c5_carrier_gap.sh c5i6 c5m4 c5m4b v1 v2 v3 v4</code>.</p>
+<p><strong>Расход Modal на §6.12:</strong> <span>$</span>0,05 (один вызов A10G, 91 с счёта, приложение <code>math170-n7</code>, остановлено; <code>modal billing report</code>: <span>$</span>0,054); всё остальное локально (замыкания на CPU, GAP в Docker, Sage).</p>
+<h3 id="613-math-171-j_n-без-плотной-формы--стандартные-мономы-уровень-за-уровнем">6.13. MATH-171: $J_n$ без плотной формы — стандартные мономы, уровень за уровнем</h3>
+<p>Вопрос: проверить $w-1\in J_n$ для $d=6$ образующих при $n=7,8$, где плотная форма §6.5 имеет $M=55\,986$ и $335\,922$ столбца ($\approx450$ ГБ в <code>uint32</code> при $n=8$). Здесь $J_n$ строится по степеням, в столбцах только <em>мономов-кандидатов</em>; на всех группах, что у нас есть, получаются те же индекс, образующие и принадлежности, что у плотного замыкания, а полная приведённая форма Хауэлла, восстановленная по ней, совпадает с плотной байт в байт. Код: <code>gpu/stdmono.py</code> (и <code>gpu/sparse_howell.c</code> для <code>--sparse</code>, <code>gpu/modal_stdmono.py</code> для Modal). Данные: <code>results/nondense/</code>.</p>
+<p><strong>Итог.</strong></p>
+<ul>
+<li>[на бумаге] $J_k=\mathrm{span}\{\mu(r)-1\}+J_{k-1}a+aJ_{k-1}$ (лемма N1): одна форма Хауэлла на уровень, без раундов замыкания. Слово, у которого префикс или суффикс не стандартный моном предыдущего уровня, переписывается фиксированным правилом в более поздние столбцы (проекция $\pi_k$ с ядром в $J_k$), так что столбцами остаются только кандидаты $C_k$; образующие $\pi_k(J_k)$ — соотношения, оба сдвига кручёных строк и немного «перекрытий» (лемма N2).</li>
+<li>[компьютер] Проверка: c4a $n=5,6,7$, <code>c5i5</code> $n=6,7,8$, $M$ из §6.10 (q5) $n=6,7,8$: индекс по модулю $2^{32}/2^{30}/2^{20}$, образующие, все tests и lintests — как в плотных прогонах; SHA-256 полной приведённой формы совпадает с плотной для c4a $n=5,6,7$ и <code>c5i5</code> $n=6,7$. <code>c5i5</code> при $n=8$ воспроизводит §6.11(g) на A10G за 5,4 мин (плотно: 26 мин на A100), с $45\,530$ столбцами вместо $97\,655$.</li>
+<li>[компьютер] Приведённая форма в этих столбцах очень разрежена: $0{,}57$ млн ненулей на $45\,530$ строк (<code>c5i5</code>, $n=8$), и строки-образующие тоже (14 ненулей на сдвиг кручёной строки). Это использует <code>--sparse</code> (по строке, на C).</li>
+<li>[компьютер] <code>--sparse</code> при $n=8$ (<code>c5i5</code>, A10G): снова ответы §6.11(g), за 126 с вычислений (155 с с контейнером), пик GPU 2,0 ГиБ, пик хоста 8,7 ГиБ; в форме $573\,467$ ненулей (у канонической $565\,950$) — заполнения нет.</li>
+<li>[оценка] $d=6$: $n=7$ — легко (около $34$–$41$ тыс. столбцов; минуты на одном GPU, плотно или разреженно). $n=8$: $154$–$203$ тыс. столбцов; плотная форма ($48$–$82$ ГБ) на один GPU 80 ГБ не помещается, а <code>--sparse</code> помещается: около 25–35 мин на одном A10G (15–20 мин на A100), память GPU $\approx8$–12 ГБ, хоста $\approx20$–25 ГБ. Подробности в (d).</li>
+</ul>
+<h4 id="a-структура-и-варианты-с-размерами">(a) Структура и варианты, с размерами</h4>
+<p>Столбцы по возрастанию степени, как везде в B. Используемые факты [на бумаге, §3.4]: форма Хауэлла $J_n$, обрезанная до степеней $&lt;k$, есть форма Хауэлла $J_k$; столбцы без единичного опорного (<em>стандартные мономы</em> $S_k$) замкнуты относительно префиксов и суффиксов (если у $u$ единичный опорный, то $u-\mathrm{NF}(u)\in J$ с $\mathrm{NF}(u)$ на более поздних столбцах, и умножение на $a_j$ с любой стороны сохраняет «позже»); $\mathrm{NF}_k(u)$ лежит в стандартных мономах степени $\ge\deg u$. Число стандартных мономов не меньше $\dim_{\mathbb F_2}\Delta_{\mathbb F_2}/\Delta^n_{\mathbb F_2}$ (<code>generators</code>, Дженнингс, §6.4) — нижняя граница для любого мономиального базиса.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>вариант</th>
+<th>столбцов, <code>c5i5</code> $n=8$ (измерено)</th>
+<th>$d=6$, $n=8$ (модель из (d))</th>
+<th>память формы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>плотно (§6.5)</td>
+<td>$97\,655$</td>
+<td>$335\,922$</td>
+<td>$M^2/2$ слов: 19 ГБ; 226 ГБ</td>
+</tr>
+<tr>
+<td>по уровням во всех столбцах (только лемма N1)</td>
+<td>$97\,655$</td>
+<td>$335\,922$</td>
+<td>то же; один вызов Хауэлла на уровень вместо 7 раундов</td>
+</tr>
+<tr>
+<td>сжата только старшая степень</td>
+<td>$19\,530+33\,709$</td>
+<td>$\approx56\,000+130\,000$</td>
+<td>5,7 ГБ; $\approx70$ ГБ</td>
+</tr>
+<tr>
+<td>кандидаты $C_n$ (выбрано)</td>
+<td>$45\,530$</td>
+<td>$154\,000$–$203\,000$</td>
+<td>4,1 ГБ; 48–82 ГБ</td>
+</tr>
+<tr>
+<td>нижняя граница: образующие</td>
+<td>$44\,370$</td>
+<td>$\ge$ около $150\,000$</td>
+<td>—</td>
+</tr>
+<tr>
+<td>кандидаты, разреженная форма</td>
+<td>$45\,530$</td>
+<td>то же</td>
+<td>$0{,}57$ млн ненулей; несколько млн</td>
+</tr>
+<tr>
+<td>подпространство, достижимое из $w-1$, или двойственное</td>
+<td>—</td>
+<td>выигрыша нет: для принадлежности нужна вся решётка ниже старшего члена $w-1$</td>
+<td>—</td>
+</tr>
+<tr>
+<td>метабелевы соотношения $\Gamma&#39;&#39;$</td>
+<td>—</td>
+<td>уже учтены: это соотношения; их эффект <em>и есть</em> малое $S_n$</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Порядок степеней «сверху вниз» тоже не помогает: число образующих — свойство фактора, а не порядка. Поэтому выбран метод столбцов-кандидатов по уровням, плотный или разреженный.</p>
+<h4 id="b-метод">(b) Метод</h4>
+<p>Обозначения: в $A_k$ степени $&lt;k$; $J_{k-1}\subseteq A_{k-1}$ — обрезка $J_k$ (§3.4); $S_k$, $\mathrm{NF}_k$ как выше.</p>
+<p><strong>Лемма N1</strong> [на бумаге]. $J_k=\mathrm{span}\{\mu(r)-1:r\in R_0\}+\sum_j\big(J_{k-1}a_j+a_jJ_{k-1}\big)$, произведения в $A_k$ (и по модулю $2^E$). <em>Доказательство.</em> Для $z\in J_{k-1}$ возьмём подъём $\tilde z\in J_k$; $\tilde za_j=za_j$ в $A_k$, так как часть $\tilde z$ степени $k-1$ в произведении умирает; отсюда «$\supseteq$». Обратно, $J_k$ натянуто на $u(\mu(r)-1)v$ с мономами $u,v$; если $v=v&#39;a_j$, то $u(\mu(r)-1)v=\big(u(\mu(r)-1)v&#39;\big)a_j$, скобка лежит в $J_k$, её обрезка — в $J_{k-1}$; слева так же. $\square$</p>
+<p><strong>Кандидаты и проекция.</strong> $C_k$: слова степени 1 и слова $v$ степени $p\ge2$ с $v[{:}{-1}],v[1{:}]\in S_{k-1}$. Так как $S_k\cap(\deg&lt;k-1)=S_{k-1}$ и $S_k$ замкнуто относительно префиксов и суффиксов, $S_k\subseteq C_k$. Для $v\notin C_k$: если $u=v[{:}{-1}]\notin S_{k-1}$, то $v\mapsto\mathrm{NF}_{k-1}(u)\,a_l$ (правило префикса); иначе $v=a_fu&#39;$ с $u&#39;\notin S_{k-1}$, $v\mapsto a_f\,\mathrm{NF}_{k-1}(u&#39;)$ (правило суффикса). Каждый шаг — сравнение по модулю $J_k$ ($u-\mathrm{NF}_{k-1}(u)$ — обрезка элемента $J_k$; разница в степени $k-1$ умирает после сдвига) и уводит в строго более поздние столбцы; $\pi_k$ — результат. Значит, $x-\pi_k(x)\in J_k$, $\pi_k$ тождественна на $C_k$, и $$x\in J_k\iff\pi_k(x)\in\pi_k(J_k),\qquad A_k^+/J_k\cong\mathbb Z^{C_k}/\pi_k(J_k)$$ — индекс, свободные столбцы и <code>generators</code> те же, что у плотной формы, и сертификат §6.4 применяется без изменений.</p>
+<p><strong>Лемма N2</strong> [на бумаге]. $\pi_k(J_k)$ порождено $\pi_k$ от: (i) $\mu(r)-1$; (ii) $ta_j$, $a_jt$ для строк $t$ формы Хауэлла $\pi_{k-1}(J_{k-1})$ с неединичным опорным; (iii) <em>перекрытий</em> $a_j\big(u-\mathrm{NF}_{k-1}(u)\big)$ для $u\notin S_{k-1}$ с $u[{:}{-1}]\in S_{k-1}$ и $a_j\,u[{:}{-1}]\notin S_{k-1}$. <em>Доказательство.</em> По N1, с порождающим множеством $\{g_u=u-\mathrm{NF}_{k-1}(u):u\notin S_{k-1}\}\cup\{\text{кручёные строки}\}$ для $J_{k-1}$ (приведённая форма Хауэлла во всех столбцах). $\pi_k(g_ua_j)=0$ по правилу префикса. $\pi_k(a_jg_u)=0$, если $a_ju[{:}{-1}]\in S_{k-1}$ (к $a_ju$ применяется правило суффикса). Если $u=u&#39;a_l$ с $u&#39;\notin S_{k-1}$: $z=g_u-g_{u&#39;}a_l\in J_{k-1}$ лежит на столбцах после $u$, и $a_jg_u=\big(a_jg_{u&#39;}\big)a_l+a_jz$ в $A_k$; первое слагаемое — правый сдвиг элемента $J_{k-1}$ (его $\pi_k$ в линейной оболочке (ii)), а $z$ — комбинация $g_x$, $x&gt;u$, и кручёных строк (свойство Хауэлла); индукция вниз по $u$. $\square$</p>
+<p>Дальше $H_k$ — форма Хауэлла этих строк в столбцах $C_k$, а $\mathrm{NF}_k(u)$ для $u\notin S_k$ — это $\pi_k(u)$, приведённое по $H_k$; оно хранится матрицами $T_k[p]$ (строки: нестандартные слова степени $p$, столбцы: кандидаты степени $\ge p$) для правил префикса и суффикса уровня $k+1$. Свойство обрезки проверяется на каждом уровне (опорные и их нормы ниже старшей степени совпадают с $H_{k-1}$).</p>
+<p><strong>Реализация</strong> [компьютер]. <code>gpu/stdmono.py run</code> (те же поля вывода, что у <code>howell_gpu.py batch</code>, плюс <code>columns</code> и статистика по уровням): соотношения и тесты строятся один раз в $A_n$ (для степеней длинных слов — биномиальное разложение: $n-2$ произведения вместо двоичного возведения) и обрезаются на каждом уровне; $\pi_k$ — две GEMM на букву с $T_{k-1}$, повторяемые, пока не останется столбцов вне кандидатов; форма Хауэлла и её образы по модулю $2^{30},2^{20},2$ — через <code>howell_gpu.py</code> (numpy или cupy), или с <code>--sparse</code> — через <code>gpu/sparse_howell.c</code>: строки вставляются по одной, сначала с самым поздним ведущим столбцом, каждая новая опорная строка приводится по уже имеющимся опорным (в порядке порождения и без приведения заполнение было в 12 раз больше: c4a $n=6$, $210\,497$ ненулей против $17\,162$; $n=7$ — $16{,}9$ млн и 23 мин во вставке на C, остановлено). <code>--digest</code> восстанавливает приведённую форму во всех $M$ столбцах (строки $H_n$ и $u+\mathrm{reduce}(-\pi_n(u))$ для остальных слов) и печатает <code>howell_gpu.digest</code>. 400 случайных матриц: форма на C и <code>howell_gpu.howell</code> совпадают по опорным, индексу, образам и принадлежности.</p>
+<h4 id="c-проверка-против-плотного-замыкания">(c) Проверка против плотного замыкания</h4>
+<p>[компьютер] Во всех прогонах сертификат выполнен (свободных столбцов $=r_n$, разности индексов $2r_n$, $12r_n$). «Плотно» — прежние прогоны §6.10, §6.11 или сделанные здесь (<code>c5i5</code> $n=6$ на локальном CPU, $n=7$ на A10G, <code>results/nondense/a10g_n7/c5i5_dense_n7.*</code>).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>группа</th>
+<th>$n$</th>
+<th>$M$</th>
+<th>столбцов</th>
+<th>индекс $2^{32}/2^{30}/2^{20}$</th>
+<th>образующих</th>
+<th>tests, lintests</th>
+<th>SHA-256 полной формы</th>
+<th>время: плотно → новое</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c4a</td>
+<td>5</td>
+<td>780</td>
+<td>780</td>
+<td>3 311 / 3 303 / 3 263</td>
+<td>619</td>
+<td>=</td>
+<td><code>f1a38141…</code> =</td>
+<td></td>
+</tr>
+<tr>
+<td>c4a</td>
+<td>6</td>
+<td>3 905</td>
+<td>2 626</td>
+<td>10 834 / 10 824 / 10 774</td>
+<td>2 325</td>
+<td>=</td>
+<td><code>56f3da59…</code> =</td>
+<td>54 с CPU → 17 с A10G</td>
+</tr>
+<tr>
+<td>c4a</td>
+<td>7</td>
+<td>19 530</td>
+<td>8 851</td>
+<td>34 830 / 34 818 / 34 758</td>
+<td>8 276</td>
+<td>=</td>
+<td><code>0d3edcc6…</code> =</td>
+<td>3,8 ч CPU → 19 с A10G</td>
+</tr>
+<tr>
+<td><code>c5i5</code></td>
+<td>6</td>
+<td>3 905</td>
+<td>3 456</td>
+<td>13 717 / 13 707 / 13 657</td>
+<td>3 000</td>
+<td>=</td>
+<td><code>8b903aac…</code> =</td>
+<td></td>
+</tr>
+<tr>
+<td><code>c5i5</code></td>
+<td>7</td>
+<td>19 530</td>
+<td>12 464</td>
+<td>48 533 / 48 521 / 48 461</td>
+<td>11 755</td>
+<td>=</td>
+<td><code>dca6a0dd…</code> =</td>
+<td>95 с → 11 с (A10G)</td>
+</tr>
+<tr>
+<td><code>c5i5</code></td>
+<td>8</td>
+<td>97 655</td>
+<td>45 530</td>
+<td>169 278 / 169 264 / 169 194</td>
+<td>44 370</td>
+<td>= (§6.11(g))</td>
+<td>—</td>
+<td>1 567 с, 54,8 ГиБ (A100) → 321 с, 21,6 ГиБ (A10G); 220 с, 30,6 ГиБ (A100)</td>
+</tr>
+<tr>
+<td>q5 ($M$ из §6.10)</td>
+<td>6, 7</td>
+<td>3 905; 19 530</td>
+<td>3 456; 14 165</td>
+<td>14 722 / …; 54 097 / 54 085 / 54 025</td>
+<td>3 214; 13 039</td>
+<td>=</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>q5</td>
+<td>8</td>
+<td>97 655</td>
+<td>52 973</td>
+<td>195 779 / 195 765 / 195 695</td>
+<td>51 004</td>
+<td>=</td>
+<td>—</td>
+<td>1 881 с, 61 ГиБ → 163 с, 34,7 ГиБ (A100)</td>
+</tr>
+</tbody>
+</table></div>
+<p>(«=»: так же, как в плотном прогоне; время — замыкание, соответственно весь прогон <code>stdmono.py</code> со всеми уровнями и сводкой.) <code>--sparse</code> даёт те же индекс, образующие и принадлежности для c4a $n=5,6,7$ и <code>c5i5</code> $n=7$ (локальный CPU, <code>results/nondense/cpu_sparse/</code>). Его форма: c4a — $17\,162$ ненулей при $n=6$, $101\,033$ при $n=7$ (11 на строку); <code>c5i5</code> $n=7$ — $96\,823$ (8 на строку; у канонической формы $95\,107$). Вставка на C заняла 1,2 с, 17 с и 7,8 с на сильно загруженной машине (проекция numpy-GEMM там — 65–76 мин; на A10G это секунды).</p>
+<p><code>--sparse</code> при $n=8$ [компьютер] (<code>c5i5</code>, Modal A10G, 4 CPU и 16 ГиБ хоста; <code>results/nondense/a10g_sparse_n8/</code>): индекс $169\,278$ / $169\,264$ / $169\,194$, образующих $44\,370$, свободных столбцов $7=r_8$, список in_D из §6.11(g) поэлементно; сертификат выполнен. Всего 126 с (соотношения и тесты в $A_8$ — 22 с; уровень 8: проекция 44,5 с, вставка на C 23,8 с; сводка с образами по модулю $2^{30},2^{20},2$ — 14 с), пик GPU 2,0 ГиБ, пик хоста 8,7 ГиБ (из них 3,1 ГБ — соотношения в $A_8$). В $129\,000$ строках-образующих уровня 8 — $17{,}0$ млн ненулей (соотношения $9{,}5$ млн, сдвиги кручёных строк $5{,}9$ млн, перекрытия $1{,}6$ млн); в итоговой форме $573\,467$ ненулей, на 1,3 % больше канонических $565\,950$. Значит, при $n=8$ вставка снизу вверх с приведением хвоста практически не даёт заполнения, как и при $n\le7$.</p>
+<p>Побочный результат [компьютер]: <code>c5i5</code> при $n=7$ (в §6.11(g) не измерялось): $w,S,X\!V,B_{12},\sum B$, chk $\in\Delta^7$, $B_{13},B_{23}\notin\Delta^7$, $128X_2X_1^2,128X_2^2X_1\in\Delta^7$. Вместе с (g): $128X_2^2X_1\in\Delta^7\setminus\Delta^8$ — на один уровень выше гарантированного $\Delta^{c+1}=\Delta^6$ (лемма 10), как и говорит гипотеза H (как $x_5$ в классе 4).</p>
+<h4 id="d-ресурсы-для-d6">(d) Ресурсы для $d=6$</h4>
+<p><em>Модель размеров.</em> Стандартные мономы по степеням, измерено: <code>c5i5</code> $5,25,125,580,2279,8807,32842$; q5 $5,25,125,580,2497,9898,38302$ (степени $1..7$), коэффициенты роста $4{,}6\to3{,}7$. Для группы того же вида на шести образующих (§6.11(e)3: ещё один носитель) коэффициенты взяты $\times6/5$ или $+1$ (степени $\le3$ свободны), а старшие кандидаты — $1{,}03\times$ старших стандартных мономов, как измерено. Тогда $C_7\approx34\,000$–$41\,000$ ($0{,}61$–$0{,}74\,M$), $C_8\approx154\,000$–$203\,000$ ($0{,}46$–$0{,}60\,M$). Это модель, а не измерение: у настоящей группы кручения может быть больше или меньше.</p>
+<p><em>Стоимость, пересчитанная с измеренных прогонов</em> (<code>c5i5</code>/q5 при $n=8$: проекция 26,5 с на A100 и 44,5 с на A10G, плотный Хауэлл 50 с на A100, разреженная вставка 23,8 с, для $45\,530$ столбцов и $129\,000$ строк-образующих; проекция — $\approx7\cdot10^{12}$ точных умножений-сложений в секунду на A100; для $d=6$ она растёт в $\approx31$ раз: строк в $3{,}5$ раза больше, работы на строку в 9 раз):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>$d=6$, $n=7$</th>
+<th>$d=6$, $n=8$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>столбцов (плотное $M$)</td>
+<td>$34$–$41$ тыс. ($55\,986$)</td>
+<td>$154$–$203$ тыс. ($335\,922$)</td>
+</tr>
+<tr>
+<td>строк-образующих старшего уровня</td>
+<td>$\approx 90\,000$</td>
+<td>$\approx 420\,000$–$500\,000$</td>
+</tr>
+<tr>
+<td>плотная форма этого метода</td>
+<td>2,3–3,4 ГБ; пик $\lesssim25$ ГБ</td>
+<td>48–82 ГБ; пик в разы больше: <strong>на один GPU 80 ГБ не помещается</strong></td>
+</tr>
+<tr>
+<td>плотный метод §6.5</td>
+<td>6,3 ГБ; помещается на A100</td>
+<td>226 ГБ: нет</td>
+</tr>
+<tr>
+<td>проекция $\pi_n$ (плотная GEMM с $T_{n-1}$)</td>
+<td>$\approx3\cdot10^{13}$: секунды</td>
+<td>$(5$–$8)\cdot10^{15}$: 12–19 мин A100, $\approx23$ мин A10G (таблицы $T_7$ $\le4$ ГБ, куски по $1{,}4$ ГБ)</td>
+</tr>
+<tr>
+<td>Хауэлл, плотно</td>
+<td>$\approx3\cdot10^{13}$: 0,5 мин A100, 1–2 мин A10G; CPU $\approx7$ ч</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Хауэлл, <code>--sparse</code></td>
+<td>секунды (C, одно ядро)</td>
+<td>форма $2$–$4$ млн ненулей (13–20 на строку; измерено 12,6 при $d=5$, без заполнения); вставка — несколько минут (одно ядро; 23,8 с при $d=5$ на 17 млн ненулей на входе, здесь $\approx60$–70 млн)</td>
+</tr>
+<tr>
+<td>память GPU, <code>--sparse</code></td>
+<td>$\lesssim3$ ГБ</td>
+<td>$\approx8$–12 ГБ (2,0 ГиБ измерено при $d=5$): помещается на A10G</td>
+</tr>
+<tr>
+<td>память хоста</td>
+<td>соотношения в $A_7$: 2 ГБ</td>
+<td>$\approx20$–25 ГБ (8,7 ГиБ измерено при $d=5$; одни соотношения в $A_8$ — 11–13 ГБ, или потоком по кускам): контейнер с $\ge32$ ГБ</td>
+</tr>
+<tr>
+<td>итого</td>
+<td><strong>минуты на A10G</strong> (и CPU, часы)</td>
+<td><strong><code>--sparse</code>: около 25–35 мин на одном A10G, 15–20 мин на A100</strong> (около <span>$</span>1 на Modal); плотная форма этого метода — не на одном GPU</td>
+</tr>
+</tbody>
+</table></div>
+<p>H100: та же память (80 ГБ), в $\approx1{,}5$–2 раза быстрее. CPU для $n=8$: проекция плотной GEMM — $\sim10^{16}$ точных операций (недели); с разреженными таблицами $T$ ($0{,}6\,\%$ ненулей при $n=6$) это были бы часы — не реализовано.</p>
+<h4 id="e-что-осталось">(e) Что осталось</h4>
+<ol type="1">
+<li>Сделано: у <code>--sparse</code> при $n=8$ заполнения нет (см. выше). Для $d=6$, $n=8$ теперь не хватает группы, а не метода.</li>
+<li>Проекция с разреженными $T_{n-1}$ (CSR в cupyx/scipy): основная стоимость при $d=6$, $n=8$, и она открыла бы путь через CPU.</li>
+<li>Группа на шести образующих для проверки (§6.11(e)3): не построена; модель из (d) хороша ровно настолько, насколько аналогия.</li>
+<li>Хранение по модулю $2^{16}$ (<code>uint16</code>): вдвое меньше плотная форма; сертификат тогда берётся при $E=16$ с $E_2=15,14$ и выполняется только при показателе кручения $\le2^{14}$ (наибольший порядок в $\Delta/\Delta^2$ у групп вида (3.12) — $2^{14}$; выше не проверялось).</li>
+</ol>
+<p><strong>Перезапуск.</strong> <code>python3 gpu/stdmono.py run --input results/c5/presentation/records/c5i5_lin.jsonl.gz --n 6 7 8 --h 1 0 0 0 0 --budget 60000 [--digest] [--sparse] --out OUT.jsonl</code> (<code>--device numpy</code> на CPU); на Modal: <code>modal deploy gpu/modal_stdmono.py</code>, <code>python gpu/modal_stdmono.py a10g|a100 '&lt;команда с $OUT&gt;'</code>, затем <code>modal volume get math171-nondense &lt;dir&gt; .</code>.</p>
+<p><strong>Расход Modal на §6.13:</strong> <span>$</span>1,69 по <code>modal billing report</code> (приложение <code>math171-nondense</code>: проверка на A10G при $n\le7$ вместе с плотным <code>c5i5</code> $n=7$; <code>c5i5</code> и q5 при $n=8$ на A10G (q5 там не хватило памяти) и на A100; прогон статистики; первая попытка <code>--sparse</code> без приведения хвоста, остановлена примерно через 25 мин); затем <span>$</span>0,09 на <code>--sparse</code> при $n=8$ (один прогон A10G, 155 с; то же приложение, заново развёрнутое). Всего <span>$</span>1,78. Всё остановлено.</p>
+<h2 id="7-литература-и-известен-ли-метод">7. Литература и известен ли метод</h2>
+<p>Знак † — ссылка не сверена с источником.</p>
+<ul>
+<li>Формула $D_n(F/R)=F\cap(1+\mathfrak r+\mathfrak f^n)$ и вложение Магнуса — классика теории размерных подгрупп: R. Mikhailov, I. B. S. Passi, <em>Lower Central and Dimension Series of Groups</em>, Lecture Notes in Math. 1952 (2009), гл. 1 (точный параграф не сверен) †; N. Gupta, <em>Free group rings</em>, Contemp. Math. 66 (1987) †. Усечённый изоморфизм (a) — частный случай теоремы Магнуса (W. Magnus, 1937 †).</li>
+<li>[BM23] L. Bartholdi, R. Mikhailov, <em>Group and Lie algebra filtrations and homotopy groups of spheres</em>, arXiv:1805.10894 (проверено через API arXiv); журнальная версия J. Topology 16 (2023) 822–853 †. Приложение <code>3group.gap</code> — pc-копредставление 3-группы порядка $3^{494}$ на 7 порождающих с проверкой соотношений и класса в GAP. Вычислений в групповом кольце там нет: доказательство теоретическое.</li>
+<li>[IMP26] V. Ionin, R. Mikhailov, T. Petrov, <em>Dimension subrings of Lie rings</em>, arXiv:2610.02042 (проверено через API arXiv).</li>
+<li>[HMP07] M. Hartl, R. Mikhailov, I. B. S. Passi, <em>Dimension quotients</em>, arXiv:0803.3290 (проверено через API arXiv, он даёт J. Indian Math. Soc. (N.S.), специальный том к столетию IMS (1907–2007), 63–107). Явного копредставления группы Рипса там нет.</li>
+<li>ModIsom (B. Eick, пакет GAP): <code>NilpotentQuotientOfFpAlgebra</code> — нильпотентный фактор конечно представленной ассоциативной алгебры. В документации он работает над конечным полем (пример и поле <code>fld</code> в ответе), то есть даёт $\mathbb F_p[G]/\Delta^n_{\mathbb F_p}$ — ряд Дженнингса $M_n$, а не целочисленные $D_n$. Поддержка $\mathbb Z$ по исходникам не проверена †. Алгоритм: B. Eick, <em>Computing nilpotent quotients of associative algebras and algebras satisfying a polynomial identity</em>, IJAC 21 (2011) †.</li>
+<li>LAGUNA — модулярные групповые алгебры $\mathbb F_p[G]$, тоже Дженнингс, не $\mathbb Z$.</li>
+<li>Тот же метод реализован независимо (не опубликовано); сверка — §5.</li>
+</ul>
+<p><strong>Вывод.</strong> Тождество $\mathbb Z[G]/\Delta^n\cong A_n/J_n$ классическое. Его вычислительного применения к целочисленным $D_n$ — линейной алгебры над $\mathbb Z/p^E$ или $\mathbb Z$ в $A_n$ размера, не зависящего от $|G|$, — мы в найденной литературе не встретили. Поиск не был исчерпывающим.</p>
+</div>
+</main><footer><div class="wrap"><small>Ход работы над задачей 20.84 Коуровской тетради: верно ли $D_5(G)\subseteq\gamma_4(G)$ для всякой группы.
+Состояние на 21 октября 2026. Код и данные — <a href="https://github.com/ispacex/dimension-subrings">ispacex/dimension-subrings</a>.
+Распределённые вычислительные мощности щедро предоставлены <a href="https://boinc.berkeley.edu/">BOINC</a>.<br>
+Раздел <a href="https://ispacex.github.io/ru/math/">«Математика»</a> на ispacex.github.io.</small></div></footer>
+<script>(function(){var d=document.documentElement,K='d5-theme',
+b=document.querySelectorAll('.theme button');
+function show(){var t=d.getAttribute('data-theme')||'system';
+for(var i=0;i<b.length;i++)b[i].setAttribute('aria-pressed',b[i].getAttribute('data-t')===t?'true':'false')}
+function set(t){if(t==='light'||t==='dark')d.setAttribute('data-theme',t);else{t='system';d.removeAttribute('data-theme')}show();return t}
+for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(){var t=set(this.getAttribute('data-t'));
+try{if(t==='system')localStorage.removeItem(K);else localStorage.setItem(K,t)}catch(e){}});
+addEventListener('storage',function(e){if(e.key===K)set(e.newValue)});show()})()</script>
+<script src="/sitesearch/palette.js" data-index="/d5/nav-index.json" data-mount="header .pal" data-search="/d5/ru/search.html" data-search-index="/d5/search-index.json" data-placeholder="Куда идём? например: 3^9, Тахара, ранг 5" defer></script>
+</body></html>
