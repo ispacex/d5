@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The \(D_5\) paper: blueprint: Results of the literature proved in the formalization</title>
+<link rel="prev" href="app-nonterm.html" title="Proof of Theorem" />
+<link rel="up" href="index.html" title="The D5 paper: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">The \(D_5\) paper: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-question.html"><span class="toc_ref">1</span> <span class="toc_entry">The question</span></a>
+ </li>
+<li class="">
+  <a href="sec-reduction.html"><span class="toc_ref">2</span> <span class="toc_entry">An elementary reduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-lie.html"><span class="toc_ref">3</span> <span class="toc_entry">The Lie-ring proof and where it does not transfer</span></a>
+ </li>
+<li class="">
+  <a href="sec-lean.html"><span class="toc_ref">4</span> <span class="toc_entry">Formalization</span></a>
+ </li>
+<li class="">
+  <a href="sec-computations.html"><span class="toc_ref">5</span> <span class="toc_entry">Computations</span></a>
+ </li>
+<li class="">
+  <a href="sec-three.html"><span class="toc_ref">6</span> <span class="toc_entry">\(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-open.html"><span class="toc_ref">7</span> <span class="toc_entry">Open questions</span></a>
+ </li>
+<li class="">
+  <a href="app-lie.html"><span class="toc_ref">A</span> <span class="toc_entry">A Lie algebra of type \((3,3,1,1)\)</span></a>
+ </li>
+<li class="">
+  <a href="app-a2.html"><span class="toc_ref">B</span> <span class="toc_entry">The case \(a=2\) of Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a></span></a>
+ </li>
+<li class="">
+  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a></span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Results of the literature proved in the formalization</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000002">Results of the literature proved in the formalization</h1>
+<div class="known_thmwrapper theorem-style-plain" id="ext:dthree">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">1</span>
+    <span class="known_thmtitle">Higman, Rees, Passi</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:dthree">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000035"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.DThreeEqGammaThree" class="lean_decl">GroupDimension.DThreeEqGammaThree</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.dThreeEqGammaThree" class="lean_decl">GroupDimension.dThreeEqGammaThree</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> \(D_3(G)=\gamma _3(G)\) for every group \(G\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Statements.lean#L70"><span class="ttfamily">GroupDimension.DThreeEqGammaThree</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/DThree.lean#L491"><span class="ttfamily">GroupDimension.dThreeEqGammaThree</span></a>. </p>
+<p><i class="itshape">For finite groups through Tahara’s Theorem 4.1 (his §§2–4, formalized with Theorem 6.1), then by reduction.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000035">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See the paper’s section on the formalization. In Lean. </p>
+
+  </div>
+</div>
+<div class="known_thmwrapper theorem-style-plain" id="ext:passi">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">2</span>
+    <span class="known_thmtitle">Passi</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:passi">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000036"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.PassiDFourSquare" class="lean_decl">GroupDimension.PassiDFourSquare</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.passiDFourSquare" class="lean_decl">GroupDimension.passiDFourSquare</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> \(D_4(G)^2\subseteq \gamma _4(G)\) for every group \(G\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Statements.lean#L78"><span class="ttfamily">GroupDimension.PassiDFourSquare</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Passi.lean#L577"><span class="ttfamily">GroupDimension.passiDFourSquare</span></a>. </p>
+<p><i class="itshape">Not Passi’s argument: through Tahara’s map ψ_3 (his §5, formalized with Theorem 6.1), for finite p-groups of class ≤ 3, then by reduction.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000036">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See the paper’s section on the formalization. In Lean. </p>
+
+  </div>
+</div>
+<div class="known_thmwrapper theorem-style-plain" id="ext:gruenberg">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">3</span>
+    <span class="known_thmtitle">Gruenberg</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:gruenberg">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000037"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.GruenbergResidualTwo" class="lean_decl">GroupDimension.GruenbergResidualTwo</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.gruenbergResidualTwo" class="lean_decl">GroupDimension.gruenbergResidualTwo</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Gruenberg.residuallyFinite" class="lean_decl">GroupDimension.Gruenberg.residuallyFinite</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> In a finitely generated nilpotent group an element none of whose odd powers is trivial survives in some finite \(2\)-group quotient. </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Statements.lean#L110"><span class="ttfamily">GroupDimension.GruenbergResidualTwo</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Gruenberg.lean#L373"><span class="ttfamily">GroupDimension.gruenbergResidualTwo</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Gruenberg.lean#L293"><span class="ttfamily">GroupDimension.Gruenberg.residuallyFinite</span></a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000037">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See the paper’s section on the formalization. In Lean. </p>
+
+  </div>
+</div>
+<div class="known_thmwrapper theorem-style-plain" id="ext:tahara61">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">4</span>
+    <span class="known_thmtitle">Tahara, Theorem 6.1, the inclusion</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:tahara61">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000038"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.TaharaFiveOne" class="lean_decl">GroupDimension.TaharaFiveOne</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.taharaFiveOne" class="lean_decl">GroupDimension.taharaFiveOne</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> For a finite group of class \(\le 4\) and any uniqueness bases with their structure constants, \(D_5\) lies in the subgroup generated by the elements \(g\) over the integer families satisfying Tahara’s conditions (A)–(F). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Tahara.lean#L194"><span class="ttfamily">GroupDimension.TaharaFiveOne</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/TaharaTheorem.lean#L33"><span class="ttfamily">GroupDimension.taharaFiveOne</span></a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000038">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See the paper’s section on the formalization. In Lean. </p>
+
+  </div>
+</div>
+<div class="known_thmwrapper theorem-style-plain" id="ext:jennings">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">5</span>
+    <span class="known_thmtitle">Jennings, the inclusion for \(p=2\), \(n=5\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:jennings">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000039"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_le_jennings" class="lean_decl">GroupDimension.D_five_le_jennings</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> For a finite \(2\)-group \(Q\) of class \(\le 3\), \(D_5(Q)\subseteq Q\cap (1+\Delta _{\mathbb F_2}(Q)^5)\subseteq Q^8\gamma _2(Q)^4\gamma _3(Q)^2\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Jennings/Theorem.lean#L130"><span class="ttfamily">GroupDimension.D_five_le_jennings</span></a>. </p>
+<p><i class="itshape">The general theorem of Jennings and Lazard’s description of the series are not formalized.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000039">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See the paper’s section on the formalization. In Lean. </p>
+
+  </div>
+</div>
+<div class="known_thmwrapper theorem-style-plain" id="ext:guptatahara">
+  <div class="known_thmheading">
+    <span class="known_thmcaption">
+    Known result
+    </span>
+    <span class="known_thmlabel">6</span>
+    <span class="known_thmtitle">Gupta–Tahara</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0001.html#ext:guptatahara">#</a>
+    
+    <a class="icon proof" href="sect0001.html#a0000000040"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.GuptaTaharaMetabelian" class="lean_decl">GroupDimension.GuptaTaharaMetabelian</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="known_thmcontent">
+  <p> \(D_{p+2}(G)=\gamma _{p+2}(G)\) for every finite metabelian \(p\)-group \(G\), \(p\) odd. </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Statements.lean#L121"><span class="ttfamily">GroupDimension.GuptaTaharaMetabelian</span></a>. </p>
+<p><i class="itshape">Stated in Lean, not proved; an explicit hypothesis where it is used.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000040">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See the paper’s section on the formalization. Only the statement is in Lean. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="app-nonterm.html" title="Proof of Theorem 6.12"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="The \(D_5\) paper: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

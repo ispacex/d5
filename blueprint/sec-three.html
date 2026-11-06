@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The \(D_5\) paper: blueprint: \(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</title>
+<link rel="next" href="sec-open.html" title="Open questions" />
+<link rel="prev" href="sec-computations.html" title="Computations" />
+<link rel="up" href="index.html" title="The D5 paper: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">The \(D_5\) paper: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-question.html"><span class="toc_ref">1</span> <span class="toc_entry">The question</span></a>
+ </li>
+<li class="">
+  <a href="sec-reduction.html"><span class="toc_ref">2</span> <span class="toc_entry">An elementary reduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-lie.html"><span class="toc_ref">3</span> <span class="toc_entry">The Lie-ring proof and where it does not transfer</span></a>
+ </li>
+<li class="">
+  <a href="sec-lean.html"><span class="toc_ref">4</span> <span class="toc_entry">Formalization</span></a>
+ </li>
+<li class="">
+  <a href="sec-computations.html"><span class="toc_ref">5</span> <span class="toc_entry">Computations</span></a>
+ </li>
+<li class=" active current">
+  <a href="sec-three.html"><span class="toc_ref">6</span> <span class="toc_entry">\(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-open.html"><span class="toc_ref">7</span> <span class="toc_entry">Open questions</span></a>
+ </li>
+<li class="">
+  <a href="app-lie.html"><span class="toc_ref">A</span> <span class="toc_entry">A Lie algebra of type \((3,3,1,1)\)</span></a>
+ </li>
+<li class="">
+  <a href="app-a2.html"><span class="toc_ref">B</span> <span class="toc_entry">The case \(a=2\) of Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a></span></a>
+ </li>
+<li class="">
+  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a></span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Results of the literature proved in the formalization</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="sec:three">6 \(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</h1>
+
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:qpp">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">6.1</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#lem:qpp">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000017"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_le_derivedSeries_two" class="lean_decl">GroupDimension.D_le_derivedSeries_two</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.mem_of_mem_D_add_two" class="lean_decl">GroupDimension.mem_of_mem_D_add_two</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.rank_ge_three_of_D_five_ne_bot" class="lean_decl">GroupDimension.rank_ge_three_of_D_five_ne_bot</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(p\) be odd and \(Q\) a finite \(p\)-group of class \(\le p+1\). Then \(D_{p+2}(Q)\subseteq Q''\cap M_{p+2}(Q)\). In particular, for \(p=3\) and class \(\le 4\), \(D_5(Q)\subseteq Q''\cap M_5(Q)\), and \(D_5(Q)\ne 1\) needs \(Q''\ne 1\), hence \(d(Q)\ge 3\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MetabelianOdd.lean#L35"><span class="ttfamily">GroupDimension.D_le_derivedSeries_two</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MetabelianOdd.lean#L54"><span class="ttfamily">GroupDimension.mem_of_mem_D_add_two</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MetabelianOdd.lean#L61"><span class="ttfamily">GroupDimension.rank_ge_three_of_D_five_ne_bot</span></a>. </p>
+<p><i class="itshape">Gupta–Tahara’s D_{p+2} = γ_{p+2} for metabelian p-groups is an explicit hypothesis.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000017">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:qpp">the paper</a>. In Lean, from statements that are not all in Lean. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mincex3">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">6.2</span>
+    <span class="lemma_thmtitle">minimal counterexample, \(p=3\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#lem:mincex3">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.minimal_three'" class="lean_decl">GroupDimension.minimal_three'</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.minimal_three" class="lean_decl">GroupDimension.minimal_three</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.minimal_three_of_quotients" class="lean_decl">GroupDimension.minimal_three_of_quotients</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(Q\) be a \(3\)-group of least order with \(D_5(Q)\ne \gamma _5(Q)\). Then \(Q\) has class \(4\), \(Q''\ne 1\) and \(d(Q)\ge 3\); \(Z(Q)\) is cyclic and \(D_5(Q)=\Omega _1(Z(Q))=\langle z\rangle \) has order \(3\), with \(z\in Q''\cap M_5(Q)\); the last nontrivial term \(P_c(Q)\) of the lower exponent-\(3\) central series equals \(\langle z\rangle \), so \(Q\) is an immediate descendant of step size \(1\) of \(Q/\langle z\rangle \). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/DThreeCorollaries.lean#L95"><span class="ttfamily">GroupDimension.minimal_three’</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MinimalThree.lean#L283"><span class="ttfamily">GroupDimension.minimal_three</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MinimalThree.lean#L191"><span class="ttfamily">GroupDimension.minimal_three_of_quotients</span></a>. </p>
+<p><i class="itshape">“Least order” as: D_5(R) = γ_5(R) for every 3-group R with |R| &lt; |Q|; Gupta–Tahara’s theorem is an explicit hypothesis.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000018">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:mincex3">the paper</a>. In Lean, from statements that are not all in Lean. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:lie">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">6.3</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#lem:lie">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.commutator_gamma_two_le_gamma_five" class="lean_decl">GroupDimension.commutator_gamma_two_le_gamma_five</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.metabelian_of_class_four" class="lean_decl">GroupDimension.metabelian_of_class_four</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(p\) be odd and \(G\) a group with \(|\gamma _3(G)/\gamma _4(G)|=p\) and \(\gamma _2(G)/\gamma _3(G)\) generated by at most two elements. Then \([\gamma _2(G),\gamma _2(G)]\subseteq \gamma _5(G)\). In particular, \(G\) is metabelian if it has class \(\le 4\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFour.lean#L724"><span class="ttfamily">GroupDimension.commutator_gamma_two_le_gamma_five</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFour.lean#L776"><span class="ttfamily">GroupDimension.metabelian_of_class_four</span></a>. </p>
+<p><i class="itshape">Works in G/γ_5(G) instead of the Lie ring L(G).</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000019">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:lie">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:lie">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">6.4</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#rem:lie">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000020"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.LieThreeThree.exists_lie_three_three" class="lean_decl">GroupDimension.LieThreeThree.exists_lie_three_three</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.LieThreeThree.lieSpan_eq_top" class="lean_decl">GroupDimension.LieThreeThree.lieSpan_eq_top</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.LieThreeThree.lcs_eq" class="lean_decl">GroupDimension.LieThreeThree.lcs_eq</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.LieThreeThree.finrank_lcs" class="lean_decl">GroupDimension.LieThreeThree.finrank_lcs</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.LieThreeThree.lie_lcs_one_ne_bot" class="lean_decl">GroupDimension.LieThreeThree.lie_lcs_one_ne_bot</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  
+<ol class="enumerate">
+  <li><p>The hypothesis \(p\ne 2\) is needed: by computation, SmallGroup\((128,i)\), \(i=928,\dots ,937\), have type \((3,2,1,1)\) and \(|G''|=2\), and there are \(108\) such groups of order \(2^8\). </p>
+</li>
+  <li><p>The other two hypotheses are sharp at order \(3^8\): of the \(904\) non-metabelian \(3\)-groups of class \(4\) and order \(3^8\), \(15\) have type \((3,3,1,1)\) and \(889\) type \((3,2,2,1)\), by computation; an explicit Lie algebra of type \((3,3,1,1)\) over \(\mathbb F_3\) with \([M_2,M_2]\ne 0\), which after changing one constant works over every \(\mathbb F_p\) with \(p\) odd, is given in Appendix&#160;A, where it is verified by hand; the verification is also formalized. </p>
+</li>
+  <li><p>A computational check: for all groups of orders \(3^5\)–\(3^8\) of class \(\ge 4\) the hypothesis holds in \(13\, 077\) groups and the conclusion in all of them; an independent scan of all \(1\, 396\, 077\) groups of order \(3^8\) and all groups of order \(7^7\) found \(24\, 215\) and \(4\, 408\) groups with \(|\gamma _2/\gamma _3|=p^2\), \(|\gamma _3/\gamma _4|=p\), and no violation. </p>
+</li>
+  <li><p>Compare Schneider’s structure theorems for finite \(p\)-groups, \(p\) odd, with \(G''\ne 1\) and \(|G'/G''|=p^3\) (in particular \(\gamma _3\) is then maximal in \(G'\))&#160;[Sch03], building on Blackburn and Hall, and their Lie algebra analogue&#160;[Zac08]. The algebra of Appendix&#160;A has \(|M'/M''|=p^4\), just outside that range. </p>
+</li>
+</ol>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/LieThreeThree.lean#L311"><span class="ttfamily">GroupDimension.LieThreeThree.exists_lie_three_three</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/LieThreeThree.lean#L220"><span class="ttfamily">GroupDimension.LieThreeThree.lieSpan_eq_top</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/LieThreeThree.lean#L186"><span class="ttfamily">GroupDimension.LieThreeThree.lcs_eq</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/LieThreeThree.lean#L295"><span class="ttfamily">GroupDimension.LieThreeThree.finrank_lcs</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/LieThreeThree.lean#L250"><span class="ttfamily">GroupDimension.LieThreeThree.lie_lcs_one_ne_bot</span></a>. </p>
+<p><i class="itshape">Only the algebra of Appendix A in (2) is in Lean (over any commutative ring, its type over any field); the counts in (1)–(3) are computations.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000020">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:lie">the paper</a>. A part is in Lean, not the whole proof. Computer-assisted in part. </p>
+
+  </div>
+</div>
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:metab">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">6.5</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#prop:metab">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000021"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.card_ge_of_not_metabelian" class="lean_decl">GroupDimension.card_ge_of_not_metabelian</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.metabelian_of_card_le" class="lean_decl">GroupDimension.metabelian_of_card_le</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.rank_of_card_nine" class="lean_decl">GroupDimension.rank_of_card_nine</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.type_of_card_nine" class="lean_decl">GroupDimension.type_of_card_nine</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> Let \(p\) be odd and \(Q\) a \(p\)-group of class \(4\). </p>
+<ol class="enumerate">
+  <li><p>If \(|Q|\le p^7\), or \(|Q|=p^8\) and \(d(Q)\ge 4\), then \(Q\) is metabelian. </p>
+</li>
+  <li><p>If \(|Q|=p^9\) and \(Q''\ne 1\), then \(d(Q)\in \{ 3,4\} \); for \(d(Q)=4\) the type is \((4,3,1,1)\) or \((4,2,2,1)\), and for \(p=3\) both occur (\(Q_0\times C_3\) with \(Q_0\) of order \(3^8\) as in Remark&#160;<a href="sec-three.html#rem:lie">6.4</a>(2)). </p>
+</li>
+</ol>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFourOrder.lean#L456"><span class="ttfamily">GroupDimension.card_ge_of_not_metabelian</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFourOrder.lean#L466"><span class="ttfamily">GroupDimension.metabelian_of_card_le</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFourOrder.lean#L482"><span class="ttfamily">GroupDimension.rank_of_card_nine</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ClassFourOrder.lean#L492"><span class="ttfamily">GroupDimension.type_of_card_nine</span></a>. </p>
+<p><i class="itshape">Class ≤ 4 instead of = 4; that both types occur for p = 3 is a computation and is not formalized.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000021">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:metab">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:exp3">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.6</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:exp3">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000022"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_gamma_five_of_exp_three" class="lean_decl">GroupDimension.D_five_eq_gamma_five_of_exp_three</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.ExpThree.D_five_eq_gamma_five" class="lean_decl">GroupDimension.ExpThree.D_five_eq_gamma_five</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(Q\) be a finite \(3\)-group with \(Q/\gamma _2(Q)\) of exponent \(3\). Then \(D_5(Q)=\gamma _5(Q)\). More generally, \(D_5(G)=\gamma _5(G)\) for every group \(G\) with \(G/\gamma _2(G)\) finite of exponent \(3\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/TaharaTheorem.lean#L49"><span class="ttfamily">GroupDimension.D_five_eq_gamma_five_of_exp_three</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ExpThree.lean#L1489"><span class="ttfamily">GroupDimension.ExpThree.D_five_eq_gamma_five</span></a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000022">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:exp3">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:exp3">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">6.7</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#rem:exp3">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000023"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> The exponent hypothesis is used in three places: in (C) (for \(d(j)\ge 3d(i)\) Tahara’s condition is empty and terms \(u_{ij}[x_i^{d(i)},x_j^3]\) with \(x_j^3\notin \gamma _2\) appear), in the choice of basis (Tahara’s (D), (E) hold only modulo \((d(i),e(k))\), \((d(i),f(l))\)), and in (iii). The next case, \(Q/\gamma _2\cong C_{3^a}\times C_3^{s-1}\), is settled by Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a> below. A computational check of the theorem: \(169\) random non-metabelian groups of class \(4\) with \(Q/\gamma _2\cong C_3^3\) or \(C_3^4\), of orders \(3^{10}\)–\(3^{79}\), \(29\) of them with \(\Omega _1(Z)\cap Q''\cap M_5\ne 1\): identity (iii) holds and \(D_5=1\) in all of them (truncated Magnus algebra modulo \(3^{19}\) with the exactness certificate). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000023">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:exp3">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:exp3plus">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:exp3plus">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000024"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_gamma_five_of_cubes_cyclic" class="lean_decl">GroupDimension.D_five_eq_gamma_five_of_cubes_cyclic</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.ExpThree.D_five_eq_gamma_five_cyclic" class="lean_decl">GroupDimension.ExpThree.D_five_eq_gamma_five_cyclic</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(Q\) be a finite \(3\)-group with \(Q/\gamma _2(Q)\cong C_{3^a}\times C_3^{s-1}\) for some \(a\ge 1\), i.e. with at most one invariant of \(Q/\gamma _2\) larger than \(3\). Then \(D_5(Q)=\gamma _5(Q)\); the same holds for every group \(G\) with \(G/\gamma _2(G)\) of this form. </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/TaharaTheorem.lean#L63"><span class="ttfamily">GroupDimension.D_five_eq_gamma_five_of_cubes_cyclic</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/ExpThreePlus.lean#L1820"><span class="ttfamily">GroupDimension.ExpThree.D_five_eq_gamma_five_cyclic</span></a>. </p>
+<p><i class="itshape">“The cubes of G/γ_2 form a cyclic group”: for some t, every x³ is congruent modulo γ_2 to a power of t³.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000024">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:exp3plus">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:filter">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">6.9</span>
+    <span class="lemma_thmtitle">a filter on parents</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#lem:filter">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.filter_on_parents" class="lean_decl">GroupDimension.filter_on_parents</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> If one of \(M\cap P^{*\prime \prime }\), \(M\cap M_5(P^*)\), \(N\) and, when \(P\) has class \(3\), \(\gamma _4(P^*)\), lies in \(\gamma _5(P^*)\), then no immediate descendant \(Q\) of step size \(1\) of \(P\) is of class \(4\) with \(z\in Q''\cap M_5(Q)\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Descendants.lean#L198"><span class="ttfamily">GroupDimension.filter_on_parents</span></a>. </p>
+<p><i class="itshape">For Q = E/U with U ≤ M subgroups of any group E and the nucleus replaced by any subgroup N ⊄ U.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000025">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:filter">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:pcover">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.10</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:pcover">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.metabelian_of_central_elementary" class="lean_decl">GroupDimension.metabelian_of_central_elementary</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.metabelian_of_central_quotient" class="lean_decl">GroupDimension.metabelian_of_central_quotient</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(p\) be odd and \(P\) a finite \(p\)-group of class \(3\) with \(|\gamma _2(P)/\gamma _3(P)|=p^2\) and \(|\gamma _3(P)|=p\). Then \(P^{*\prime \prime }=1\). In particular every immediate descendant of step size \(1\) of \(P\) is metabelian, and \(P\) is rejected by Lemma&#160;<a href="sec-three.html#lem:filter">6.9</a>. </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/PCover.lean#L168"><span class="ttfamily">GroupDimension.metabelian_of_central_elementary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/PCover.lean#L156"><span class="ttfamily">GroupDimension.metabelian_of_central_quotient</span></a>. </p>
+<p><i class="itshape">For every central extension of P by a subgroup of exponent p (Mathlib has no p-covering group).</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000026">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:pcover">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:pcover">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">6.11</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#rem:pcover">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  
+<ol class="enumerate">
+  <li><p>For \(p=2\) the theorem fails, as a computation shows: SmallGroup\((64,138)\) has type \((3,2,1)\), while its \(2\)-covering group has order \(2^{13}\), class \(4\) and \(|P^{*\prime \prime }|=2\); likewise SmallGroup\((128,i)\), \(i=522,599,621,1755\), and \(12\) groups of order \(2^8\). </p>
+</li>
+  <li><p>A computational check: the hypothesis holds for \(13\, 315\) groups of order \(3^8\) and \(2\, 754\) of order \(7^7\), and \(P^{*\prime \prime }=1\) in all of them. </p>
+</li>
+  <li><p>The theorem does not say that such \(P\) are terminal. Of the \(7\, 824\) groups of order \(3^8\), type \((5,2,1)\) and rank \(5\) (SmallGroup\((3^8,i)\), \(1\, 387\, 558\le i\le 1\, 395\, 381\)), a computation finds that \(190\) have nucleus of order \(3\), e.g. SmallGroup\((81,9)\times 3^{1+2}_+\times C_3\), and that all of their descendants are metabelian of type \((5,2,1,1)\). Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a> below says exactly which groups of type \((d,2,1)\) with \(P/\gamma _2\) elementary abelian are nonterminal, and on this block it selects exactly the \(190\) (by computation). Its conditions (N1)–(N3) and (E) alone hold for the \(190\) and also for \(573\) terminal groups; the Jacobi condition (J) separates the two. </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000027">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:pcover">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nonterm">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.12</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:nonterm">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.nonterminal_necessary" class="lean_decl">GroupDimension.nonterminal_necessary</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.nonterminal_sufficient" class="lean_decl">GroupDimension.nonterminal_sufficient</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.nonterminal_iff" class="lean_decl">GroupDimension.nonterminal_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(p\) be odd and \(P\) a finite \(p\)-group of type \((d,2,1)\) with \(P/\gamma _2(P)\) elementary abelian, and write \([a,b]=a^{-1}b^{-1}ab\). Then \(P\) is nonterminal (it has an immediate descendant, equivalently its nucleus is nontrivial) if and only if <em>(N1)</em> \(|Z(P)\cap \gamma _2(P)|=p^2\), <em>(N2)</em> \(\gamma _2(P)\) is elementary abelian, <em>(N3)</em> \(P^p\le Z(P)\), and <em>(N4)</em> the linear system <span class="upshape">(E)+(J)</span> below over \(\mathbb F_p\) has a solution with \(c=1\). </p>
+<p>To state (N4), assume (N1)–(N3) and choose a generator \(w\) of \(\gamma _3(P)\), elements \(v\in Z(P)\cap \gamma _2(P)\setminus \gamma _3(P)\) and \(u\in \gamma _2(P)\setminus Z(P)\), and generators \(x_1,\dots ,x_d\) of \(P\). Then \(\gamma _2(P)=\langle u\rangle \times \langle v\rangle \times \langle w\rangle \), \(x_i^p\in \langle v,w\rangle \), and </p>
+<div class="displaymath" id="a0000000029">
+  \[ [x_i,x_j]=u^{\omega _1(i,j)}v^{\omega _2(i,j)}w^{\omega _3(i,j)},\qquad x_i^p=v^{\alpha _i}w^{\beta _i},\qquad [u,x_i]=w^{f_i}, \]
+</div>
+<p> with alternating \(\omega _r\) and \(f\ne 0\). The unknowns are \(c,\mu _u,\mu _v\in \mathbb F_p\) and \(\eta ,\sigma \in \mathbb F_p^d\); let \(\varepsilon _3=1\) and \(\varepsilon _p=0\) for \(p\ge 5\): for all \(1\le i,j\le d\), including \(i=j\), </p>
+<div class="displaymath" id="a0000000030">
+  \[ \text{(E)}\qquad \alpha _j\eta _i+c\, \beta _jf_i+\mu _u\, \omega _1(i,j)+\mu _v\, \omega _2(i,j)+\varepsilon _p\, c\, f_j^2\, \omega _1(i,j)=0, \]
+</div>
+<p> and for all \(1\le i{\lt}j{\lt}k\le d\), with \((a,b,e)\) running over the cyclic shifts of \((i,j,k)\), </p>
+<div class="displaymath" id="a0000000031">
+  \[ \text{(J)}\qquad \textstyle \sum _{(a,b,e)}\bigl(\omega _1(a,b)\, \sigma _e+\omega _2(a,b)\, \eta _e+c\, \omega _3(a,b)\, f_e\bigr)=0. \]
+</div>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Nonterminal.lean#L869"><span class="ttfamily">GroupDimension.nonterminal_necessary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/NonterminalSufficient.lean#L916"><span class="ttfamily">GroupDimension.nonterminal_sufficient</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/NonterminalSufficient.lean#L1049"><span class="ttfamily">GroupDimension.nonterminal_iff</span></a>. </p>
+<p><i class="itshape">“Nonterminal” is stated in the form of Lemma C.1 (a central extension by a subgroup of order p with γ_4 ≠ 1); Lemma C.1, that this means having immediate descendants, is not formalized; the normal form of Step 3 is given, not constructed.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000028">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:nonterm">the paper</a>. In Lean, from statements that are not all in Lean. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:nonterm">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">6.13</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#rem:nonterm">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  
+<ol class="enumerate">
+  <li><p>A computational check. For the \(7\, 824\) groups of Remark&#160;<a href="sec-three.html#rem:pcover">6.11</a>(3) and for all groups of order \(p^7\), type \((4,2,1)\) and rank \(4\) (i.e. with \(P/\gamma _2\) elementary) with \(p=3,5,7\) (\(932\), \(1\, 460\), \(2\, 232\) groups), the nucleus was computed in two ways: with ANUPQ, and with GAP’s own \(p\)-quotient of \(F/[R,F]R^p\). The two agree, and \(N\ne 1\) exactly for the groups satisfying (N1)–(N4): \(190\), \(102\), \(110\), \(118\) groups. For each of these, the pc-presentation of the proof built from the solution was checked to be consistent, with \(\gamma _4\ne 1\), and to map onto \(P\); so for these groups sufficiency does not rest on the consistency test. Without the term \(c\, \omega _3f\) in (J) the criterion gives wrong answers both ways: on the block it accepts \(295\) terminal groups and rejects \(13\) nonterminal ones. Code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>. </p>
+</li>
+  <li><p>The system is linear and homogeneous in \((c,\eta ,\sigma ,\mu _u,\mu _v)\), so (N4) is the solvability of an inhomogeneous linear system. The term with \(\varepsilon _p\) is \(\binom p3[x_j,x_i,x_j,x_j]\), the only place where \(p=3\) differs from \(p\ge 5\). Whether (N4) holds does not depend on the choices made, since it is equivalent to nonterminality. </p>
+</li>
+  <li><p>The criterion assumes \(P/\gamma _2\) elementary abelian, i.e. \(d(P)=d\); this implies that \(P\) has \(p\)-class \(3\), but not conversely. It covers all groups of order \(3^8\), type \((5,2,1)\) and rank \(5\), i.e. all possible parents in Theorem&#160;<a href="sec-three.html#thm:3e9">6.14</a>, but not all groups of type \((5,2,1)\): for instance \(M\times (C_9\rtimes C_9)\), with \(M\) of maximal class and order \(81\) and \(C_9\rtimes C_9\) non-abelian, has order \(3^8\), type \((5,2,1)\) and rank \(4\). Groups of type \((d,2,1)\) with \(P/\gamma _2\) not elementary are not treated here. </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000032">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:nonterm">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:3e9">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.14</span>
+    <span class="theorem_thmtitle">Computer-assisted</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:3e9">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(D_5(Q)=\gamma _5(Q)\) for every \(3\)-group \(Q\) of order at most \(3^9\). Hence \(D_5(G)/\gamma _5(G)\) has no \(3\)-torsion for every finite group \(G\) whose Sylow \(3\)-subgroup has order at most \(3^9\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000033">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:3e9">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sec-computations.html" title="Computations"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="The \(D_5\) paper: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sec-open.html" title="Open questions"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

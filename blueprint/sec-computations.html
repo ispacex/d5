@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The \(D_5\) paper: blueprint: Computations</title>
+<link rel="next" href="sec-three.html" title="" />
+<link rel="prev" href="sec-lean.html" title="Formalization" />
+<link rel="up" href="index.html" title="The D5 paper: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">The \(D_5\) paper: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-question.html"><span class="toc_ref">1</span> <span class="toc_entry">The question</span></a>
+ </li>
+<li class="">
+  <a href="sec-reduction.html"><span class="toc_ref">2</span> <span class="toc_entry">An elementary reduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-lie.html"><span class="toc_ref">3</span> <span class="toc_entry">The Lie-ring proof and where it does not transfer</span></a>
+ </li>
+<li class="">
+  <a href="sec-lean.html"><span class="toc_ref">4</span> <span class="toc_entry">Formalization</span></a>
+ </li>
+<li class=" active current">
+  <a href="sec-computations.html"><span class="toc_ref">5</span> <span class="toc_entry">Computations</span></a>
+ </li>
+<li class="">
+  <a href="sec-three.html"><span class="toc_ref">6</span> <span class="toc_entry">\(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-open.html"><span class="toc_ref">7</span> <span class="toc_entry">Open questions</span></a>
+ </li>
+<li class="">
+  <a href="app-lie.html"><span class="toc_ref">A</span> <span class="toc_entry">A Lie algebra of type \((3,3,1,1)\)</span></a>
+ </li>
+<li class="">
+  <a href="app-a2.html"><span class="toc_ref">B</span> <span class="toc_entry">The case \(a=2\) of Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a></span></a>
+ </li>
+<li class="">
+  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a></span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Results of the literature proved in the formalization</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="sec:computations">5 Computations</h1>
+
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:computer">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.1</span>
+    <span class="proposition_thmtitle">Computer-assisted</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#prop:computer">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000007"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> In each of the following groups \(D_n(G)=\gamma _n(G)\) for all \(n\): </p>
+<ol class="enumerate">
+  <li><p>all \(2\)-groups of order \(8,16,32,64,128\) (\(2665\) groups) and all groups of order \(256\) of class \(\ge 3\) (\(24\, 328\) groups); </p>
+</li>
+  <li><p>all \(3\)-groups of order \(81\), \(243\), \(729\) (\(586\) groups); </p>
+</li>
+  <li><p>all \(1202\) groups of order \(3^7\) of class \(4\) that pass the sieve, by two methods with identical results (\(1202\) groups, \(6010\) levels, no discrepancies): the lattice of §5 in its C implementation and the truncated Magnus algebra of §7, item&#160;?? (code and description: <a href="https://gitlab.com/ispacex/cflint-core">https://gitlab.com/ispacex/cflint-core</a>, <span class="ttfamily">docs/analysis.md</span>, §6.1); the numpy code of <span class="ttfamily">compute/</span> was run on a sample of \(49\) of them (every \(25\)th), with the same answer; </p>
+</li>
+  <li><p>all \(15\) groups of order \(625\) (a control). </p>
+</li>
+</ol>
+<p> Every \(3\)-group of class \(4\) and order \(3^5\), \(3^6\), \(3^7\) (\(6\), \(71\), \(1309\) groups) is metabelian (this is proved in Proposition&#160;<a href="sec-three.html#prop:metab">6.5</a>, also in Lean). Moreover, \(D_5(Q)=1\) for every metabelian group \(Q\) of order \(512\) and class \(3\): the sieve leaves \(2792\) of the \(1\, 587\, 389\) such groups (out of \(1\, 708\, 439\) groups of order \(512\) and \(p\)-class \(\ge 3\)), and for each of the \(2792\) the lattice computation gives \(D_4(Q)=D_5(Q)=1\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000007">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:computer">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:mincex">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">5.2</span>
+    <span class="lemma_thmtitle">minimal counterexample</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#lem:mincex">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000008"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.isCandidate_of_minimal'" class="lean_decl">GroupDimension.isCandidate_of_minimal'</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.isCandidate_of_minimal" class="lean_decl">GroupDimension.isCandidate_of_minimal</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.isDescendant_of_minimal" class="lean_decl">GroupDimension.isDescendant_of_minimal</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(Q\) be a finite \(2\)-group of class \(3\) such that \(D_5(Q/N)=1\) for every central subgroup \(N\) of order \(2\). If \(D_5(Q)\ne 1\), then </p>
+<ol class="enumerate">
+  <li><p>\(Z(Q)\) is cyclic and \(D_5(Q)=\Omega _1(Z(Q))=\langle n\rangle \) has order \(2\); </p>
+</li>
+  <li><p>\(n\in \gamma _3(Q)\cap M_5(Q)\); </p>
+</li>
+  <li><p>the \(2\)-class \(c\) of \(Q\) is at least \(4\), and \(P_c(Q)=\langle n\rangle \); </p>
+</li>
+  <li><p>\(Q\) is an immediate descendant of step size \(1\) of \(R=Q/\langle n\rangle \), a group of class \(2\) or \(3\) and \(2\)-class \(c-1\ge 3\) with \(\gamma _3(R)\) cyclic. </p>
+</li>
+</ol>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/DThreeCorollaries.lean#L61"><span class="ttfamily">GroupDimension.isCandidate_of_minimal’</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MinimalCounterexample.lean#L127"><span class="ttfamily">GroupDimension.isCandidate_of_minimal</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Descendants.lean#L157"><span class="ttfamily">GroupDimension.isDescendant_of_minimal</span></a>. </p>
+<p><i class="itshape">M_n is Jennings’ product ∏ γ_i^{p^j}; the inclusion of Q ∩ (1+Δ_{F_2}^5) into it is proved (Jennings’ inclusion, below), so (b) holds in the product sense.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000008">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:mincex">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:1024">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.3</span>
+    <span class="proposition_thmtitle">Computer-assisted</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#prop:1024">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000009"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.D_five_cand" class="lean_decl">GroupDimension.Cert1024.D_five_cand</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.D_four_cand" class="lean_decl">GroupDimension.Cert1024.D_four_cand</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.card_cand" class="lean_decl">GroupDimension.Cert1024.card_cand</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.prop_1024'" class="lean_decl">GroupDimension.Cert1024.prop_1024'</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.prop_1024" class="lean_decl">GroupDimension.Cert1024.prop_1024</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(D_5(Q)=1\) for every \(2\)-group \(Q\) of order \(2^{10}\) and class \(3\) (all of them are metabelian, Remark&#160;<a href="sec-reduction.html#rem:metab">2.2</a>). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L42"><span class="ttfamily">GroupDimension.Cert1024.D_five_cand</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L45"><span class="ttfamily">GroupDimension.Cert1024.D_four_cand</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L49"><span class="ttfamily">GroupDimension.Cert1024.card_cand</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L102"><span class="ttfamily">GroupDimension.Cert1024.prop_1024’</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L63"><span class="ttfamily">GroupDimension.Cert1024.prop_1024</span></a>. </p>
+<p><i class="itshape">Certificates for the 3400 candidates (native_decide: they trust the compiler, not only the kernel); prop_1024’ derives the proposition from Proposition 5.1 at order 2^9 and the completeness of the list, both explicit hypotheses (the completeness is Lemma 5.2(d) and the ANUPQ search).</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000009">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:1024">the paper</a>. A part is in Lean, not the whole proof. Computer-assisted in part. </p>
+
+  </div>
+</div>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:small">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.4</span>
+    <span class="theorem_thmtitle">Computer-assisted</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#thm:small">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000010"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  
+<ol class="enumerate">
+  <li><p>\(D_5(G)\subseteq \gamma _4(G)\) for every finite group \(G\) whose Sylow \(2\)-subgroup has order at most \(2^{10}\); in particular for every group of order less than \(2048\). </p>
+</li>
+  <li><p>\(D_n(G)=\gamma _n(G)\) for all \(n\) and every finite group \(G\) of order less than \(512\). </p>
+</li>
+  <li><p>\(D_5(G)/\gamma _5(G)\) has no \(3\)-torsion for every finite group \(G\) whose Sylow \(3\)-subgroup has order at most \(3^7\); in fact \(D_5(Q)=\gamma _5(Q)\) for every \(3\)-group \(Q\) of order at most \(3^7\). (Extended to \(3^9\) in Theorem&#160;<a href="sec-three.html#thm:3e9">6.14</a>.) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000010">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:small">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:prune">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">5.5</span>
+    <span class="remark_thmtitle">pruning the generation tree</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#rem:prune">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000011"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Let \(Q\) be a finite \(2\)-group of class \(3\) with cyclic centre, \(d=d(Q)\), \(C=C_Q(\gamma _2(Q))\), \(X=\gamma _2(Q)/(\gamma _2(Q)\cap Z(Q))\). The commutator map \(X\times Q/C\to \gamma _3(Q)\) is a non-degenerate bilinear pairing into the cyclic group \(\gamma _3(Q)\le Z(Q)\); hence \(X\cong Q/C\), a quotient of \(Q_{ab}\), and \(X\) has rank \(\le \min (d,d(d-1)/2)\). If \(|\gamma _3(Q)|=2^e\), then \(Q_{ab}\) has two invariants \(\ge 2^e\) (the map \((u,v)\mapsto [u,v,z]\) factors through \(\Lambda ^2Q_{ab}\)) and \(X\) has an element of order \(\ge 2^e\). For a minimal counterexample \(Q\) (Lemma&#160;<a href="sec-computations.html#lem:mincex">5.2</a>) with central involution \(n\) this gives conditions on every quotient \(V=Q/N\) with \(N\le \Phi (Q)\) (with \(n\in N\le \Phi (Q)\) for the second), which pass to further quotients and so may be used to cut whole subtrees of the \(p\)-group generation tree: (i) there is a cyclic \(K\), \(\gamma _3(V)\le K\le \gamma _2(V)\cap Z(V)\), with \(\mathrm{rk}(\gamma _2(V)/K)\le \min (d,d(d-1)/2)\); (ii) for such a \(K\), \(|Q|\ge 2|K|\, |A\vee B\vee E_1|\, |A\vee V_{ab}\vee E_2|\), where \(A=\gamma _2(V)/K\), \(B=V/C_V(\gamma _2(V))\), \(E_1=\mathbb {Z}/2^{e_V+1}\), \(E_2=E_1^2\), \(2^{e_V}=|\gamma _3(V)|\), and \(\vee \) is the componentwise maximum of abelian invariants. In particular every such \(V\) of class \(3\) has \(d+4e_V+2\le \log _2|Q|\). These conditions are proved by hand; the proofs are in <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/pq2048"><span class="ttfamily">compute/pq2048/README.md</span></a>. Condition (i) is vacuous for \(d\le 3\) and below order \(2^{2d+1}\); condition (ii) is the one that cuts. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000011">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:prune">the paper</a>. By hand; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:z4">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">5.6</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#lem:z4">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000012"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.not_isCandidate_of_quotient_z4" class="lean_decl">GroupDimension.not_isCandidate_of_quotient_z4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> There is no candidate \(Q\) of order \(2^{11}\) with \(Q/P_3(Q)\cong \mathbb {Z}/4\times (\mathbb {Z}/2)^7\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Candidate.lean#L479"><span class="ttfamily">GroupDimension.not_isCandidate_of_quotient_z4</span></a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000012">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:z4">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:rank8">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.7</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#prop:rank8">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000013"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.not_isCandidate_of_rank" class="lean_decl">GroupDimension.not_isCandidate_of_rank</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.false_of_card_expCentral_two_le" class="lean_decl">GroupDimension.false_of_card_expCentral_two_le</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_bot_of_rank'" class="lean_decl">GroupDimension.D_five_eq_bot_of_rank'</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_bot_of_rank" class="lean_decl">GroupDimension.D_five_eq_bot_of_rank</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete'" class="lean_decl">GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete'</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete" class="lean_decl">GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(D_5(Q)=1\) for every \(2\)-group \(Q\) of order \(2^{11}\), class \(3\) and rank \(d(Q)\ge 8\). More generally, every candidate \(Q\) has \(|\Phi (Q)|\ge 16\), that is, \(d(Q)\le \log _2|Q|-4\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Candidate.lean#L817"><span class="ttfamily">GroupDimension.not_isCandidate_of_rank</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Candidate.lean#L556"><span class="ttfamily">GroupDimension.false_of_card_expCentral_two_le</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/DThreeCorollaries.lean#L82"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_rank’</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/MinimalCounterexample.lean#L244"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_rank</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L113"><span class="ttfamily">GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete’</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/Cert1024/Prop1024.lean#L91"><span class="ttfamily">GroupDimension.Cert1024.D_five_eq_bot_of_rank_of_complete</span></a>. </p>
+<p><i class="itshape">The second statement (|Φ(Q)| ≥ 16 for candidates) and the deduction of the first from it and Proposition 5.3 are in Lean; through Proposition 5.3 the first statement is computer-assisted.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000013">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:rank8">the paper</a>. In Lean, from statements that are not all in Lean. Computer-assisted in part. </p>
+
+  </div>
+</div>
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:central">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#prop:central">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000014"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_n_eq_of_central_product" class="lean_decl">GroupDimension.D_n_eq_of_central_product</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_n_eq_of_dihedral" class="lean_decl">GroupDimension.D_n_eq_of_dihedral</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_n_eq_of_sqrt" class="lean_decl">GroupDimension.D_n_eq_of_sqrt</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> Let \(H\) be a group with \(t\in \gamma _2(H)\), and \(n\ge 2\). </p>
+<ol class="enumerate">
+  <li><p>If \(E\in \{ D_8,Q_8\} \), then \(D_n(H\circ E)=D_n(H)\). </p>
+</li>
+  <li><p>If \(E=M_{2^{k+2}}\) and for some \(g\in H\) the element \(c=g^{-2}s\) satisfies \(c^{2^j}-1\in \Delta (H)^{j+2}\) for all \(j\ge 0\) (for instance \(c^{2^j}\in \gamma _{j+2}(H)\)), then \(D_n(H\circ E)=D_n(H)\). This holds in particular if \(s=g^2\) for some \(g\in H\), central or not (\(c=1\)), and if \(s\in \gamma _2(H)\), \(s^2\in \gamma _3(H)\) (\(g=1\), \(k=2\)). </p>
+</li>
+</ol>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/CentralProduct.lean#L385"><span class="ttfamily">GroupDimension.D_n_eq_of_central_product</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/CentralD8.lean#L674"><span class="ttfamily">GroupDimension.D_n_eq_of_dihedral</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/CentralSqrt.lean#L357"><span class="ttfamily">GroupDimension.D_n_eq_of_sqrt</span></a>. </p>
+<p><i class="itshape">For Q = H⟨a,b⟩ with a, b centralising H and a, b, ab ∉ H; the passage from (H × E)/{(φ(z), z⁻¹)} to this form and the classification of E are not formalized.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000014">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:central">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:root">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">5.9</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#lem:root">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000015"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_n_eq_of_index" class="lean_decl">GroupDimension.D_n_eq_of_index</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Let \(K=H\langle r\rangle \) with \(r\) central, \(|K:H|=m\), and \(r^m=\sigma =g^m\) for some \(g\in H\), not necessarily central. Then \(\mathbb {Z}[H]\cap \Delta (K)^n=\Delta (H)^n\) for all \(n\), and \(D_n(K)=D_n(H)\) for \(n\ge 2\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/80d672ca73f2306fd85c55dda9f7640fd43af0de/GroupDimension/CentralRoot.lean#L392"><span class="ttfamily">GroupDimension.D_n_eq_of_index</span></a>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000015">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=lem:root">the paper</a>. In Lean. </p>
+
+  </div>
+</div>
+
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:2048">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">5.10</span>
+    <span class="proposition_thmtitle">Computer-assisted</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#prop:2048">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000016"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(D_5(Q)=1\) for every \(2\)-group \(Q\) of order \(2^{11}\) and class \(3\). Hence a counterexample to Question&#160;<a href="sec-question.html#q:main">1.1</a> among finite \(2\)-groups of class \(3\) has order at least \(2^{12}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000016">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=prop:2048">the paper</a>. Computer-assisted; not formalized. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sec-lean.html" title="Formalization"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="The \(D_5\) paper: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sec-three.html" title="\(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
