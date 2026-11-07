@@ -302,7 +302,7 @@
       <span class="lemma_thmcaption">
       Lemma
       </span>
-      <span class="lemma_thmlabel">6.10</span><span class="lemma_thmtitle">a filter on parents</span></div>
+      <span class="lemma_thmlabel">6.11</span><span class="lemma_thmtitle">a filter on parents</span></div>
     <div class="thm_thmcontent"><p> If one of \(M\cap P^{*\prime \prime }\), \(M\cap M_5(P^*)\), \(N\) and, when \(P\) has class \(3\), \(\gamma _4(P^*)\), lies in \(\gamma _5(P^*)\), then no immediate descendant \(Q\) of step size \(1\) of \(P\) is of class \(4\) with \(z\in Q''\cap M_5(Q)\). </p>
 <p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/Descendants.lean#L198"><span class="ttfamily">GroupDimension.filter_on_parents</span></a>. </p>
 <p><i class="itshape">For Q = E/U with U ≤ M subgroups of any group E and the nucleus replaced by any subgroup N ⊄ U.</i> </p>
@@ -1003,7 +1003,7 @@
       Remark
       </span>
       <span class="remark_thmlabel">6.7</span></div>
-    <div class="thm_thmcontent"><p> The exponent hypothesis is used in three places: in (C) (for \(d(j)\ge 3d(i)\) Tahara’s condition is empty and terms \(u_{ij}[x_i^{d(i)},x_j^3]\) with \(x_j^3\notin \gamma _2\) appear), in the choice of basis (Tahara’s (D), (E) hold only modulo \((d(i),e(k))\), \((d(i),f(l))\)), and in (iii). Theorems&#160;<a href="sec-three.html#thm:exp3plus">6.8</a> and&#160;<a href="sec-three.html#thm:exp3gen">6.9</a> below remove the first two: what they need is that \(\gamma _2/\gamma _3\) has exponent \(3\). At exponent \(9\) the method breaks in several places: identity (iii) may fail, and \(\gamma _2/\gamma _3\) is no longer elementary, so the \(Y_i\) of these proofs cannot always be taken as basis elements, and (D)–(F) are taken modulo numbers that may equal \(9\). As for (iii): in a group of class \(4\), for \(x\in Q\), \(a\in \gamma _2\) and \(c=[x,a]\), the exact formula is \([x^3,a]=c^{x^2}c^xc=[x,a]^3[x,a,x]^3\), as \([x,a,x,x]\in \gamma _5\), while \([x,a^3]=[x,a]^3\) always holds, as \([\gamma _3,\gamma _2]=1\); so (iii) holds if and only if \([x,a,x]^3=1\), which is automatic when \(\gamma _2/\gamma _3\) has exponent \(3\). For \(Q=\langle x,y\mid x^9,y^9\rangle /\gamma _5\), of order \(3^{15}\) and class \(4\), with \(\gamma _2/\gamma _3\cong C_9\), a computation gives, for \(a=[x,y]\), \([x,a,x]^3\ne 1\) and so \([x^3,a]\ne [x,a]^3\), and also \([x^9,y]=1\ne [x,y]^9\). (This \(Q\) has two generators, so it is metabelian, see the proof of Lemma&#160;<a href="sec-three.html#lem:qpp">6.1</a>, and is not a counterexample; it only shows that these identities fail.) A computational check of the theorem: \(169\) random non-metabelian groups of class \(4\) with \(Q/\gamma _2\cong C_3^3\) or \(C_3^4\), of orders \(3^{10}\)–\(3^{79}\), \(29\) of them with \(\Omega _1(Z)\cap Q''\cap M_5\ne 1\): identity (iii) holds and \(D_5=1\) in all of them (truncated Magnus algebra modulo \(3^{19}\) with the exactness certificate). </p>
+    <div class="thm_thmcontent"><p> The exponent hypothesis is used in three places: in (C) (for \(d(j)\ge 3d(i)\) Tahara’s condition is empty and terms \(u_{ij}[x_i^{d(i)},x_j^3]\) with \(x_j^3\notin \gamma _2\) appear), in the choice of basis (Tahara’s (D), (E) hold only modulo \((d(i),e(k))\), \((d(i),f(l))\)), and in (iii). Theorems&#160;<a href="sec-three.html#thm:exp3plus">6.8</a> and&#160;<a href="sec-three.html#thm:exp3gen">6.9</a> below remove the first two: what they need is that \(\gamma _2/\gamma _3\) has exponent \(3\). At exponent \(9\) the method breaks in several places: identity (iii) may fail, and \(\gamma _2/\gamma _3\) is no longer elementary, so the \(Y_i\) of these proofs cannot always be taken as basis elements, and (D)–(F) are taken modulo numbers that may equal \(9\). Theorem&#160;<a href="sec-three.html#thm:exp3h9">6.10</a> below shows that exponent \(9\) by itself is not an obstruction: the method still works if \(\gamma _4^3=1\) and \(\gamma _2^9\subseteq \gamma _4\). As for (iii): in a group of class \(4\), for \(x\in Q\), \(a\in \gamma _2\) and \(c=[x,a]\), the exact formula is \([x^3,a]=c^{x^2}c^xc=[x,a]^3[x,a,x]^3\), as \([x,a,x,x]\in \gamma _5\), while \([x,a^3]=[x,a]^3\) always holds, as \([\gamma _3,\gamma _2]=1\); so (iii) holds if and only if \([x,a,x]^3=1\), which is automatic when \(\gamma _2/\gamma _3\) has exponent \(3\). For \(Q=\langle x,y\mid x^9,y^9\rangle /\gamma _5\), of order \(3^{15}\) and class \(4\), with \(\gamma _2/\gamma _3\cong C_9\), a computation gives, for \(a=[x,y]\), \([x,a,x]^3\ne 1\) and so \([x^3,a]\ne [x,a]^3\), and also \([x^9,y]=1\ne [x,y]^9\). (This \(Q\) has two generators, so it is metabelian, see the proof of Lemma&#160;<a href="sec-three.html#lem:qpp">6.1</a>, and is not a counterexample; it only shows that these identities fail.) A computational check of the theorem: \(169\) random non-metabelian groups of class \(4\) with \(Q/\gamma _2\cong C_3^3\) or \(C_3^4\), of orders \(3^{10}\)–\(3^{79}\), \(29\) of them with \(\Omega _1(Z)\cap Q''\cap M_5\ne 1\): identity (iii) holds and \(D_5=1\) in all of them (truncated Magnus algebra modulo \(3^{19}\) with the exactness certificate). </p>
 </div>
 
     <a class="latex_link" href="sec-three.html#rem:exp3">LaTeX</a>
@@ -1120,14 +1120,14 @@
       <span class="remark_thmcaption">
       Remark
       </span>
-      <span class="remark_thmlabel">6.14</span></div>
+      <span class="remark_thmlabel">6.15</span></div>
     <div class="thm_thmcontent">
 <ol class="enumerate">
-  <li><p>A computational check. For the \(7\, 824\) groups of Remark&#160;<a href="sec-three.html#rem:pcover">6.12</a>(3) and for all groups of order \(p^7\), type \((4,2,1)\) and rank \(4\) (i.e. with \(P/\gamma _2\) elementary) with \(p=3,5,7\) (\(932\), \(1\, 460\), \(2\, 232\) groups), the nucleus was computed in two ways: with ANUPQ, and with GAP’s own \(p\)-quotient of \(F/[R,F]R^p\). The two agree, and \(N\ne 1\) exactly for the groups satisfying (N1)–(N4): \(190\), \(102\), \(110\), \(118\) groups. For each of these, the pc-presentation of the proof built from the solution was checked to be consistent, with \(\gamma _4\ne 1\), and to map onto \(P\); so for these groups sufficiency does not rest on the consistency test. Without the term \(c\, \omega _3f\) in (J) the criterion gives wrong answers both ways: on the block it accepts \(295\) terminal groups and rejects \(13\) nonterminal ones. Code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>. </p>
+  <li><p>A computational check. For the \(7\, 824\) groups of Remark&#160;<a href="sec-three.html#rem:pcover">6.13</a>(3) and for all groups of order \(p^7\), type \((4,2,1)\) and rank \(4\) (i.e. with \(P/\gamma _2\) elementary) with \(p=3,5,7\) (\(932\), \(1\, 460\), \(2\, 232\) groups), the nucleus was computed in two ways: with ANUPQ, and with GAP’s own \(p\)-quotient of \(F/[R,F]R^p\). The two agree, and \(N\ne 1\) exactly for the groups satisfying (N1)–(N4): \(190\), \(102\), \(110\), \(118\) groups. For each of these, the pc-presentation of the proof built from the solution was checked to be consistent, with \(\gamma _4\ne 1\), and to map onto \(P\); so for these groups sufficiency does not rest on the consistency test. Without the term \(c\, \omega _3f\) in (J) the criterion gives wrong answers both ways: on the block it accepts \(295\) terminal groups and rejects \(13\) nonterminal ones. Code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>. </p>
 </li>
   <li><p>The system is linear and homogeneous in \((c,\eta ,\sigma ,\mu _u,\mu _v)\), so (N4) is the solvability of an inhomogeneous linear system. The term with \(\varepsilon _p\) is \(\binom p3[x_j,x_i,x_j,x_j]\), the only place where \(p=3\) differs from \(p\ge 5\). Whether (N4) holds does not depend on the choices made, since it is equivalent to nonterminality. </p>
 </li>
-  <li><p>The criterion assumes \(P/\gamma _2\) elementary abelian, i.e. \(d(P)=d\); this implies that \(P\) has \(p\)-class \(3\), but not conversely. It covers all groups of order \(3^8\), type \((5,2,1)\) and rank \(5\), i.e. all possible parents in Theorem&#160;<a href="sec-three.html#thm:3e9">6.15</a>, but not all groups of type \((5,2,1)\): for instance \(M\times (C_9\rtimes C_9)\), with \(M\) of maximal class and order \(81\) and \(C_9\rtimes C_9\) non-abelian, has order \(3^8\), type \((5,2,1)\) and rank \(4\). Groups of type \((d,2,1)\) with \(P/\gamma _2\) not elementary are not treated here. </p>
+  <li><p>The criterion assumes \(P/\gamma _2\) elementary abelian, i.e. \(d(P)=d\); this implies that \(P\) has \(p\)-class \(3\), but not conversely. It covers all groups of order \(3^8\), type \((5,2,1)\) and rank \(5\), i.e. all possible parents in Theorem&#160;<a href="sec-three.html#thm:3e9">6.16</a>, but not all groups of type \((5,2,1)\): for instance \(M\times (C_9\rtimes C_9)\), with \(M\) of maximal class and order \(81\) and \(C_9\rtimes C_9\) non-abelian, has order \(3^8\), type \((5,2,1)\) and rank \(4\). Groups of type \((d,2,1)\) with \(P/\gamma _2\) not elementary are not treated here. </p>
 </li>
 </ol>
 </div>
@@ -1158,14 +1158,14 @@
       <span class="remark_thmcaption">
       Remark
       </span>
-      <span class="remark_thmlabel">6.12</span></div>
+      <span class="remark_thmlabel">6.13</span></div>
     <div class="thm_thmcontent">
 <ol class="enumerate">
   <li><p>For \(p=2\) the theorem fails, as a computation shows: SmallGroup\((64,138)\) has type \((3,2,1)\), while its \(2\)-covering group has order \(2^{13}\), class \(4\) and \(|P^{*\prime \prime }|=2\); likewise SmallGroup\((128,i)\), \(i=522,599,621,1755\), and \(12\) groups of order \(2^8\). </p>
 </li>
   <li><p>A computational check: the hypothesis holds for \(13\, 315\) groups of order \(3^8\) and \(2\, 754\) of order \(7^7\), and \(P^{*\prime \prime }=1\) in all of them. </p>
 </li>
-  <li><p>The theorem does not say that such \(P\) are terminal. Of the \(7\, 824\) groups of order \(3^8\), type \((5,2,1)\) and rank \(5\) (SmallGroup\((3^8,i)\), \(1\, 387\, 558\le i\le 1\, 395\, 381\)), a computation finds that \(190\) have nucleus of order \(3\), e.g. SmallGroup\((81,9)\times 3^{1+2}_+\times C_3\), and that all of their descendants are metabelian of type \((5,2,1,1)\). Theorem&#160;<a href="sec-three.html#thm:nonterm">6.13</a> below says exactly which groups of type \((d,2,1)\) with \(P/\gamma _2\) elementary abelian are nonterminal, and on this block it selects exactly the \(190\) (by computation). Its conditions (N1)–(N3) and (E) alone hold for the \(190\) and also for \(573\) terminal groups; the Jacobi condition (J) separates the two. </p>
+  <li><p>The theorem does not say that such \(P\) are terminal. Of the \(7\, 824\) groups of order \(3^8\), type \((5,2,1)\) and rank \(5\) (SmallGroup\((3^8,i)\), \(1\, 387\, 558\le i\le 1\, 395\, 381\)), a computation finds that \(190\) have nucleus of order \(3\), e.g. SmallGroup\((81,9)\times 3^{1+2}_+\times C_3\), and that all of their descendants are metabelian of type \((5,2,1,1)\). Theorem&#160;<a href="sec-three.html#thm:nonterm">6.14</a> below says exactly which groups of type \((d,2,1)\) with \(P/\gamma _2\) elementary abelian are nonterminal, and on this block it selects exactly the \(190\) (by computation). Its conditions (N1)–(N3) and (E) alone hold for the \(190\) and also for \(573\) terminal groups; the Jacobi condition (J) separates the two. </p>
 </li>
 </ol>
 </div>
@@ -1226,7 +1226,7 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">6.15</span><span class="theorem_thmtitle">Computer-assisted</span></div>
+      <span class="theorem_thmlabel">6.16</span><span class="theorem_thmtitle">Computer-assisted</span></div>
     <div class="thm_thmcontent"><p> \(D_5(Q)=\gamma _5(Q)\) for every \(3\)-group \(Q\) of order at most \(3^9\). Hence \(D_5(G)/\gamma _5(G)\) has no \(3\)-torsion for every finite group \(G\) whose Sylow \(3\)-subgroup has order at most \(3^9\). </p>
 </div>
 
@@ -1335,6 +1335,37 @@
 
 
     
+    <div class="dep-modal-container" id="thm:exp3h9_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:exp3h9" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6.10</span></div>
+    <div class="thm_thmcontent"><p> Let \(Q\) be a finite \(3\)-group of class \(\le 4\) such that <em>(H1)</em> \(\gamma _4(Q)\) has exponent dividing \(3\), and <em>(H2)</em> \(a^9\in \gamma _4(Q)\) for every \(a\in \gamma _2(Q)\). Then \(D_5(Q)=1\). More generally, \(D_5(G)=\gamma _5(G)\) for every group \(G\) such that \(G/\gamma _2(G)\) is a finite \(3\)-group, \(\gamma _4(G)^3\subseteq \gamma _5(G)\) and \(\gamma _2(G)^9\subseteq \gamma _4(G)\). </p>
+<p><i class="itshape">Proved on paper (MATH-444), checked by an independent review; not formalized. Theorem 6.9 is the special case exp(γ_2/γ_3) ≤ 3; here γ_2/γ_3 and γ_3/γ_4 may have exponent 9. The proof follows that of Theorem 6.9.</i> </p>
+</div>
+
+    <a class="latex_link" href="sec-three.html#thm:exp3h9">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
     <div class="dep-modal-container" id="thm:exp3plus_modal">
       <div class="dep-modal-content">
           <button class="dep-closebtn">
@@ -1389,18 +1420,18 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">6.13</span></div>
+      <span class="theorem_thmlabel">6.14</span></div>
     <div class="thm_thmcontent"><p> Let \(p\) be odd and \(P\) a finite \(p\)-group of type \((d,2,1)\) with \(P/\gamma _2(P)\) elementary abelian, and write \([a,b]=a^{-1}b^{-1}ab\). Then \(P\) is nonterminal (it has an immediate descendant, equivalently its nucleus is nontrivial) if and only if <em>(N1)</em> \(|Z(P)\cap \gamma _2(P)|=p^2\), <em>(N2)</em> \(\gamma _2(P)\) is elementary abelian, <em>(N3)</em> \(P^p\le Z(P)\), and <em>(N4)</em> the linear system <span class="upshape">(E)+(J)</span> below over \(\mathbb F_p\) has a solution with \(c=1\). </p>
 <p>To state (N4), assume (N1)–(N3) and choose a generator \(w\) of \(\gamma _3(P)\), elements \(v\in Z(P)\cap \gamma _2(P)\setminus \gamma _3(P)\) and \(u\in \gamma _2(P)\setminus Z(P)\), and generators \(x_1,\dots ,x_d\) of \(P\). Then \(\gamma _2(P)=\langle u\rangle \times \langle v\rangle \times \langle w\rangle \), \(x_i^p\in \langle v,w\rangle \), and </p>
-<div class="displaymath" id="a0000000030">
+<div class="displaymath" id="a0000000031">
   \[ [x_i,x_j]=u^{\omega _1(i,j)}v^{\omega _2(i,j)}w^{\omega _3(i,j)},\qquad x_i^p=v^{\alpha _i}w^{\beta _i},\qquad [u,x_i]=w^{f_i}, \]
 </div>
 <p> with alternating \(\omega _r\) and \(f\ne 0\). The unknowns are \(c,\mu _u,\mu _v\in \mathbb F_p\) and \(\eta ,\sigma \in \mathbb F_p^d\); let \(\varepsilon _3=1\) and \(\varepsilon _p=0\) for \(p\ge 5\): for all \(1\le i,j\le d\), including \(i=j\), </p>
-<div class="displaymath" id="a0000000031">
+<div class="displaymath" id="a0000000032">
   \[ \text{(E)}\qquad \alpha _j\eta _i+c\, \beta _jf_i+\mu _u\, \omega _1(i,j)+\mu _v\, \omega _2(i,j)+\varepsilon _p\, c\, f_j^2\, \omega _1(i,j)=0, \]
 </div>
 <p> and for all \(1\le i{\lt}j{\lt}k\le d\), with \((a,b,e)\) running over the cyclic shifts of \((i,j,k)\), </p>
-<div class="displaymath" id="a0000000032">
+<div class="displaymath" id="a0000000033">
   \[ \text{(J)}\qquad \textstyle \sum _{(a,b,e)}\bigl(\omega _1(a,b)\, \sigma _e+\omega _2(a,b)\, \eta _e+c\, \omega _3(a,b)\, f_e\bigr)=0. \]
 </div>
 <p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/Nonterminal.lean#L869"><span class="ttfamily">GroupDimension.nonterminal_necessary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/NonterminalSufficient.lean#L916"><span class="ttfamily">GroupDimension.nonterminal_sufficient</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/NonterminalSufficient.lean#L1049"><span class="ttfamily">GroupDimension.nonterminal_iff</span></a>. </p>
@@ -1444,8 +1475,8 @@
       <span class="theorem_thmcaption">
       Theorem
       </span>
-      <span class="theorem_thmlabel">6.11</span></div>
-    <div class="thm_thmcontent"><p> Let \(p\) be odd and \(P\) a finite \(p\)-group of class \(3\) with \(|\gamma _2(P)/\gamma _3(P)|=p^2\) and \(|\gamma _3(P)|=p\). Then \(P^{*\prime \prime }=1\). In particular every immediate descendant of step size \(1\) of \(P\) is metabelian, and \(P\) is rejected by Lemma&#160;<a href="sec-three.html#lem:filter">6.10</a>. </p>
+      <span class="theorem_thmlabel">6.12</span></div>
+    <div class="thm_thmcontent"><p> Let \(p\) be odd and \(P\) a finite \(p\)-group of class \(3\) with \(|\gamma _2(P)/\gamma _3(P)|=p^2\) and \(|\gamma _3(P)|=p\). Then \(P^{*\prime \prime }=1\). In particular every immediate descendant of step size \(1\) of \(P\) is metabelian, and \(P\) is rejected by Lemma&#160;<a href="sec-three.html#lem:filter">6.11</a>. </p>
 <p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/PCover.lean#L168"><span class="ttfamily">GroupDimension.metabelian_of_central_elementary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/81e844394ccf24e0bc043d37795cbea406868849/GroupDimension/PCover.lean#L156"><span class="ttfamily">GroupDimension.metabelian_of_central_quotient</span></a>. </p>
 <p><i class="itshape">For every central extension of P by a subgroup of exponent p (Mathlib has no p-covering group).</i> </p>
 </div>
@@ -1492,7 +1523,7 @@
 </li>
   <li><p>\(D_n(G)=\gamma _n(G)\) for all \(n\) and every finite group \(G\) of order less than \(512\). </p>
 </li>
-  <li><p>\(D_5(G)/\gamma _5(G)\) has no \(3\)-torsion for every finite group \(G\) whose Sylow \(3\)-subgroup has order at most \(3^7\); in fact \(D_5(Q)=\gamma _5(Q)\) for every \(3\)-group \(Q\) of order at most \(3^7\). (Extended to \(3^9\) in Theorem&#160;<a href="sec-three.html#thm:3e9">6.15</a>.) </p>
+  <li><p>\(D_5(G)/\gamma _5(G)\) has no \(3\)-torsion for every finite group \(G\) whose Sylow \(3\)-subgroup has order at most \(3^7\); in fact \(D_5(Q)=\gamma _5(Q)\) for every \(3\)-group \(Q\) of order at most \(3^7\). (Extended to \(3^9\) in Theorem&#160;<a href="sec-three.html#thm:3e9">6.16</a>.) </p>
 </li>
 </ol>
 </div>
@@ -1528,7 +1559,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"thm:exp3plus"	[color=green,		fillcolor="#1CAC78",		label=exp3plus,		shape=ellipse,		style=filled];	"prop:2048"	[color=blue,		label=2048,		shape=ellipse];	"lem:qpp"	[color=green,		fillcolor="#9CEC8B",		label=qpp,		shape=ellipse,		style=filled];	"lem:mincex3"	[color=green,		fillcolor="#9CEC8B",		label=mincex3,		shape=ellipse,		style=filled];	"lem:qpp" -> "lem:mincex3";	"thm:3e9"	[color=blue,		label="3e9",		shape=ellipse];	"lem:mincex3" -> "thm:3e9";	"rem:prune"	[color=blue,		fillcolor="#A3D6FF",		label=prune,		shape=ellipse,		style=filled];	"ext:passi"	[color=green,		fillcolor="#1CAC78",		label=passi,		shape=ellipse,		style=filled];	"ext:passi" -> "lem:mincex3";	"prop:reduction"	[color=green,		fillcolor="#1CAC78",		label=reduction,		shape=ellipse,		style=filled];	"ext:passi" -> "prop:reduction";	"rem:bounded"	[color=green,		fillcolor="#1CAC78",		label=bounded,		shape=ellipse,		style=filled];	"prop:reduction" -> "rem:bounded";	"thm:small"	[color=blue,		label=small,		shape=ellipse];	"rem:bounded" -> "thm:small";	"thm:small" -> "thm:3e9";	"ext:guptatahara"	[color=green,		fillcolor="#A3D6FF",		label=guptatahara,		shape=ellipse,		style=filled];	"ext:guptatahara" -> "lem:qpp";	"prop:1024"	[color=green,		label=1024,		shape=ellipse];	"prop:1024" -> "thm:small";	"prop:rank8"	[color=green,		fillcolor="#9CEC8B",		label=rank8,		shape=ellipse,		style=filled];	"prop:1024" -> "prop:rank8";	"prop:rank8" -> "prop:2048";	"thm:exp3gen"	[color=green,		fillcolor="#1CAC78",		label=exp3gen,		shape=ellipse,		style=filled];	"prop:metab"	[color=green,		fillcolor="#1CAC78",		label=metab,		shape=ellipse,		style=filled];	"prop:metab" -> "thm:3e9";	"lem:ntQ"	[color=blue,		fillcolor="#A3D6FF",		label=ntQ,		shape=ellipse,		style=filled];	"thm:nonterm"	[color=green,		fillcolor="#9CEC8B",		label=nonterm,		shape=ellipse,		style=filled];	"lem:ntQ" -> "thm:nonterm";	"lem:mincex"	[color=green,		fillcolor="#1CAC78",		label=mincex,		shape=ellipse,		style=filled];	"lem:mincex" -> "lem:mincex3";	"lem:mincex" -> "prop:1024";	"lem:root"	[color=green,		fillcolor="#1CAC78",		label=root,		shape=ellipse,		style=filled];	"prop:central"	[color=green,		fillcolor="#1CAC78",		label=central,		shape=ellipse,		style=filled];	"lem:root" -> "prop:central";	"rem:lie"	[color=green,		fillcolor="#A3D6FF",		label=lie,		shape=ellipse,		style=filled];	"thm:pcover"	[color=green,		fillcolor="#1CAC78",		label=pcover,		shape=ellipse,		style=filled];	"thm:pcover" -> "thm:3e9";	"thm:pcover" -> "thm:nonterm";	"thm:exp3"	[color=green,		fillcolor="#1CAC78",		label=exp3,		shape=ellipse,		style=filled];	"thm:exp3" -> "thm:exp3plus";	"thm:exp3" -> "thm:3e9";	"thm:exp3" -> "thm:exp3gen";	"prop:computer"	[color=blue,		fillcolor="#A3D6FF",		label=computer,		shape=ellipse,		style=filled];	"prop:computer" -> "prop:1024";	"lem:z4"	[color=green,		fillcolor="#1CAC78",		label=z4,		shape=ellipse,		style=filled];	"lem:z4" -> "prop:rank8";	"lem:lie"	[color=green,		fillcolor="#1CAC78",		label=lie,		shape=ellipse,		style=filled];	"lem:lie" -> "lem:qpp";	"lem:lie" -> "prop:metab";	"lem:lie" -> "lem:ntQ";	"lem:lie" -> "thm:pcover";	"rem:exp3"	[color=blue,		fillcolor="#A3D6FF",		label=exp3,		shape=ellipse,		style=filled];	"rem:nonterm"	[color=blue,		fillcolor="#A3D6FF",		label=nonterm,		shape=ellipse,		style=filled];	"rem:metab"	[color=green,		fillcolor="#1CAC78",		label=metab,		shape=ellipse,		style=filled];	"rem:metab" -> "prop:reduction";	"rem:pcover"	[color=blue,		fillcolor="#A3D6FF",		label=pcover,		shape=ellipse,		style=filled];	"ext:dthree"	[color=green,		fillcolor="#1CAC78",		label=dthree,		shape=ellipse,		style=filled];	"ext:dthree" -> "prop:reduction";	"ext:dthree" -> "lem:mincex";	"ext:gruenberg"	[color=green,		fillcolor="#1CAC78",		label=gruenberg,		shape=ellipse,		style=filled];	"ext:gruenberg" -> "ext:passi";	"ext:tahara61"	[color=green,		fillcolor="#1CAC78",		label=tahara61,		shape=ellipse,		style=filled];	"ext:tahara61" -> "thm:exp3";	"ext:jennings"	[color=green,		fillcolor="#1CAC78",		label=jennings,		shape=ellipse,		style=filled];	"ext:jennings" -> "lem:mincex";	"lem:filter"	[color=green,		fillcolor="#1CAC78",		label=filter,		shape=ellipse,		style=filled];	"lem:filter" -> "thm:3e9";	"q:main"	[color=green,		fillcolor="#A3D6FF",		label=main,		shape=ellipse,		style=filled];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"prop:2048"	[color=blue,		label=2048,		shape=ellipse];	"lem:qpp"	[color=green,		fillcolor="#9CEC8B",		label=qpp,		shape=ellipse,		style=filled];	"lem:mincex3"	[color=green,		fillcolor="#9CEC8B",		label=mincex3,		shape=ellipse,		style=filled];	"lem:qpp" -> "lem:mincex3";	"thm:3e9"	[color=blue,		label="3e9",		shape=ellipse];	"lem:mincex3" -> "thm:3e9";	"ext:guptatahara"	[color=green,		fillcolor="#A3D6FF",		label=guptatahara,		shape=ellipse,		style=filled];	"ext:guptatahara" -> "lem:qpp";	"rem:prune"	[color=blue,		fillcolor="#A3D6FF",		label=prune,		shape=ellipse,		style=filled];	"prop:1024"	[color=green,		label=1024,		shape=ellipse];	"thm:small"	[color=blue,		label=small,		shape=ellipse];	"prop:1024" -> "thm:small";	"prop:rank8"	[color=green,		fillcolor="#9CEC8B",		label=rank8,		shape=ellipse,		style=filled];	"prop:1024" -> "prop:rank8";	"thm:small" -> "thm:3e9";	"prop:rank8" -> "prop:2048";	"rem:pcover"	[color=blue,		fillcolor="#A3D6FF",		label=pcover,		shape=ellipse,		style=filled];	"thm:exp3gen"	[color=green,		fillcolor="#1CAC78",		label=exp3gen,		shape=ellipse,		style=filled];	"thm:exp3h9"	[color=blue,		fillcolor="#A3D6FF",		label=exp3h9,		shape=ellipse,		style=filled];	"thm:exp3gen" -> "thm:exp3h9";	"thm:exp3plus"	[color=green,		fillcolor="#1CAC78",		label=exp3plus,		shape=ellipse,		style=filled];	"thm:nonterm"	[color=green,		fillcolor="#9CEC8B",		label=nonterm,		shape=ellipse,		style=filled];	"prop:metab"	[color=green,		fillcolor="#1CAC78",		label=metab,		shape=ellipse,		style=filled];	"prop:metab" -> "thm:3e9";	"lem:filter"	[color=green,		fillcolor="#1CAC78",		label=filter,		shape=ellipse,		style=filled];	"lem:filter" -> "thm:3e9";	"lem:ntQ"	[color=blue,		fillcolor="#A3D6FF",		label=ntQ,		shape=ellipse,		style=filled];	"lem:ntQ" -> "thm:nonterm";	"lem:mincex"	[color=green,		fillcolor="#1CAC78",		label=mincex,		shape=ellipse,		style=filled];	"lem:mincex" -> "lem:mincex3";	"lem:mincex" -> "prop:1024";	"lem:root"	[color=green,		fillcolor="#1CAC78",		label=root,		shape=ellipse,		style=filled];	"prop:central"	[color=green,		fillcolor="#1CAC78",		label=central,		shape=ellipse,		style=filled];	"lem:root" -> "prop:central";	"rem:lie"	[color=green,		fillcolor="#A3D6FF",		label=lie,		shape=ellipse,		style=filled];	"thm:exp3"	[color=green,		fillcolor="#1CAC78",		label=exp3,		shape=ellipse,		style=filled];	"thm:exp3" -> "thm:3e9";	"thm:exp3" -> "thm:exp3gen";	"thm:exp3" -> "thm:exp3plus";	"prop:computer"	[color=blue,		fillcolor="#A3D6FF",		label=computer,		shape=ellipse,		style=filled];	"prop:computer" -> "prop:1024";	"lem:z4"	[color=green,		fillcolor="#1CAC78",		label=z4,		shape=ellipse,		style=filled];	"lem:z4" -> "prop:rank8";	"lem:lie"	[color=green,		fillcolor="#1CAC78",		label=lie,		shape=ellipse,		style=filled];	"lem:lie" -> "lem:qpp";	"lem:lie" -> "prop:metab";	"lem:lie" -> "lem:ntQ";	"thm:pcover"	[color=green,		fillcolor="#1CAC78",		label=pcover,		shape=ellipse,		style=filled];	"lem:lie" -> "thm:pcover";	"thm:pcover" -> "thm:3e9";	"thm:pcover" -> "thm:nonterm";	"rem:bounded"	[color=green,		fillcolor="#1CAC78",		label=bounded,		shape=ellipse,		style=filled];	"rem:bounded" -> "thm:small";	"rem:exp3"	[color=blue,		fillcolor="#A3D6FF",		label=exp3,		shape=ellipse,		style=filled];	"ext:passi"	[color=green,		fillcolor="#1CAC78",		label=passi,		shape=ellipse,		style=filled];	"ext:passi" -> "lem:mincex3";	"prop:reduction"	[color=green,		fillcolor="#1CAC78",		label=reduction,		shape=ellipse,		style=filled];	"ext:passi" -> "prop:reduction";	"prop:reduction" -> "rem:bounded";	"rem:metab"	[color=green,		fillcolor="#1CAC78",		label=metab,		shape=ellipse,		style=filled];	"rem:metab" -> "prop:reduction";	"ext:dthree"	[color=green,		fillcolor="#1CAC78",		label=dthree,		shape=ellipse,		style=filled];	"ext:dthree" -> "lem:mincex";	"ext:dthree" -> "prop:reduction";	"ext:gruenberg"	[color=green,		fillcolor="#1CAC78",		label=gruenberg,		shape=ellipse,		style=filled];	"ext:gruenberg" -> "ext:passi";	"ext:jennings"	[color=green,		fillcolor="#1CAC78",		label=jennings,		shape=ellipse,		style=filled];	"ext:jennings" -> "lem:mincex";	"q:main"	[color=green,		fillcolor="#A3D6FF",		label=main,		shape=ellipse,		style=filled];	"rem:nonterm"	[color=blue,		fillcolor="#A3D6FF",		label=nonterm,		shape=ellipse,		style=filled];	"ext:tahara61"	[color=green,		fillcolor="#1CAC78",		label=tahara61,		shape=ellipse,		style=filled];	"ext:tahara61" -> "thm:exp3";}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {
