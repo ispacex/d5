@@ -60,7 +60,7 @@
   <a href="app-a2.html"><span class="toc_ref">B</span> <span class="toc_entry">The case \(a=2\) of Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a></span></a>
  </li>
 <li class="">
-  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a></span></a>
+  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.13</a></span></a>
  </li>
 <li class="">
   <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Results of the literature proved in the formalization</span></a>
@@ -504,7 +504,7 @@
         </div>
   </div>
   <div class="remark_thmcontent">
-  <p> The exponent hypothesis is used in three places: in (C) (for \(d(j)\ge 3d(i)\) Tahara’s condition is empty and terms \(u_{ij}[x_i^{d(i)},x_j^3]\) with \(x_j^3\notin \gamma _2\) appear), in the choice of basis (Tahara’s (D), (E) hold only modulo \((d(i),e(k))\), \((d(i),f(l))\)), and in (iii). The next case, \(Q/\gamma _2\cong C_{3^a}\times C_3^{s-1}\), is settled by Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a> below. A computational check of the theorem: \(169\) random non-metabelian groups of class \(4\) with \(Q/\gamma _2\cong C_3^3\) or \(C_3^4\), of orders \(3^{10}\)–\(3^{79}\), \(29\) of them with \(\Omega _1(Z)\cap Q''\cap M_5\ne 1\): identity (iii) holds and \(D_5=1\) in all of them (truncated Magnus algebra modulo \(3^{19}\) with the exactness certificate). </p>
+  <p> The exponent hypothesis is used in three places: in (C) (for \(d(j)\ge 3d(i)\) Tahara’s condition is empty and terms \(u_{ij}[x_i^{d(i)},x_j^3]\) with \(x_j^3\notin \gamma _2\) appear), in the choice of basis (Tahara’s (D), (E) hold only modulo \((d(i),e(k))\), \((d(i),f(l))\)), and in (iii). Theorems&#160;<a href="sec-three.html#thm:exp3plus">6.8</a> and&#160;<a href="sec-three.html#thm:exp3gen">6.9</a> below remove the first two: what they need is that \(\gamma _2/\gamma _3\) has exponent \(3\). At exponent \(9\) the method breaks in several places: identity (iii) may fail, and \(\gamma _2/\gamma _3\) is no longer elementary, so the \(Y_i\) of these proofs cannot always be taken as basis elements, and (D)–(F) are taken modulo numbers that may equal \(9\). As for (iii): in a group of class \(4\), for \(x\in Q\), \(a\in \gamma _2\) and \(c=[x,a]\), the exact formula is \([x^3,a]=c^{x^2}c^xc=[x,a]^3[x,a,x]^3\), as \([x,a,x,x]\in \gamma _5\), while \([x,a^3]=[x,a]^3\) always holds, as \([\gamma _3,\gamma _2]=1\); so (iii) holds if and only if \([x,a,x]^3=1\), which is automatic when \(\gamma _2/\gamma _3\) has exponent \(3\). For \(Q=\langle x,y\mid x^9,y^9\rangle /\gamma _5\), of order \(3^{15}\) and class \(4\), with \(\gamma _2/\gamma _3\cong C_9\), a computation gives, for \(a=[x,y]\), \([x,a,x]^3\ne 1\) and so \([x^3,a]\ne [x,a]^3\), and also \([x^9,y]=1\ne [x,y]^9\). (This \(Q\) has two generators, so it is metabelian, see the proof of Lemma&#160;<a href="sec-three.html#lem:qpp">6.1</a>, and is not a counterexample; it only shows that these identities fail.) A computational check of the theorem: \(169\) random non-metabelian groups of class \(4\) with \(Q/\gamma _2\cong C_3^3\) or \(C_3^4\), of orders \(3^{10}\)–\(3^{79}\), \(29\) of them with \(\Omega _1(Z)\cap Q''\cap M_5\ne 1\): identity (iii) holds and \(D_5=1\) in all of them (truncated Magnus algebra modulo \(3^{19}\) with the exactness certificate). </p>
 
   </div>
 </div>
@@ -584,12 +584,51 @@
   </div>
 </div>
 
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:exp3gen">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">6.9</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-three.html#thm:exp3gen">#</a>
+    
+    <a class="icon proof" href="sec-three.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(Q\) be a finite \(3\)-group with \(\gamma _2(Q)/\gamma _3(Q)\) of exponent at most \(3\), i.e. with \([x^3,y]\in \gamma _3(Q)\) for all \(x,y\in Q\). Then \(D_5(Q)=\gamma _5(Q)\), whatever the invariants of \(Q/\gamma _2(Q)\). More generally, \(D_5(G)=\gamma _5(G)\) for every group \(G\) such that \(G/\gamma _2(G)\) is a finite \(3\)-group and \(\gamma _2(G)/\gamma _3(G)\) has exponent at most \(3\). </p>
+<p><i class="itshape">Proved on paper (MATH-443); not formalized.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000025">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:exp3gen">the paper</a>. By hand; not formalized. </p>
+
+  </div>
+</div>
+
 <div class="lemma_thmwrapper theorem-style-plain" id="lem:filter">
   <div class="lemma_thmheading">
     <span class="lemma_thmcaption">
     Lemma
     </span>
-    <span class="lemma_thmlabel">6.9</span>
+    <span class="lemma_thmlabel">6.10</span>
     <span class="lemma_thmtitle">a filter on parents</span>
     <div class="thm_header_extras">
 
@@ -600,7 +639,7 @@
 
     <a class="icon proof" href="sec-three.html#lem:filter">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000025"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -633,7 +672,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000025">
+<div class="proof_wrapper" id="a0000000026">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -651,7 +690,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">6.10</span>
+    <span class="theorem_thmlabel">6.11</span>
     <div class="thm_header_extras">
 
     
@@ -661,7 +700,7 @@
 
     <a class="icon proof" href="sec-three.html#thm:pcover">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000026"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -690,13 +729,13 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> Let \(p\) be odd and \(P\) a finite \(p\)-group of class \(3\) with \(|\gamma _2(P)/\gamma _3(P)|=p^2\) and \(|\gamma _3(P)|=p\). Then \(P^{*\prime \prime }=1\). In particular every immediate descendant of step size \(1\) of \(P\) is metabelian, and \(P\) is rejected by Lemma&#160;<a href="sec-three.html#lem:filter">6.9</a>. </p>
+  <p> Let \(p\) be odd and \(P\) a finite \(p\)-group of class \(3\) with \(|\gamma _2(P)/\gamma _3(P)|=p^2\) and \(|\gamma _3(P)|=p\). Then \(P^{*\prime \prime }=1\). In particular every immediate descendant of step size \(1\) of \(P\) is metabelian, and \(P\) is rejected by Lemma&#160;<a href="sec-three.html#lem:filter">6.10</a>. </p>
 <p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/27a6a6bcddc756f283d729a42fef7a1d5402cf8b/GroupDimension/PCover.lean#L168"><span class="ttfamily">GroupDimension.metabelian_of_central_elementary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/27a6a6bcddc756f283d729a42fef7a1d5402cf8b/GroupDimension/PCover.lean#L156"><span class="ttfamily">GroupDimension.metabelian_of_central_quotient</span></a>. </p>
 <p><i class="itshape">For every central extension of P by a subgroup of exponent p (Mathlib has no p-covering group).</i> </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000026">
+<div class="proof_wrapper" id="a0000000027">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -714,7 +753,7 @@
     <span class="remark_thmcaption">
     Remark
     </span>
-    <span class="remark_thmlabel">6.11</span>
+    <span class="remark_thmlabel">6.12</span>
     <div class="thm_header_extras">
 
         </div>
@@ -722,7 +761,7 @@
 
     <a class="icon proof" href="sec-three.html#rem:pcover">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000027"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -736,13 +775,13 @@
 </li>
   <li><p>A computational check: the hypothesis holds for \(13\, 315\) groups of order \(3^8\) and \(2\, 754\) of order \(7^7\), and \(P^{*\prime \prime }=1\) in all of them. </p>
 </li>
-  <li><p>The theorem does not say that such \(P\) are terminal. Of the \(7\, 824\) groups of order \(3^8\), type \((5,2,1)\) and rank \(5\) (SmallGroup\((3^8,i)\), \(1\, 387\, 558\le i\le 1\, 395\, 381\)), a computation finds that \(190\) have nucleus of order \(3\), e.g. SmallGroup\((81,9)\times 3^{1+2}_+\times C_3\), and that all of their descendants are metabelian of type \((5,2,1,1)\). Theorem&#160;<a href="sec-three.html#thm:nonterm">6.12</a> below says exactly which groups of type \((d,2,1)\) with \(P/\gamma _2\) elementary abelian are nonterminal, and on this block it selects exactly the \(190\) (by computation). Its conditions (N1)–(N3) and (E) alone hold for the \(190\) and also for \(573\) terminal groups; the Jacobi condition (J) separates the two. </p>
+  <li><p>The theorem does not say that such \(P\) are terminal. Of the \(7\, 824\) groups of order \(3^8\), type \((5,2,1)\) and rank \(5\) (SmallGroup\((3^8,i)\), \(1\, 387\, 558\le i\le 1\, 395\, 381\)), a computation finds that \(190\) have nucleus of order \(3\), e.g. SmallGroup\((81,9)\times 3^{1+2}_+\times C_3\), and that all of their descendants are metabelian of type \((5,2,1,1)\). Theorem&#160;<a href="sec-three.html#thm:nonterm">6.13</a> below says exactly which groups of type \((d,2,1)\) with \(P/\gamma _2\) elementary abelian are nonterminal, and on this block it selects exactly the \(190\) (by computation). Its conditions (N1)–(N3) and (E) alone hold for the \(190\) and also for \(573\) terminal groups; the Jacobi condition (J) separates the two. </p>
 </li>
 </ol>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000027">
+<div class="proof_wrapper" id="a0000000028">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -760,7 +799,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">6.12</span>
+    <span class="theorem_thmlabel">6.13</span>
     <div class="thm_header_extras">
 
     
@@ -770,7 +809,7 @@
 
     <a class="icon proof" href="sec-three.html#thm:nonterm">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000028"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000029"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -803,15 +842,15 @@
   <div class="theorem_thmcontent">
   <p> Let \(p\) be odd and \(P\) a finite \(p\)-group of type \((d,2,1)\) with \(P/\gamma _2(P)\) elementary abelian, and write \([a,b]=a^{-1}b^{-1}ab\). Then \(P\) is nonterminal (it has an immediate descendant, equivalently its nucleus is nontrivial) if and only if <em>(N1)</em> \(|Z(P)\cap \gamma _2(P)|=p^2\), <em>(N2)</em> \(\gamma _2(P)\) is elementary abelian, <em>(N3)</em> \(P^p\le Z(P)\), and <em>(N4)</em> the linear system <span class="upshape">(E)+(J)</span> below over \(\mathbb F_p\) has a solution with \(c=1\). </p>
 <p>To state (N4), assume (N1)–(N3) and choose a generator \(w\) of \(\gamma _3(P)\), elements \(v\in Z(P)\cap \gamma _2(P)\setminus \gamma _3(P)\) and \(u\in \gamma _2(P)\setminus Z(P)\), and generators \(x_1,\dots ,x_d\) of \(P\). Then \(\gamma _2(P)=\langle u\rangle \times \langle v\rangle \times \langle w\rangle \), \(x_i^p\in \langle v,w\rangle \), and </p>
-<div class="displaymath" id="a0000000029">
+<div class="displaymath" id="a0000000030">
   \[ [x_i,x_j]=u^{\omega _1(i,j)}v^{\omega _2(i,j)}w^{\omega _3(i,j)},\qquad x_i^p=v^{\alpha _i}w^{\beta _i},\qquad [u,x_i]=w^{f_i}, \]
 </div>
 <p> with alternating \(\omega _r\) and \(f\ne 0\). The unknowns are \(c,\mu _u,\mu _v\in \mathbb F_p\) and \(\eta ,\sigma \in \mathbb F_p^d\); let \(\varepsilon _3=1\) and \(\varepsilon _p=0\) for \(p\ge 5\): for all \(1\le i,j\le d\), including \(i=j\), </p>
-<div class="displaymath" id="a0000000030">
+<div class="displaymath" id="a0000000031">
   \[ \text{(E)}\qquad \alpha _j\eta _i+c\, \beta _jf_i+\mu _u\, \omega _1(i,j)+\mu _v\, \omega _2(i,j)+\varepsilon _p\, c\, f_j^2\, \omega _1(i,j)=0, \]
 </div>
 <p> and for all \(1\le i{\lt}j{\lt}k\le d\), with \((a,b,e)\) running over the cyclic shifts of \((i,j,k)\), </p>
-<div class="displaymath" id="a0000000031">
+<div class="displaymath" id="a0000000032">
   \[ \text{(J)}\qquad \textstyle \sum _{(a,b,e)}\bigl(\omega _1(a,b)\, \sigma _e+\omega _2(a,b)\, \eta _e+c\, \omega _3(a,b)\, f_e\bigr)=0. \]
 </div>
 <p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/27a6a6bcddc756f283d729a42fef7a1d5402cf8b/GroupDimension/Nonterminal.lean#L869"><span class="ttfamily">GroupDimension.nonterminal_necessary</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/27a6a6bcddc756f283d729a42fef7a1d5402cf8b/GroupDimension/NonterminalSufficient.lean#L916"><span class="ttfamily">GroupDimension.nonterminal_sufficient</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/27a6a6bcddc756f283d729a42fef7a1d5402cf8b/GroupDimension/NonterminalSufficient.lean#L1049"><span class="ttfamily">GroupDimension.nonterminal_iff</span></a>. </p>
@@ -819,7 +858,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000028">
+<div class="proof_wrapper" id="a0000000029">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -837,7 +876,7 @@
     <span class="remark_thmcaption">
     Remark
     </span>
-    <span class="remark_thmlabel">6.13</span>
+    <span class="remark_thmlabel">6.14</span>
     <div class="thm_header_extras">
 
         </div>
@@ -845,7 +884,7 @@
 
     <a class="icon proof" href="sec-three.html#rem:nonterm">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000032"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -855,17 +894,17 @@
   <div class="remark_thmcontent">
   
 <ol class="enumerate">
-  <li><p>A computational check. For the \(7\, 824\) groups of Remark&#160;<a href="sec-three.html#rem:pcover">6.11</a>(3) and for all groups of order \(p^7\), type \((4,2,1)\) and rank \(4\) (i.e. with \(P/\gamma _2\) elementary) with \(p=3,5,7\) (\(932\), \(1\, 460\), \(2\, 232\) groups), the nucleus was computed in two ways: with ANUPQ, and with GAP’s own \(p\)-quotient of \(F/[R,F]R^p\). The two agree, and \(N\ne 1\) exactly for the groups satisfying (N1)–(N4): \(190\), \(102\), \(110\), \(118\) groups. For each of these, the pc-presentation of the proof built from the solution was checked to be consistent, with \(\gamma _4\ne 1\), and to map onto \(P\); so for these groups sufficiency does not rest on the consistency test. Without the term \(c\, \omega _3f\) in (J) the criterion gives wrong answers both ways: on the block it accepts \(295\) terminal groups and rejects \(13\) nonterminal ones. Code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>. </p>
+  <li><p>A computational check. For the \(7\, 824\) groups of Remark&#160;<a href="sec-three.html#rem:pcover">6.12</a>(3) and for all groups of order \(p^7\), type \((4,2,1)\) and rank \(4\) (i.e. with \(P/\gamma _2\) elementary) with \(p=3,5,7\) (\(932\), \(1\, 460\), \(2\, 232\) groups), the nucleus was computed in two ways: with ANUPQ, and with GAP’s own \(p\)-quotient of \(F/[R,F]R^p\). The two agree, and \(N\ne 1\) exactly for the groups satisfying (N1)–(N4): \(190\), \(102\), \(110\), \(118\) groups. For each of these, the pc-presentation of the proof built from the solution was checked to be consistent, with \(\gamma _4\ne 1\), and to map onto \(P\); so for these groups sufficiency does not rest on the consistency test. Without the term \(c\, \omega _3f\) in (J) the criterion gives wrong answers both ways: on the block it accepts \(295\) terminal groups and rejects \(13\) nonterminal ones. Code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>. </p>
 </li>
   <li><p>The system is linear and homogeneous in \((c,\eta ,\sigma ,\mu _u,\mu _v)\), so (N4) is the solvability of an inhomogeneous linear system. The term with \(\varepsilon _p\) is \(\binom p3[x_j,x_i,x_j,x_j]\), the only place where \(p=3\) differs from \(p\ge 5\). Whether (N4) holds does not depend on the choices made, since it is equivalent to nonterminality. </p>
 </li>
-  <li><p>The criterion assumes \(P/\gamma _2\) elementary abelian, i.e. \(d(P)=d\); this implies that \(P\) has \(p\)-class \(3\), but not conversely. It covers all groups of order \(3^8\), type \((5,2,1)\) and rank \(5\), i.e. all possible parents in Theorem&#160;<a href="sec-three.html#thm:3e9">6.14</a>, but not all groups of type \((5,2,1)\): for instance \(M\times (C_9\rtimes C_9)\), with \(M\) of maximal class and order \(81\) and \(C_9\rtimes C_9\) non-abelian, has order \(3^8\), type \((5,2,1)\) and rank \(4\). Groups of type \((d,2,1)\) with \(P/\gamma _2\) not elementary are not treated here. </p>
+  <li><p>The criterion assumes \(P/\gamma _2\) elementary abelian, i.e. \(d(P)=d\); this implies that \(P\) has \(p\)-class \(3\), but not conversely. It covers all groups of order \(3^8\), type \((5,2,1)\) and rank \(5\), i.e. all possible parents in Theorem&#160;<a href="sec-three.html#thm:3e9">6.15</a>, but not all groups of type \((5,2,1)\): for instance \(M\times (C_9\rtimes C_9)\), with \(M\) of maximal class and order \(81\) and \(C_9\rtimes C_9\) non-abelian, has order \(3^8\), type \((5,2,1)\) and rank \(4\). Groups of type \((d,2,1)\) with \(P/\gamma _2\) not elementary are not treated here. </p>
 </li>
 </ol>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000032">
+<div class="proof_wrapper" id="a0000000033">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
@@ -883,7 +922,7 @@
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">6.14</span>
+    <span class="theorem_thmlabel">6.15</span>
     <span class="theorem_thmtitle">Computer-assisted</span>
     <div class="thm_header_extras">
 
@@ -892,7 +931,7 @@
 
     <a class="icon proof" href="sec-three.html#thm:3e9">#</a>
     
-    <a class="icon proof" href="sec-three.html#a0000000033"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sec-three.html#a0000000034"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -904,7 +943,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000033">
+<div class="proof_wrapper" id="a0000000034">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
