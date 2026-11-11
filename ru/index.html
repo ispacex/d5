@@ -72,6 +72,10 @@ footer { border-top:1px solid var(--line); margin-top:3rem; }
        color:var(--cellink); border:1px solid var(--line); }
 .tag.c { background:var(--cmp); } .tag.p { background:var(--ppr); } .tag.cp { background:var(--both); }
 .tag.o { background:var(--open); } .tag.l { background:var(--soft); color:var(--ink); }
+figure.scene { margin:1rem 0; } figure.scene iframe { border:0; width:100%; max-width:640px; aspect-ratio:640/460; height:auto; display:block; }
+figure.scene figcaption { font-size:.88rem; color:var(--muted); margin-top:.3rem; }
+dl.terms dt { font-weight:600; margin-top:.8rem; } dl.terms dd { margin:.2rem 0 0 1.2rem; } dl.terms dd p { margin:.2rem 0; }
+div.claim { margin:.9rem 0; } div.claim > p:first-child { margin-bottom:.2rem; } div.claim .st { margin-left:1.2rem; }
 .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:.8rem; margin:1rem 0; }
 .card { border:1px solid var(--line); border-radius:8px; padding:.7rem .9rem; background:var(--soft); }
 .card h3 { margin:.1rem 0 .4rem; font-size:1rem; } .card .big { font-size:1.35rem; font-weight:600; }
@@ -119,15 +123,16 @@ ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
- macros:{'\\D':'\\Delta','\\Z':'\\mathbb{Z}'},ignoredTags:['script','noscript','style','textarea','pre','code','svg']})"></script></head>
+ macros:{'\\D':'\\Delta','\\Z':'\\mathbb{Z}'},ignoredTags:['script','noscript','style','textarea','pre','code','svg']})"></script><script src="https://default.kaiku.tech/embed/kaiku.js" data-kaiku-set="b05bdc8cc4fcbe702bbb57f83374b96502b3ffa34bdc6bfd" async></script></head>
 <body><header><div class="wrap"><div class="top"><a class="title" href="index.html">Задача о $D_5$</a>
 <div class="tools"><span class="pal"></span><span class="theme" role="group" aria-label="Тема"><button type="button" data-t="system" aria-pressed="true" aria-label="Тема: как в системе" title="Тема: как в системе"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button><button type="button" data-t="light" aria-pressed="false" aria-label="Тема: светлая" title="Тема: светлая"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-t="dark" aria-pressed="false" aria-label="Тема: тёмная" title="Тема: тёмная"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button></span><span class="lang" role="group" aria-label="Язык"><a href="../index.html" hreflang="en" lang="en">EN</a><strong lang="ru" aria-current="true">RU</strong></span></div></div>
-<nav aria-label="Разделы"><a href="index.html" class=cur aria-current=page>Сводка</a><a href="coverage.html">Карта покрытия</a><a href="results.html">Результаты</a><a href="blueprint.html">Blueprint</a><a href="computations.html">Вычисления</a><a href="kernel.html">Быстрое ядро</a><a href="timeline.html">Хронология</a><a href="open.html">Открытые вопросы</a><a href="paper.html">Статья</a><a href="search.html">Поиск</a></nav></div></header>
+<nav aria-label="Разделы"><a href="index.html" class=cur aria-current=page>Сводка</a><a href="coverage.html">Карта покрытия</a><a href="results.html">Результаты</a><a href="definitions.html">Определения</a><a href="blueprint.html">Blueprint</a><a href="computations.html">Вычисления</a><a href="kernel.html">Быстрое ядро</a><a href="timeline.html">Хронология</a><a href="open.html">Открытые вопросы</a><a href="paper.html">Статья</a><a href="search.html">Поиск</a></nav></div></header>
 <main class="wrap"><h1>Задача о $D_5$: где мы сейчас</h1>
 
-<div class="box"><p><b>Вопрос</b> (Коуровская тетрадь, задача 20.84). Пусть $\Delta$&nbsp;— фундаментальный идеал $\mathbb Z[G]$,
-$D_n(G)=G\cap(1+\Delta^n)$&nbsp;— размерные подгруппы, $\gamma_n(G)$&nbsp;— нижний центральный ряд. Всегда $\gamma_n\subseteq D_n$,
-и $D_n=\gamma_n$ при $n\le3$; при $n=4$ это неверно (Рипс). <b>Верно ли $D_5(G)\subseteq\gamma_4(G)$ для всякой группы?</b></p>
+<div class="box"><p><b>Вопрос</b> (Коуровская тетрадь, задача 20.84). Пусть $\Delta$&nbsp;— <span data-kaiku-term="аугментационный идеал">фундаментальный идеал</span> $\mathbb Z[G]$,
+$D_n(G)=G\cap(1+\Delta^n)$&nbsp;— <span data-kaiku-term="Размерные подгруппы">размерные подгруппы</span>, $\gamma_n(G)$&nbsp;— <span data-kaiku-term="Нижний центральный ряд">нижний центральный ряд</span>. Всегда $\gamma_n\subseteq D_n$,
+и $D_n=\gamma_n$ при $n\le3$; при $n=4$ это неверно (Рипс). <b><span data-kaiku-claim="q:main">Верно ли $D_5(G)\subseteq\gamma_4(G)$ для всякой группы?</span></b></p>
+<p>Определения и основные утверждения статьи (из реестра трекера; подчёркнутые слова открываются при наведении или нажатии)&nbsp;— на странице <a href="definitions.html">«Определения»</a>.</p>
 <p>Для колец Ли ответ «да» (Ионин, Михайлов, Петров, 2026, с формализацией в Lean). Для групп вопрос открыт;
 к нему с нескольких сторон подходит наш препринт, отправленный в arXiv 22 октября 2026 года. Здесь — что доказано, что посчитано и что осталось.</p></div>
 <div class="cards">
@@ -142,6 +147,8 @@ $D_n(G)=G\cap(1+\Delta^n)$&nbsp;— размерные подгруппы, $\gam
 <div class="card"><h3>Контрпримеров</h3><div class="big">0</div>
 <p>Ни в одной из посчитанных групп $D_5\ne\gamma_5$; везде $D_n=\gamma_n$ при всех $n$. Больше ста тысяч кандидатов, все вычисления точные.</p></div>
 </div>
+<h2>Вопрос в одной сцене</h2>
+<figure class="scene"><iframe src="https://default.kaiku.tech/embed/anim/112e0a885b56ad8911a65c34f33c488546ef849be52dcc48" width="640" height="460" title="Нижний центральный ряд, размерные подгруппы и вопрос D₅ ⊆ γ₄" loading="lazy" allowfullscreen></iframe><figcaption>Нижний центральный ряд, размерные подгруппы и вопрос $D_5\subseteq\gamma_4$</figcaption></figure>
 <h2>Карта покрытия: $2$-группы ступени $3$</h2>
 <p>Клетка&nbsp;— все $2$-группы ступени $3$ данного порядка и ранга; закрыта, если для всех них $D_5=1$.
 Закрыто 36 клеток, открыто 0. Подробнее&nbsp;— <a href="coverage.html">карта покрытия</a>.</p>
