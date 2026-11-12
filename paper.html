@@ -5,11 +5,11 @@
 <link rel="alternate" hreflang="en" href="https://ispacex.github.io/d5/paper.html">
 <link rel="alternate" hreflang="ru" href="https://ispacex.github.io/d5/ru/paper.html">
 <link rel="alternate" hreflang="x-default" href="https://ispacex.github.io/d5/paper.html">
-<meta name="description" content="The paper comes in two versions: the preprint for arXiv, and the lab notebook with all the details.">
+<meta name="description" content="The paper comes in two versions: the preprint, and the lab notebook with all the details.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The D₅ problem">
 <meta property="og:title" content="Paper draft — The D₅ problem">
-<meta property="og:description" content="The paper comes in two versions: the preprint for arXiv, and the lab notebook with all the details.">
+<meta property="og:description" content="The paper comes in two versions: the preprint, and the lab notebook with all the details.">
 <meta property="og:url" content="https://ispacex.github.io/d5/paper.html">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ispacex.github.io/d5/og-en.png">
@@ -119,6 +119,23 @@ ol.toc { list-style:none; padding-left:0; } ol.toc > li { margin:.55rem 0; } ol.
 ol.toc .stm { font-size:.88rem; margin:.15rem 0 0 1.4rem; } ol.toc .stm > span { white-space:nowrap; }
 ol.toc .stm > span .muted { white-space:normal; }
 ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; }
+.bpf { margin:1rem 0 .4rem; display:grid; gap:.45rem; }
+html:not(.js) .bpf { display:none; }
+.bpf .fg { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem; }
+.bpf .fl { font-size:.85rem; color:var(--muted); font-weight:600; min-width:6.5rem; }
+.bpf button { font:inherit; font-size:.85rem; line-height:1.5; padding:.1em .6em; border:1px solid var(--line); border-radius:999px;
+        background:var(--bg); color:var(--ink); cursor:pointer; }
+.bpf button:hover { border-color:var(--acc); }
+.bpf button:focus-visible { outline:2px solid var(--acc); outline-offset:1px; }
+.bpf button[aria-pressed="true"] { background:var(--acc); border-color:var(--acc); color:var(--bg); }
+.bpf button .n { color:var(--muted); margin-left:.1em; font-variant-numeric:tabular-nums; }
+.bpf button[aria-pressed="true"] .n { color:inherit; opacity:.85; }
+.bpf button.zero:not([aria-pressed="true"]) { opacity:.5; }
+.bpf .fs { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; font-size:.85rem; color:var(--muted); }
+.bpf .fs button.all { border-radius:6px; }
+.bpf .fs button.all:disabled { opacity:.5; cursor:default; }
+@media (max-width:520px) { .bpf .fl { min-width:100%; } }
+tr.bpf-hide { display:none; }
 </style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js"></script>
@@ -130,9 +147,9 @@ ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; 
 <nav aria-label="Sections"><a href="index.html">Summary</a><a href="coverage.html">Coverage map</a><a href="results.html">Results</a><a href="definitions.html">Definitions</a><a href="blueprint.html">Blueprint</a><a href="computations.html">Computations</a><a href="kernel.html">Fast kernel</a><a href="timeline.html">Timeline</a><a href="open.html">Open questions</a><a href="paper.html" class=cur aria-current=page>Paper</a><a href="search.html">Search</a></nav></div></header>
 <main class="wrap"><h1>Paper draft</h1>
 
-<div class="box"><p>The paper comes in two versions: the preprint for arXiv, and the lab notebook with all the details.</p>
+<div class="box"><p>The paper comes in two versions: the preprint, and the lab notebook with all the details.</p>
 <ul>
-<li><b>Preprint (arXiv version)</b>: <a href="preprint-viewer.html">read it</a> (45 pp., English),
+<li><b>Preprint (concise text)</b>: <a href="preprint-viewer.html">read it</a> (45 pp., English),
 <a href="paper/d5-preprint.pdf">PDF</a>.</li>
 <li><b>Lab notebook (full details)</b>: the draft below, in English and Russian.</li>
 </ul>

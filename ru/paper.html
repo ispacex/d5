@@ -5,11 +5,11 @@
 <link rel="alternate" hreflang="en" href="https://ispacex.github.io/d5/paper.html">
 <link rel="alternate" hreflang="ru" href="https://ispacex.github.io/d5/ru/paper.html">
 <link rel="alternate" hreflang="x-default" href="https://ispacex.github.io/d5/paper.html">
-<meta name="description" content="Статья есть в двух версиях: препринт для arXiv и лабораторный журнал со всеми подробностями.">
+<meta name="description" content="Статья есть в двух версиях: препринт и лабораторный журнал со всеми подробностями.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Задача о D₅">
 <meta property="og:title" content="Черновик статьи — Задача о D₅">
-<meta property="og:description" content="Статья есть в двух версиях: препринт для arXiv и лабораторный журнал со всеми подробностями.">
+<meta property="og:description" content="Статья есть в двух версиях: препринт и лабораторный журнал со всеми подробностями.">
 <meta property="og:url" content="https://ispacex.github.io/d5/ru/paper.html">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://ispacex.github.io/d5/og-ru.png">
@@ -119,6 +119,23 @@ ol.toc { list-style:none; padding-left:0; } ol.toc > li { margin:.55rem 0; } ol.
 ol.toc .stm { font-size:.88rem; margin:.15rem 0 0 1.4rem; } ol.toc .stm > span { white-space:nowrap; }
 ol.toc .stm > span .muted { white-space:normal; }
 ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; }
+.bpf { margin:1rem 0 .4rem; display:grid; gap:.45rem; }
+html:not(.js) .bpf { display:none; }
+.bpf .fg { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem; }
+.bpf .fl { font-size:.85rem; color:var(--muted); font-weight:600; min-width:6.5rem; }
+.bpf button { font:inherit; font-size:.85rem; line-height:1.5; padding:.1em .6em; border:1px solid var(--line); border-radius:999px;
+        background:var(--bg); color:var(--ink); cursor:pointer; }
+.bpf button:hover { border-color:var(--acc); }
+.bpf button:focus-visible { outline:2px solid var(--acc); outline-offset:1px; }
+.bpf button[aria-pressed="true"] { background:var(--acc); border-color:var(--acc); color:var(--bg); }
+.bpf button .n { color:var(--muted); margin-left:.1em; font-variant-numeric:tabular-nums; }
+.bpf button[aria-pressed="true"] .n { color:inherit; opacity:.85; }
+.bpf button.zero:not([aria-pressed="true"]) { opacity:.5; }
+.bpf .fs { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; font-size:.85rem; color:var(--muted); }
+.bpf .fs button.all { border-radius:6px; }
+.bpf .fs button.all:disabled { opacity:.5; cursor:default; }
+@media (max-width:520px) { .bpf .fl { min-width:100%; } }
+tr.bpf-hide { display:none; }
 </style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js"></script>
@@ -130,9 +147,9 @@ ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; 
 <nav aria-label="Разделы"><a href="index.html">Сводка</a><a href="coverage.html">Карта покрытия</a><a href="results.html">Результаты</a><a href="definitions.html">Определения</a><a href="blueprint.html">Blueprint</a><a href="computations.html">Вычисления</a><a href="kernel.html">Быстрое ядро</a><a href="timeline.html">Хронология</a><a href="open.html">Открытые вопросы</a><a href="paper.html" class=cur aria-current=page>Статья</a><a href="search.html">Поиск</a></nav></div></header>
 <main class="wrap"><h1>Черновик статьи</h1>
 
-<div class="box"><p>Статья есть в двух версиях: препринт для arXiv и лабораторный журнал со всеми подробностями.</p>
+<div class="box"><p>Статья есть в двух версиях: препринт и лабораторный журнал со всеми подробностями.</p>
 <ul>
-<li><b>Препринт (версия для arXiv)</b>: <a href="preprint-viewer.html">читать</a> (45 с., по-английски),
+<li><b>Препринт (сжатый текст)</b>: <a href="preprint-viewer.html">читать</a> (45 с., по-английски),
 <a href="../paper/d5-preprint.pdf">PDF</a>.</li>
 <li><b>Лабораторный журнал (все подробности)</b>: черновик ниже, по-русски и по-английски.</li>
 </ul>

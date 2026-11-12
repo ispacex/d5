@@ -119,6 +119,23 @@ ol.toc { list-style:none; padding-left:0; } ol.toc > li { margin:.55rem 0; } ol.
 ol.toc .stm { font-size:.88rem; margin:.15rem 0 0 1.4rem; } ol.toc .stm > span { white-space:nowrap; }
 ol.toc .stm > span .muted { white-space:normal; }
 ol.tl .d { font-weight:600; } ol.tl ul { margin:.2rem 0 0; padding-left:1.1rem; }
+.bpf { margin:1rem 0 .4rem; display:grid; gap:.45rem; }
+html:not(.js) .bpf { display:none; }
+.bpf .fg { display:flex; flex-wrap:wrap; align-items:center; gap:.35rem; }
+.bpf .fl { font-size:.85rem; color:var(--muted); font-weight:600; min-width:6.5rem; }
+.bpf button { font:inherit; font-size:.85rem; line-height:1.5; padding:.1em .6em; border:1px solid var(--line); border-radius:999px;
+        background:var(--bg); color:var(--ink); cursor:pointer; }
+.bpf button:hover { border-color:var(--acc); }
+.bpf button:focus-visible { outline:2px solid var(--acc); outline-offset:1px; }
+.bpf button[aria-pressed="true"] { background:var(--acc); border-color:var(--acc); color:var(--bg); }
+.bpf button .n { color:var(--muted); margin-left:.1em; font-variant-numeric:tabular-nums; }
+.bpf button[aria-pressed="true"] .n { color:inherit; opacity:.85; }
+.bpf button.zero:not([aria-pressed="true"]) { opacity:.5; }
+.bpf .fs { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; font-size:.85rem; color:var(--muted); }
+.bpf .fs button.all { border-radius:6px; }
+.bpf .fs button.all:disabled { opacity:.5; cursor:default; }
+@media (max-width:520px) { .bpf .fl { min-width:100%; } }
+tr.bpf-hide { display:none; }
 </style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js"></script>
@@ -135,7 +152,7 @@ $D_n(G)=G\cap(1+\Delta^n)$ the <span data-kaiku-term="dimension subgroups">dimen
 and $D_n=\gamma_n$ for $n\le3$; for $n=4$ this fails (Rips). <b><span data-kaiku-claim="q:main">Is $D_5(G)\subseteq\gamma_4(G)$ for every group?</span></b></p>
 <p>Definitions and the main statements of the paper (from the tracker's registry; hover over or tap the underlined words) are on the <a href="definitions.html">Definitions</a> page.</p>
 <p>For Lie rings the answer is yes (Ionin, Mikhailov, Petrov, 2026, formalized in Lean). For groups it is open;
-our preprint, submitted to arXiv on 22 October 2026, approaches it from several sides. This site shows what is proved, what is computed, and what is left.</p></div>
+our paper (preprint) approaches it from several sides. This site shows what is proved, what is computed, and what is left.</p></div>
 <div class="cards">
 <div class="card"><h3>$2$-torsion: $D_5\subseteq\gamma_4$</h3><div class="big">up to $2^{10}$</div>
 <p>True for every finite group whose Sylow $2$-subgroup has order $\le2^{10}$, in particular for all groups of order $<2048$.</p>
