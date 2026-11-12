@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The \(D_5\) paper: blueprint: Results proved in the formalization, not in the paper</title>
+<link rel="prev" href="sect0001.html" title="Results of the literature proved in the formalization" />
+<link rel="up" href="index.html" title="The D5 paper: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">The \(D_5\) paper: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-question.html"><span class="toc_ref">1</span> <span class="toc_entry">The question</span></a>
+ </li>
+<li class="">
+  <a href="sec-reduction.html"><span class="toc_ref">2</span> <span class="toc_entry">An elementary reduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-lie.html"><span class="toc_ref">3</span> <span class="toc_entry">The Lie-ring proof and where it does not transfer</span></a>
+ </li>
+<li class="">
+  <a href="sec-lean.html"><span class="toc_ref">4</span> <span class="toc_entry">Formalization</span></a>
+ </li>
+<li class="">
+  <a href="sec-computations.html"><span class="toc_ref">5</span> <span class="toc_entry">Computations</span></a>
+ </li>
+<li class="">
+  <a href="sec-three.html"><span class="toc_ref">6</span> <span class="toc_entry">\(3\)-torsion: orders \(3^8\) and \(3^9\), and groups with \(G/\gamma _2\) of exponent \(3\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-open.html"><span class="toc_ref">7</span> <span class="toc_entry">Open questions</span></a>
+ </li>
+<li class="">
+  <a href="app-lie.html"><span class="toc_ref">A</span> <span class="toc_entry">A Lie algebra of type \((3,3,1,1)\)</span></a>
+ </li>
+<li class="">
+  <a href="app-a2.html"><span class="toc_ref">B</span> <span class="toc_entry">The case \(a=2\) of Theorem&#160;<a href="sec-three.html#thm:exp3plus">6.8</a></span></a>
+ </li>
+<li class="">
+  <a href="app-nonterm.html"><span class="toc_ref">C</span> <span class="toc_entry">Proof of Theorem&#160;<a href="sec-three.html#thm:nonterm">6.17</a></span></a>
+ </li>
+<li class="">
+  <a href="app-gt3.html"><span class="toc_ref">D</span> <span class="toc_entry">Gupta–Tahara at \(p=3\) through Tahara’s Theorem&#160;6.1</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Results of the literature proved in the formalization</span></a>
+ </li>
+<li class=" active current">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Results proved in the formalization, not in the paper</span></a>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000003">Results proved in the formalization, not in the paper</h1>
+<div class="own_thmwrapper theorem-style-plain" id="own:ab399">
+  <div class="own_thmheading">
+    <span class="own_thmcaption">
+    Result beyond the paper
+    </span>
+    <span class="own_thmlabel">1</span>
+    <span class="own_thmtitle">\(D_5=1\) for \(Q_{ab}\cong C_3\times C_9\times C_9\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#own:ab399">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000048"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_bot_of_class_four_ab399" class="lean_decl">GroupDimension.D_five_eq_bot_of_class_four_ab399</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399" class="lean_decl">GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.Star.two_smul_gen_eq" class="lean_decl">GroupDimension.Star.two_smul_gen_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="own_thmcontent">
+  <p> Let \(Q\) be a finite group of class \(\le 4\) with \(Q/\gamma _2(Q)\cong C_3\times C_9\times C_9\). Then \(D_5(Q)=1\). No condition on \(\gamma _4(Q)\) is assumed. </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/TaharaTheorem.lean#L115"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/Ab399Finite.lean#L290"><span class="ttfamily">GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/Star.lean#L29"><span class="ttfamily">GroupDimension.Star.two_smul_gen_eq</span></a>. </p>
+<p><i class="itshape">Not in the paper (the authors’ decision): the proof on paper is MATH-446 (wiki 891 §10, one review per 703), the Lean proof group-dimension#48 (MATH-448). It covers γ_4 of exponent 9 (e.g. γ_4 ≅ C_9), the case that Remark 6.13 leaves open, for this type of Q_ab; for γ_4^3 = 1 it is a case of Theorem 6.11. Star.two_smul_gen_eq is the exact identity (⋆) of the proof of Theorem 6.11, for Tahara’s data and any admissible τ in a group of class ≤ 4, with no condition on γ_4; the Lean proof of Theorem 6.11 does not use it. GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399 takes Tahara’s inclusion as a hypothesis, the unprefixed one discharges it. Only the finite form of class ≤ 4 is in Lean; the general form D_5(G) = γ_5(G) for G_ab ≅ C_3 × C_9 × C_9 is not formalized. Other types of Q_ab with γ_4 ≅ C_9 are open (MATH-450).</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000048">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See the Lean declarations (not in the paper). In Lean. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0001.html" title="Results of the literature proved in the formalization"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="The \(D_5\) paper: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+<script type="text/javascript" src="js/copy_tex.js"></script>
+</body>
+</html>
