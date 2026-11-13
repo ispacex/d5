@@ -664,6 +664,101 @@
   </div>
 </div>
 
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rank3">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5.11</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#thm:rank3">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000018"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Let \(Q\) be a finite \(2\)-group of class \(3\), and let \(d(1)\mid \dots \mid d(s)\) be the invariants of \(Q/\gamma _2(Q)\), so that \(s=d(Q)\). Then \(D_5(Q)=1\) in each of the following cases: </p>
+<ol class="enumerate">
+  <li><p>\(s\le 2\); </p>
+</li>
+  <li><p>\(s=3\) and \(d(2)\le 4\); </p>
+</li>
+  <li><p>\(s=3\) and \(d(2)^2\mid d(3)\). </p>
+</li>
+</ol>
+<p><i class="itshape">Paper only (MATH-41): the proof uses Tahara’s Theorem 6.1, whose inclusion is formalized; the rest is not. Checked by independent agent reviews (MATH-41, wiki 578 §4.4); the random-presentation runs (compute/magnus/run_rank3.sh) agree but are not part of the proof.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000018">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=thm:rank3">the paper</a>. By hand; not formalized. </p>
+
+  </div>
+</div>
+
+<div class="remark_thmwrapper theorem-style-plain" id="rem:rank3">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">5.12</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-computations.html#rem:rank3">#</a>
+    
+    <a class="icon proof" href="sec-computations.html#a0000000019"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  
+<ol class="enumerate">
+  <li><p>Condition (B) alone does not give \(g=0\): the parity of Step&#160;2 is needed. In particular, the identity \(g=\mu q_{13}T_{13}\), which one might expect by symmetry with (2), does not follow from (B) alone: by (2), \((1_3)\) and (3) it is equivalent to \(\nu \bigl(q_{23}\binom {d(2)}2R-\binom {d(3)}2S\bigr)=0\), which holds when \(\nu \) is even or \(d(3)\ge 2d(2)\). Example: \(Q=D_{16}\times C_2\) with \(D_{16}=\langle r,s\rangle \) dihedral of order \(16\) and \(C_2=\langle y\rangle \), \(x_1=r\), \(x_2=s\), \(x_3=ry\), of type \((2,2,2)\) with \(x_{21}=r^2\), \(e(1)=2\), \(b=(1,0,1)\). The family \(\lambda =\nu =1\), \(\mu =0\) satisfies (B) with \(v=v'=0\), but \(g=T_{12}=r^4\ne 1\), while \(\mu q_{13}T_{13}=0\). The family violates (A), since \(\lambda \) is odd. </p>
+</li>
+  <li><p>Not covered by Theorem&#160;<a href="sec-computations.html#thm:rank3">5.11</a> in rank \(3\) is the case \(d(2)\ge 8\), \(d(3){\lt}d(2)^2\) (for orders \(\le 2^{11}\) it is settled by Propositions&#160;<a href="sec-computations.html#prop:1024">5.3</a> and&#160;<a href="sec-computations.html#prop:2048">5.10</a>), beginning with the types \((2,8,8)\), \((4,8,8)\) and \((8,8,8)\). For \(d(1)=2\) and \(d(2)\ge 8\) we have \(q_{12}\ge 4\), and conditions (A) and (C) impose nothing on \(\lambda \). </p>
+</li>
+  <li><p>A computational check. We took \(2\, 100\) random presentations of \(3\)-generator \(2\)-groups of class \(3\), \(300\) of each of the types \((4,4,16)\), \((2,8,8)\), \((4,8,8)\), \((8,8,8)\), \((4,4,8)\), \((2,4,16)\) and \((8,8,64)\), of orders up to \(2^{33}\); isomorphism between them was not checked. In all of them \(D_5=1\), both by the truncated Magnus algebra of §7, item&#160;??, and by Tahara’s lattice of admissible families; the negative control with (A)–(F) dropped gives \(\langle g\rangle \ne 1\) in \(1\, 592\) of them. In all of them also \(D_4=1\), so none is a candidate. In the uniqueness bases chosen by the program, \(T_{32}=0\) in all \(900\) groups with \(d(2)^2\mid d(3)\), and \(T_{32}\ne 0\) in \(203\)–\(296\) of the \(300\) groups of each other type. Code: <span class="ttfamily">compute/magnus/run_rank3.sh</span> in <a href="https://github.com/ispacex/dimension-subrings">https://github.com/ispacex/dimension-subrings</a>. </p>
+</li>
+  <li><p>Conditions on the invariants under which \(D_5=\gamma _5\), also derived from Tahara’s Theorem&#160;6.1, are stated in&#160;[GK19,GK21,GK23]. We have not verified those arguments and do not know how far they overlap with Theorem&#160;<a href="sec-computations.html#thm:rank3">5.11</a>. </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000019">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=rem:rank3">the paper</a>. By hand; not formalized. </p>
+
+  </div>
+</div>
+
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
 </div> <!-- content -->
