@@ -128,12 +128,75 @@
   </div>
   <div class="own_thmcontent">
   <p> Let \(Q\) be a finite group of class \(\le 4\) with \(Q/\gamma _2(Q)\cong C_3\times C_9\times C_9\). Then \(D_5(Q)=1\). No condition on \(\gamma _4(Q)\) is assumed. </p>
-<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/TaharaTheorem.lean#L115"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/Ab399Finite.lean#L290"><span class="ttfamily">GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/f14c8f503bbd6d1a92a553064d8efeb145922035/GroupDimension/Star.lean#L29"><span class="ttfamily">GroupDimension.Star.two_smul_gen_eq</span></a>. </p>
-<p><i class="itshape">Not in the paper (the authors’ decision): the proof on paper is MATH-446 (wiki 891 §10, one review per 703), the Lean proof group-dimension#48 (MATH-448). It covers γ_4 of exponent 9 (e.g. γ_4 ≅ C_9), the case that Remark 6.13 leaves open, for this type of Q_ab; for γ_4^3 = 1 it is a case of Theorem 6.11. Star.two_smul_gen_eq is the exact identity (⋆) of the proof of Theorem 6.11, for Tahara’s data and any admissible τ in a group of class ≤ 4, with no condition on γ_4; the Lean proof of Theorem 6.11 does not use it. GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399 takes Tahara’s inclusion as a hypothesis, the unprefixed one discharges it. Only the finite form of class ≤ 4 is in Lean; the general form D_5(G) = γ_5(G) for G_ab ≅ C_3 × C_9 × C_9 is not formalized. Other types of Q_ab with γ_4 ≅ C_9 are open (MATH-450).</i> </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/3515039f200ac6a1a0ea4bfb63bcf9af1d411079/GroupDimension/TaharaTheorem.lean#L115"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/3515039f200ac6a1a0ea4bfb63bcf9af1d411079/GroupDimension/Ab399Finite.lean#L290"><span class="ttfamily">GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/3515039f200ac6a1a0ea4bfb63bcf9af1d411079/GroupDimension/Star.lean#L29"><span class="ttfamily">GroupDimension.Star.two_smul_gen_eq</span></a>. </p>
+<p><i class="itshape">Not in the paper (the authors’ decision): the proof on paper is MATH-446 (wiki 891 §10, one review per 703), the Lean proof group-dimension#48 (MATH-448). It covers γ_4 of exponent 9 (e.g. γ_4 ≅ C_9), the case that Remark 6.13 leaves open, for this type of Q_ab; for γ_4^3 = 1 it is a case of Theorem 6.11. Star.two_smul_gen_eq is the exact identity (⋆) of the proof of Theorem 6.11, for Tahara’s data and any admissible τ in a group of class ≤ 4, with no condition on γ_4; the Lean proof of Theorem 6.11 does not use it. GroupDimension.Ab399.D_five_eq_bot_of_class_four_ab399 takes Tahara’s inclusion as a hypothesis, the unprefixed one discharges it. Only the finite form of class ≤ 4 is in Lean; the general form D_5(G) = γ_5(G) for G_ab ≅ C_3 × C_9 × C_9 is not formalized. Types with at most two invariants ≥ 9 are covered by own:thm126 (MATH-468); types with three invariants ≥ 9 are open (MATH-450).</i> </p>
 
   </div>
 </div>
 <div class="proof_wrapper" id="a0000000049">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p> See the Lean declarations (not in the paper). In Lean. </p>
+
+  </div>
+</div>
+<div class="own_thmwrapper theorem-style-plain" id="own:thm126">
+  <div class="own_thmheading">
+    <span class="own_thmcaption">
+    Result beyond the paper
+    </span>
+    <span class="own_thmlabel">2</span>
+    <span class="own_thmtitle">\(D_5\subseteq \Omega _{\mu -1}\): the third invariant of \(Q_{ab}\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#own:thm126">#</a>
+    
+    <a class="icon proof" href="sect0002.html#a0000000050"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_pow_eq_one_of_third_invariant" class="lean_decl">GroupDimension.D_five_pow_eq_one_of_third_invariant</a></li>
+          
+          <li><a href="https://ispacex.github.io/d5/blueprint/docs/find/#doc/GroupDimension.D_five_eq_bot_of_two_large_invariants" class="lean_decl">GroupDimension.D_five_eq_bot_of_two_large_invariants</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="own_thmcontent">
+  <p> Let \(Q\) be a finite \(3\)-group of class \(\le 4\) and \(\mu \ge 0\) such that at most two invariants of \(Q/\gamma _2(Q)\) exceed \(3^\mu \) (e.g. \(3^\mu \) the third largest invariant). Then \(z^{3^{\mu -1}}=1\) for every \(z\in D_5(Q)\) (with \(3^{\mu -1}:=1\) for \(\mu =0\)). In particular, if at most two invariants of \(Q/\gamma _2(Q)\) are \(\ge 9\), then \(D_5(Q)=1\), with no condition on \(\gamma _4(Q)\). </p>
+<p><b class="bfseries">Lean:</b> <a href ="https://github.com/ispacex/group-dimension/blob/3515039f200ac6a1a0ea4bfb63bcf9af1d411079/GroupDimension/ThirdInvariantFinite.lean#L396"><span class="ttfamily">GroupDimension.D_five_pow_eq_one_of_third_invariant</span></a>, <a href ="https://github.com/ispacex/group-dimension/blob/3515039f200ac6a1a0ea4bfb63bcf9af1d411079/GroupDimension/ThirdInvariantFinite.lean#L406"><span class="ttfamily">GroupDimension.D_five_eq_bot_of_two_large_invariants</span></a>. </p>
+<p><i class="itshape">Not in the paper: the proof on paper is Theorem 12.6 of wiki 891 §12.3 (MATH-451, reviewed per 703) with its case μ ≤ 1, Theorem 11.2 (§11.2, MATH-450); the Lean proof is group-dimension#54 (MATH-468). It evaluates the exact identity (⋆) (Star.two_smul_gen_eq, node own:ab399) term by term after multiplying by 3^{μ-1}. In Lean the hypothesis is stated intrinsically: the 3^μ-th powers of Q_ab contain at most 9 elements of order dividing 3. The conclusion is the exponent bound on D_5(Q); together with D_5(Q) ⊆ γ_4(Q)^3 (Corollary 6.12) it gives D_5(Q) ⊆ Ω_{μ-1}(γ_4(Q)), but that combination is not stated in Lean. The case μ = 1 contains the type [3,9,9] of own:ab399. Only the finite form of class ≤ 4 is in Lean; the general form D_5(G) = γ_5(G) is not formalized. Types with three invariants ≥ 9 (μ ≥ 2) are open.</i> </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000050">
   <div class="proof_heading">
     <span class="proof_caption">
     Proof
