@@ -82,7 +82,120 @@
 <div class="main-text">
 <h1 id="sec:open">7 Open questions</h1>
 
-<p>No labelled statements in this section of the paper. </p>
+
+<div class="openq_thmwrapper theorem-style-plain" id="oq:main">
+  <div class="openq_thmheading">
+    <span class="openq_thmcaption">
+    Open question
+    </span>
+    <span class="openq_thmlabel">1</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-open.html#oq:main">#</a>
+    
+    <a class="icon proof" href="sec-open.html#a0000000041"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="openq_thmcontent">
+  <p> Question&#160;<a href="sec-question.html#q:main">1.1</a>; equivalently, is \(D_5(Q)=1\) for all finite \(2\)-groups of class \(3\)? A counterexample must have \(D_4(Q)\ne 1\) and order \(\ge 2^{12}\) (Proposition&#160;<a href="sec-computations.html#prop:2048">5.10</a>); at order \(2^{12}\) it is a candidate of rank \(\le 8\) (after Proposition&#160;<a href="sec-computations.html#prop:2048">5.10</a>). By Tahara&#160;[Tah77a, Cor.&#160;18 and&#160;21] a counterexample has \(d(Q)\ge 4\) (Remark&#160;<a href="sec-computations.html#rem:rank3">5.11</a>). Already \(D_4\ne \gamma _4\) needs order \(\ge 2^{11}\) (§5, after the sections of Rips’s group), while the smallest known example, Rips’s group, has order \(2^{38}\). Using the truncated Magnus algebra (\(\mathbb {Z}[G]/\Delta ^n\cong T_{{\lt}n}(\mathbb {Z}^k)/I_n\) for a \(k\)-generator presentation, of rank \((k^n-1)/(k-1)\) independent of \(|G|\)) we checked the class-\(3\) quotients of the three-relator Rips-type group of&#160;[BM23, §1.2] and of \(13\) variants (orders \(2^{40}\)–\(2^{107}\)): \(D_5=1\) in all of them, including three, of orders \(2^{84}\), \(2^{90}\) and \(2^{107}\), with \(D_4\ne 1\). Two independent implementations agree on these results, and the exactness certificate holds in all cases, so \(D_4\ne 1\) and \(D_5=1\) are proved, not only modulo \(2^{30}\). The method (code: <a href="https://gitlab.com/ispacex/cflint-core">https://gitlab.com/ispacex/cflint-core</a>) was also checked against the lattice computation on \(30\, 435\) groups of order \(\le 3^7\) without discrepancies, and is \(200\)–\(400\) times faster at order \(3^7\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000041">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=oq:main">the paper</a>. An open question. </p>
+
+  </div>
+</div>
+
+<div class="openq_thmwrapper theorem-style-plain" id="oq:torsion">
+  <div class="openq_thmheading">
+    <span class="openq_thmcaption">
+    Open question
+    </span>
+    <span class="openq_thmlabel">2</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-open.html#oq:torsion">#</a>
+    
+    <a class="icon proof" href="sec-open.html#a0000000042"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="openq_thmcontent">
+  <p> Is there \(3\)-torsion in \(D_5(G)/\gamma _5(G)\) for some \(G\), i.e. is Tahara’s bound \(6\) attained? (“Rips’s abyss” in Mikhailov’s talk&#160;[Mik13].) Tahara expected the bound \(6\) to be the best one&#160;[Tah81, p.&#160;142]. At the end of the paper he announced a separate paper&#160;[Tah81, p.&#160;173], which would show \(D_5(G)=\gamma _5(G)=1\) for his \(2\)-groups with \(D_4\ne \gamma _4\)&#160;[Tah77b] and construct counterexamples to \(D_5(G)=\gamma _5(G)\). The announcement does not say that their quotient \(D_5/\gamma _5\) would have \(3\)-torsion, and \(D_5\ne \gamma _5\) with \(2\)-torsion is known anyway: \(2\mid s(5)\) in the notation of&#160;[BM23, §1]. We have not been able to locate this paper (the conference report&#160;[THSH81] of 1981 is on other topics), and we could not obtain his surveys in Bull. Aichi Univ. Educ. (1981, 1982). According to its zbMATH review, Tahara’s survey of 2003&#160;[Tah03] reports Gupta’s claim that the exponent of \(D_n/\gamma _n\) is at most \(2\). Bartholdi and Mikhailov&#160;[BM23, §1] state the bound as \(s(5)\in \{ 2,6\} \), i.e. open. By the results of this paper, there is no \(3\)-torsion when the Sylow \(3\)-subgroup has order \(\le 3^9\) (in \(D_n/\gamma _n\) for every \(n\), see below), and \(D_5=\gamma _5\) when \(G/\gamma _2\) is a finite \(3\)-group and \(\gamma _2/\gamma _3\) has exponent \(3\) (Theorem&#160;<a href="sec-three.html#thm:exp3gen">6.9</a>), or, more generally, \(\gamma _4^3\subseteq \gamma _5\) (Theorem&#160;<a href="sec-three.html#thm:g4cube">6.11</a>, which contains Theorem&#160;<a href="sec-three.html#thm:exp3h9">6.10</a>); by&#160;[Gup91] a finite metabelian group has no \(3\)-torsion in \(D_n/\gamma _n\), so an example must be non-metabelian. A minimal \(3\)-group with \(D_5\ne \gamma _5\) has order \(\ge 3^{10}\), class \(4\), cyclic centre, \(\gamma _2/\gamma _3\) of exponent \(\ge 9\) (hence at least two invariants \(\ge 9\) in \(Q/\gamma _2\)), and \(\gamma _4\le Z(Q)\) cyclic of order \(3^k\) with \(k\ge 2\), with \(D_5(Q)=\Omega _1(\gamma _4)\) (Corollary&#160;<a href="sec-three.html#cor:g4cube">6.12</a> and the paragraph after it), so \(\gamma _4\cong C_9\) when the second largest invariant of \(Q/\gamma _2\) is \(9\) (Theorem&#160;<a href="sec-three.html#thm:exp3gen">6.9</a> and the paragraph after it). Open is the case \(\gamma _4^3\not\subseteq \gamma _5\), that is, for a minimal \(Q\), \(\gamma _4\) cyclic of order \(\ge 9\). Already for \(\gamma _4\cong C_9\) the identity \((\star )\) of the proof of Theorem&#160;<a href="sec-three.html#thm:g4cube">6.11</a> holds, but its terms are only known to lie in \(\gamma _4^3\) (Remark&#160;<a href="sec-three.html#rem:g4c9">6.13</a>); by computation, \(D_5=1\) in \(940\) random groups with \(\gamma _4\cong C_9\) and cyclic centre. For every \(n\), a \(3\)-group with \(D_n\ne \gamma _n\) has order \(\ge 3^{10}\); the smallest known example, a quotient of the Bartholdi–Mikhailov group, has order \(3^{493}\) (§5). Let \(Q\) be a \(3\)-group of least order with \(D_n\ne \gamma _n\). Then \(\gamma _n(Q)=1\) (pass to \(Q/\gamma _n\)), so \(Q\) has class \(c{\lt}n\). Every proper quotient has \(D_n=\gamma _n=1\), so \(D_n(Q)\ne 1\) lies in every nontrivial normal subgroup; hence the centre is cyclic and its socle \(\langle z\rangle =D_n(Q)\) lies in \(D_{c+1}(Q)\), in the Jennings subgroup \(M_{c+1}(Q)\) and, by&#160;[Gup91] applied to \(Q/Q''\), in \(Q''\). Class \(\le 3\) is impossible (\(D_4=\gamma _4\) in a \(3\)-group&#160;[Pas68]), and class \(4\) gives \(D_n\subseteq D_5=\gamma _5=1\) by Theorem&#160;<a href="sec-three.html#thm:3e9">6.19</a>. Of the groups of order \(3^6\), \(3^7\), \(3^8\) of class \(\ge 5\), \(1035\) satisfy these conditions, and all have \(z\notin D_{c+1}\), by an exact computation in the truncated Magnus algebra (code: <a href ="https://github.com/ispacex/dimension-subrings/tree/main/compute/magnus"><span class="ttfamily">compute/magnus</span></a>). At order \(3^9\) a least-order \(Q\) of class \(\ge 5\) is an immediate descendant of step size \(1\) of \(P=Q/\langle z\rangle \), since the last term of its lower exponent-\(3\) central series is nontrivial, central and of exponent \(3\), hence lies in \(\Omega _1(Z(Q))=\langle z\rangle \) and equals it; \(P\) has class \(\ge c-1\ge 4\) and rank \(d(Q)\le 5\), as \(d(Q)+c-1\le 9\). Of the \(66\, 569\) such \(P\), \(4\, 627\) pass a necessary test on the \(p\)-cover (with \(Q=P^*/U\), each of \(z\in Q''\), \(z\in M_6(Q)\), \(\gamma _5(Q)\ne 1\) requires a subgroup of the multiplier not contained in \(U\), and so does \(Q\) being a descendant: the nucleus is not in \(U\)); ANUPQ lists their \(65\, 398\) immediate descendants, \(27\, 547\) of them satisfy the conditions above, and all have \(z\notin D_{c+1}\), by the same exact computation; the descendant step repeated with the corrected ANUPQ gives the same \(27\, 547\) presentations. (The nonterminal parents of type \((5,2,1)\) are characterised exactly by Theorem&#160;<a href="sec-three.html#thm:nonterm">6.17</a>; this is not needed for Theorem&#160;<a href="sec-three.html#thm:3e9">6.19</a>.) </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000042">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=oq:torsion">the paper</a>. An open question. </p>
+
+  </div>
+</div>
+
+<div class="openq_thmwrapper theorem-style-plain" id="oq:theoremc">
+  <div class="openq_thmheading">
+    <span class="openq_thmcaption">
+    Open question
+    </span>
+    <span class="openq_thmlabel">3</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-open.html#oq:theoremc">#</a>
+    
+    <a class="icon proof" href="sec-open.html#a0000000043"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="openq_thmcontent">
+  <p> The group analogue of Theorem&#160;C of&#160;[IMP26]: is \(D_{2c-1}(G)=1\) for every metabelian group of class \(\le c\)? For \(c=3\) this is Question&#160;<a href="sec-question.html#q:main">1.1</a>. The question reduces to finite metabelian \(p\)-groups (a finite nilpotent quotient is the product of its Sylow subgroups); for \(p\) odd the answer is yes for every \(c\) by&#160;[Gup91] (for \(c\le p+1\) already by&#160;[GT85, Thm.&#160;3.2]). So only \(p=2\), \(c\ge 3\) is open. The plateau group of&#160;[IMP26, §3.3] is metabelian of class \(4\) with \(D_6\ne 1\) (by computation), so \(2c-2\) is attained, as for Lie rings. Its distinguished element \(w\) is not in \(D_7\), and since \(D_6=\langle w\rangle \)&#160;[IMP26], \(D_7=1\) (computed from the dense Howell form modulo \(2^{32}\) of the ideal of relations in the truncated Magnus algebra of rank \(55\, 986\), with the exactness certificate): this group is not a counterexample, and the analogue, if true, is sharp at \(c=4\). A first search for a counterexample at \(c=4\) reduces to metabelian quotients of class \(4\) with \(\gamma _4\) finite cyclic, testing its element of order \(2\) (this reduction uses \(D_5^2\subseteq G''\gamma _5\)&#160;[MP09, Thm.&#160;2.28] and is proved by hand in the documentation of the code, <a href="https://gitlab.com/ispacex/cflint-fast-core">https://gitlab.com/ispacex/cflint-fast-core</a>, <span class="ttfamily">docs/analysis.md</span>, §6.6); about \(170\) such groups (quotients and perturbations of the plateau group, group versions of the Lie ring \(L_1\) of&#160;[IMP26, Ex.&#160;3.2], random presentations on \(4\) generators) all have \(D_7\cap \gamma _4=1\) by computation. For \(c=5\), the plateau group shifted up one class (five generators) has \(D_7\ne 1\) but \(D_8\cap \gamma _5=1\) (by a certified computation), so for metabelian groups of class \(5\) at least \(D_7\ne 1\) is attained, one short of \(2c-2\); an elementary pairing lemma indicates that the construction would need the exponents of the relations of&#160;[IMP26, (3.12)] quadrupled rather than doubled at class \(5\) (the lemma is proved by hand in the same documentation, §6.7), and in our computer experiments with relations modified in this way the distinguished element \(w\) becomes trivial. Code and data: <a href="https://gitlab.com/ispacex/cflint-fast-core">https://gitlab.com/ispacex/cflint-fast-core</a> (<span class="ttfamily">docs/analysis.md</span>, §§6.5–6.7). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000043">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>See <a href ="https://ispacex.github.io/d5/viewer.html#nameddest=oq:theoremc">the paper</a>. An open question. </p>
+
+  </div>
+</div>
 
 
 </div> <!--main-text -->

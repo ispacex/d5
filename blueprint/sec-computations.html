@@ -111,7 +111,7 @@
 </li>
   <li><p>all \(3\)-groups of order \(81\), \(243\), \(729\) (\(586\) groups); </p>
 </li>
-  <li><p>all \(1202\) groups of order \(3^7\) of class \(4\) that pass the sieve, by two methods with identical results (\(1202\) groups, \(6010\) levels, no discrepancies): the lattice of §5 in its C implementation and the truncated Magnus algebra of §7, item&#160;?? (code and description: <a href="https://gitlab.com/ispacex/cflint-core">https://gitlab.com/ispacex/cflint-core</a>, <span class="ttfamily">docs/analysis.md</span>, §6.1); the numpy code of <span class="ttfamily">compute/</span> was run on a sample of \(49\) of them (every \(25\)th), with the same answer; </p>
+  <li><p>all \(1202\) groups of order \(3^7\) of class \(4\) that pass the sieve, by two methods with identical results (\(1202\) groups, \(6010\) levels, no discrepancies): the lattice of §5 in its C implementation and the truncated Magnus algebra of §7, item&#160;<a href="sec-open.html#oq:main">1</a> (code and description: <a href="https://gitlab.com/ispacex/cflint-core">https://gitlab.com/ispacex/cflint-core</a>, <span class="ttfamily">docs/analysis.md</span>, §6.1); the numpy code of <span class="ttfamily">compute/</span> was run on a sample of \(49\) of them (every \(25\)th), with the same answer; </p>
 </li>
   <li><p>all \(15\) groups of order \(625\) (a control). </p>
 </li>
@@ -698,7 +698,7 @@
 </li>
 </ul>
 <p> Together these give \(g=0\) for every admissible family when \(d(Q)=3\) and either \(d(2)\le 4\) or \(d(2)^2\mid d(3)\), and the same method settles the types \((2,8,8)\) and \((4,8,8)\). These arguments were checked by independent reviews but are not formalized. Condition&#160;(B) alone does not suffice: in \(D_{16}\times C_2=\langle r,s\rangle \times \langle y\rangle \) with \(x_1=r\), \(x_2=s\), \(x_3=ry\), the family \(\lambda =\nu =1\), \(u_{13}=0\) satisfies&#160;(B) but violates&#160;(A), and gives \(g=r^4\ne 1\). </p>
-<p>A computation agrees. We took \(11\, 100\) random presentations of \(3\)-generator \(2\)-groups of class \(3\), of types \((4,4,16)\), \((2,8,8)\), \((4,8,8)\), \((8,8,8)\), \((4,4,8)\), \((2,4,16)\) and \((8,8,64)\) and of orders up to \(2^{33}\), with repeats possible. In all of them \(D_5=1\), both by the truncated Magnus algebra (§7, item&#160;??) and by Tahara’s lattice of admissible families, and \(D_4=1\) by the Magnus algebra (code: <span class="ttfamily">compute/magnus/run_rank3.sh</span> in <a href="https://github.com/ispacex/dimension-subrings">https://github.com/ispacex/dimension-subrings</a>). </p>
+<p>A computation agrees. We took \(11\, 100\) random presentations of \(3\)-generator \(2\)-groups of class \(3\), of types \((4,4,16)\), \((2,8,8)\), \((4,8,8)\), \((8,8,8)\), \((4,4,8)\), \((2,4,16)\) and \((8,8,64)\) and of orders up to \(2^{33}\), with repeats possible. In all of them \(D_5=1\), both by the truncated Magnus algebra (§7, item&#160;<a href="sec-open.html#oq:main">1</a>) and by Tahara’s lattice of admissible families, and \(D_4=1\) by the Magnus algebra (code: <span class="ttfamily">compute/magnus/run_rank3.sh</span> in <a href="https://github.com/ispacex/dimension-subrings">https://github.com/ispacex/dimension-subrings</a>). </p>
 <p><i class="itshape">Paper only (MATH-41). D₅ = 1 for d(Q) ≤ 3 is Tahara’s [Tah77a, Cor. 18, 21] (D₄ = γ₄), not formalized. The independent check through Tahara’s Theorem 6.1 uses its formalized inclusion; the rest is not formalized (checked by independent agent reviews, MATH-41 comments 8197, 8216).</i> </p>
 
   </div>
